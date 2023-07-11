@@ -1,5 +1,5 @@
 adblock = []
-dicarded = []
+discarded = []
 
 File.open("1.txt", "r") do |f|
   f.each_line do |line|
