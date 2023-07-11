@@ -16,7 +16,8 @@ discarded = []
   end
 end
 
-adblock.uniq!
+adblock = adblock.uniq
+discarded = discarded.uniq
 
 File.write("adblock.txt", adblock.join("\n"))
 File.write("discarded.txt", discarded.join("\n"))
