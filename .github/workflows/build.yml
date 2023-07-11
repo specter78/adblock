@@ -20,17 +20,14 @@ jobs:
         curl https://filters.adtidy.org/ios/filters/2_optimized.txt --output 1.txt
         curl https://filters.adtidy.org/ios/filters/11_optimized.txt --output 2.txt
         curl https://filters.adtidy.org/ios/filters/3_optimized.txt --output 3.txt
-        curl https://secure.fanboy.co.nz/easylist.txt --output 4.txt
-        curl https://easylist.to/easylist/easyprivacy.txt --output 5.txt
         ruby script.rb
         
     - name: Commit and Push
       run: |
         git config --global user.name github-actions
         git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-        git add adguard.txt
-        git add easylist.txt
-        git add merged.txt
+        git add ads.txt
+        git add privacy.txt
         git add discarded.txt
         git commit -m 'Auto Update' || exit 0
         git push
