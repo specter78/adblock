@@ -4,7 +4,7 @@ discarded = []
 File.open("2.txt", "r") do |f|
   f.each_line do |line|
     if line == ""
-    elsif (/^\|\|.*\^$/.match(line)) != nil
+    elsif (/^\|\|.*\.com^$/.match(line)) != nil
       discarded << line
     else
       adblock << line
