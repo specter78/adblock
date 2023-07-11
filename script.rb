@@ -1,19 +1,22 @@
 adblock = []
 discarded = []
 
-File.open("1.txt", "r") do |f|
-  f.each_line do |line|
-    line = line.strip
-    if line.start_with?('!')
-    # elsif line.start_with?('||') && line.end_with?('.com^')
-    # elsif line.start_with?('||') && line.end_with?('.in^')
-    elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
-      discarded << line
-    else
-      adblock << line
+3.times do |n|
+  file_number = n + 1
+  File.open("#{file_number}.txt", "r") do |f|
+    f.each_line do |line|
+      line = line.strip
+      if line.start_with?('!')
+      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
+        discarded << line
+      else
+        adblock << line
+      end
     end
   end
 end
+
+adblock.uniq!
 
 File.write("adblock.txt", adblock.join("\n"))
 File.write("discarded.txt", discarded.join("\n"))
