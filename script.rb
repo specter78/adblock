@@ -26,9 +26,6 @@ discarded = discarded.uniq
 merged = adguard + easylist
 merged = merged.uniq
 
-adguard.sort!
-easylist.sort!
-
 puts "#{adguard.length} + #{easylist.length} = #{merged.length}"
 
 File.write("adguard.txt", adguard.join("\n"))
