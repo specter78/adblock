@@ -1,6 +1,7 @@
 adguard = []
 easylist = []
 discarded = []
+merged = []
 
 3.times do |n|
   file_number = n + 1
@@ -36,6 +37,12 @@ adguard = adguard.uniq
 easylist = easylist.uniq
 discarded = discarded.uniq
 
+merged = adguard + easylist
+merged = merged.uniq
+
+puts "#{adguard.length} + #{easylist.length} = #{merged.length}"
+
 File.write("adguard.txt", adguard.join("\n"))
 File.write("easylist.txt", easylist.join("\n"))
 File.write("discarded.txt", discarded.join("\n"))
+File.write("merged.txt", merged.join("\n"))
