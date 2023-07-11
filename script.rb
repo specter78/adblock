@@ -15,3 +15,4 @@ final_array << ["---", "---", "---"]
 final_array << discarded
 
 File.write("adblock.txt", final_array.join("\n"))
+
