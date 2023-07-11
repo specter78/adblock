@@ -7,7 +7,8 @@ discarded = []
   File.open("#{file_number}.txt", "r") do |f|
     f.each_line do |line|
       line = line.strip
-      if (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
+      if line.start_with?('! Checksum:')
+      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
         discarded << line
       else
         (file_number <= 2) ? (ads << line) : (privacy << line)
