@@ -3,7 +3,8 @@ discarded = []
 
 File.open("1.txt", "r") do |f|
   f.each_line do |line|
-    if (line.match(/^\|\|.*\^$/))
+    if line == ""
+    elsif (line.match(/^\|\|.*\^$/)) != nil
       discarded << line
     else
       adblock << line
