@@ -1,7 +1,7 @@
 adblock = []
 discarded = []
 
-3.times do |n|
+6.times do |n|
   file_number = n + 1
   File.open("#{file_number}.txt", "r") do |f|
     f.each_line do |line|
@@ -14,6 +14,9 @@ discarded = []
       end
     end
   end
+  adblock = adblock.uniq
+  discarded = discarded.uniq
+  puts "#{adblock.length} -- #{discarded.length}"
 end
 
 adblock = adblock.uniq
