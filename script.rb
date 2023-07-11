@@ -9,6 +9,7 @@ merged = []
     f.each_line do |line|
       line = line.strip
       if line.start_with?('!')
+      elsif line == '[Adblock Plus 2.0]'
       elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
         discarded << line
       else
