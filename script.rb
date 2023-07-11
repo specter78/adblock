@@ -1,7 +1,8 @@
-adblock = []
+adguard = []
+easylist = []
 discarded = []
 
-5.times do |n|
+3.times do |n|
   file_number = n + 1
   File.open("#{file_number}.txt", "r") do |f|
     f.each_line do |line|
@@ -10,17 +11,31 @@ discarded = []
       elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
         discarded << line
       else
-        adblock << line
+        adguard << line
       end
     end
   end
-  adblock = adblock.uniq
-  discarded = discarded.uniq
-  puts "#{adblock.length} -- #{discarded.length}"
 end
 
-adblock = adblock.uniq
+2.times do |n|
+  file_number = n + 4
+  File.open("#{file_number}.txt", "r") do |f|
+    f.each_line do |line|
+      line = line.strip
+      if line.start_with?('!')
+      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
+        discarded << line
+      else
+        easylist << line
+      end
+    end
+  end
+end
+
+adguard = adguard.uniq
+easylist = easylist.uniq
 discarded = discarded.uniq
 
-File.write("adblock.txt", adblock.join("\n"))
+File.write("adguard.txt", adguard.join("\n"))
+File.write("easylist.txt", easylist.join("\n"))
 File.write("discarded.txt", discarded.join("\n"))
