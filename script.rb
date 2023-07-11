@@ -7,7 +7,7 @@ File.open("1.txt", "r") do |f|
     if line.start_with?('!')
     # elsif line.start_with?('||') && line.end_with?('.com^')
     # elsif line.start_with?('||') && line.end_with?('.in^')
-    elsif (line.count('/') != 0) && (line.start_with?('||')) && (line.end_with?('^'))
+    elsif (line.count('/') != 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
       discarded << line
     else
       adblock << line
