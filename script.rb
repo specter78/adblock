@@ -1,7 +1,7 @@
 adblock = []
 discarded = []
 
-6.times do |n|
+5.times do |n|
   file_number = n + 1
   File.open("#{file_number}.txt", "r") do |f|
     f.each_line do |line|
