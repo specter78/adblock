@@ -4,12 +4,8 @@ discarded = []
 File.open("1.txt", "r") do |f|
   f.each_line do |line|
     if line == ""
-    elsif line.start_with? "||"
-      if line.end_with? ".com^"
+    elsif line.start_with? '||' && line.end_with? '.com^'
         discarded << line
-      else
-        adblock << line
-      end
     else
       adblock << line
     end
