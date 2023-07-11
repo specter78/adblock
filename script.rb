@@ -15,4 +15,5 @@ File.open("1.txt", "r") do |f|
   end
 end
 
-File.write("adblock.txt", discarded.join("\n"))
+File.write("adblock.txt", adblock.join("\n"))
+File.write("discarded.txt", discarded.join("\n"))
