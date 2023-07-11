@@ -10,8 +10,8 @@ File.open("1.txt", "r") do |f|
   end
 end
 
-final = adblock
-final << ["---", "---", "---"]
-final << discarded
+final_array = adblock
+final_array << ["---", "---", "---"]
+final_array << discarded
 
-File.write("adblock.txt", final.join("\n"))
+File.write("adblock.txt", final_array.join("\n"))
