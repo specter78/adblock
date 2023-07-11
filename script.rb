@@ -3,7 +3,7 @@ easylist = []
 discarded = []
 merged = []
 
-3.times do |n|
+5.times do |n|
   file_number = n + 1
   File.open("#{file_number}.txt", "r") do |f|
     f.each_line do |line|
@@ -12,22 +12,7 @@ merged = []
       elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
         discarded << line
       else
-        adguard << line
-      end
-    end
-  end
-end
-
-2.times do |n|
-  file_number = n + 4
-  File.open("#{file_number}.txt", "r") do |f|
-    f.each_line do |line|
-      line = line.strip
-      if line.start_with?('!')
-      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
-        discarded << line
-      else
-        easylist << line
+        (file_number <= 3) ? (adguard << line) : (easylist << line)
       end
     end
   end
