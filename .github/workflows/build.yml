@@ -21,9 +21,14 @@ jobs:
         curl https://filters.adtidy.org/ios/filters/11_optimized.txt --output 2.txt
         curl https://filters.adtidy.org/ios/filters/3_optimized.txt --output 3.txt
         ruby script.rb
-        rm 1.txt
-        rm 2.txt
-        rm 3.txt
-
+        
+    - name: Commit and Push
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions[bot]@users.noreply.github.com
+        git add adblock.txt
+        git commit -m '[CI] Auto update'
+        git push
+        
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
