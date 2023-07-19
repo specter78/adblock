@@ -17,18 +17,17 @@ jobs:
 
     - name: Adblock
       run: |
-        curl https://filters.adtidy.org/ios/filters/2_optimized.txt --output 1.txt
-        curl https://filters.adtidy.org/ios/filters/11_optimized.txt --output 2.txt
-        curl https://filters.adtidy.org/ios/filters/3_optimized.txt --output 3.txt
+        curl https://filters.adtidy.org/extension/ublock/filters/2_without_easylist.txt --output adguard_ads.txt
+        curl https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt --output easylist.txt
+        curl https://filters.adtidy.org/extension/ublock/filters/3.txt --output adguard_privacy.txt
+        curl https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt --output easyprivacy.txt
         ruby script.rb
         
     - name: Commit and Push
       run: |
         git config --global user.name github-actions
         git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-        git add ads.txt
-        git add privacy.txt
-        git add discarded.txt
+        git add adguard_ads.txt easylist.txt adguard_privacy.txt easyprivacy.txt
         git commit -m 'Auto Update' || exit 0
         git push
         
