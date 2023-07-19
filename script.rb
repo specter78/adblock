@@ -1,26 +1,20 @@
-ads = []
-privacy = []
-discarded = []
+selected_rules = []
+discarded_rules = []
+blocklists = ['adguard_ads.txt', 'easylist.txt', 'adguard_privacy.txt', 'easyprivacy.txt']
 
-3.times do |n|
-  file_number = n + 1
-  File.open("#{file_number}.txt", "r") do |f|
+blocklists.each do |blocklist|
+  File.open(blocklist, "r") do |f|
     f.each_line do |line|
       line = line.strip
       if line.start_with?('! Checksum:')
       elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party'))
-        discarded << line
+        discarded_rules << line
       else
-        (file_number <= 2) ? (ads << line) : (privacy << line)
+        selected_rules << line
       end
     end
   end
+  File.write(blocklist, selected_rules.join("\n"))
+  selected_rules = []
+  discarded_rules = []
 end
-
-# adguard = adguard.uniq
-# easylist = easylist.uniq
-# discarded = discarded.uniq
-
-File.write("ads.txt", ads.join("\n"))
-File.write("privacy.txt", privacy.join("\n"))
-File.write("discarded.txt", discarded.join("\n"))
