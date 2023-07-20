@@ -21,13 +21,14 @@ jobs:
         curl https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt --output easylist.txt
         curl https://filters.adtidy.org/extension/ublock/filters/3.txt --output adguard_privacy.txt
         curl https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt --output easyprivacy.txt
+        curl https://filters.adtidy.org/extension/ublock/filters/11.txt --output adguard_mobile.txt
         ruby script.rb
         
     - name: Commit and Push
       run: |
         git config --global user.name github-actions
         git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-        git add adguard_ads.txt easylist.txt adguard_privacy.txt easyprivacy.txt
+        git add adguard_ads.txt easylist.txt adguard_privacy.txt easyprivacy.txt adguard_mobile.txt
         git commit -m 'Auto Update' || exit 0
         git push
         
