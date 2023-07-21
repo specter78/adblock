@@ -21,4 +21,4 @@ blocklists.each do |blocklist|
   end
   File.write(blocklist, selected_rules.join("\n"))
 end
-File.write(discarded, discarded_rules.join("\n"))
+File.write("discarded.txt", discarded_rules.join("\n"))
