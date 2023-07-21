@@ -1,8 +1,8 @@
 blocklists = ['adguard_ads.txt', 'easylist.txt', 'adguard_privacy.txt', 'easyprivacy.txt', 'adguard_mobile.txt']
+discarded_rules = []
 
 blocklists.each do |blocklist|
   selected_rules = []
-  discarded_rules = []
   skip_comments = false
   File.open(blocklist, "r") do |f|
     f.each_line do |line|
@@ -21,3 +21,4 @@ blocklists.each do |blocklist|
   end
   File.write(blocklist, selected_rules.join("\n"))
 end
+File.write(discarded, discarded_rules.join("\n"))
