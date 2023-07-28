@@ -1,8 +1,8 @@
 ![Adblock Plus 2.0]
 ! Title: AdGuard Base filter
 ! Description: This filter is necessary for quality ad blocking.
-! Version: 2.2.92.84
-! TimeUpdated: 2023-07-28T16:31:42+00:00
+! Version: 2.2.92.85
+! TimeUpdated: 2023-07-28T17:03:36+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1269,9 +1269,10 @@ tool-box.xyz##+js(set-constant, adBlock, noopFunc)
 9koala.com##+js(no-fetch-if, pagead2.googlesyndication.com)
 sports247.sbs#@#.banner_ad
 blog.nationapk.com##+js(no-fetch-if, pagead2.googlesyndication.com)
-pussyspace.com,pussyspace.net##.itemsetbox div[id] *:not(div):not(span):not(a):not(img):not(b):not(p):not(video):not(iframe) > img:not(a img)
+pussyspace.com,pussyspace.net##style ~ [id] [class]:only-child div:only-child > img
+/^https:\/\/www\.pussyspace\.(?:com|net)\/style\/(?!\d{2}\/img\/).*/$image,~third-party,domain=pussyspace.com|pussyspace.net
 /^https:\/\/www\.pussyspace\.(?:com|net)\/(?!style\/).*/$image,~third-party,domain=pussyspace.com|pussyspace.net
-pussyspace.com,pussyspace.net##+js(addEventListener-defuser, , loa_dme)
+pussyspace.com,pussyspace.net##+js(addEventListener-defuser, , loadMe)
 pussyspace.com,pussyspace.net##+js(no-requestAnimationFrame-if, exoframe)
 pussyspace.com,pussyspace.net##+js(addEventListener-defuser, load, exoJsPop101)
 pussyspace.com,pussyspace.net##+js(abort-on-stack-trace, document.createElement, /ExoSupport|add.?Zone|detectCensorship/)
@@ -6514,6 +6515,7 @@ indiastudychannel.com#?#article > div.row:has(> div.col-md-12 > p > ins.adsbygoo
 indiastudychannel.com#?#.main > div.row:has(> div.col-md-12 > div.item > div.row > div.col-md-6 > div[id^="div-gpt-ad-"])
 indiastudychannel.com#?##content_rightbar > div.roundedBlock:has(> div#HP-gpt-passback)
 indiastudychannel.com#?##content_rightbar > div.roundedBlock:has(> div[id^="div-gpt-ad-"])
+bing.com#?#.tob_calcontainer > div.slide:has(> div.tobitem > a[href*="/tracking?adUnit="])
 vogue.com.au#?#div[class^="sc-"]:has(> div[style="display: none !important;"])
 vogue.com.au#?#div[class^="sc-"]:has(> div[id^="ad-"])
 vogue.com.au#?#div[class^="sc-"]:has(> div[class^="ad-"])
@@ -12037,7 +12039,7 @@ forum.echirurgia.pl##.article__side
 vibez.pl#?#style + div[class] > img[src^="https://v.wpimg.pl/"][alt]:first-child + div:last-child:upward(1)
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=autocentrum.pl|autokult.pl|gadzetomania.pl|fotoblogia.pl|pudelek.pl
 benchmark.pl#?#img[src="https://i.wpimg.pl/O/56x45/i.wp.pl/a/i/stg/pkf/bg.png"]:upward(1)
-autocentrum.pl#?#img[src="https://i.wpimg.pl/O/56x45/i.wp.pl/a/i/stg/pkf/bg.png"]:upward(1)
+autocentrum.pl#?#style + div[class]:has(> script:first-child + img[src^="https://v.wpimg.pl/"][alt] + div[class]:last-child)
 kafeteria.pl,autokult.pl,fitness.wp.pl,komorkomania.pl,gadzetomania.pl,fotoblogia.pl#?#div[class*=" "] > div[class]:first-child + img[src^="https://i.wpimg.pl/100x0/"]:upward(1)
 dom.wp.pl#?#article > div[class] > div > div[class]:has(> div[class]:only-child > div[class]:only-child > span:first-child + span:last-child)
 horoskop.wp.pl##.reklama
@@ -32116,8 +32118,6 @@ freeupscmaterials.org#@#.quads-location
 dummies.com#@#.ad-post
 dummies.com#@#.AD-POST
 buzzdrives.com#@#.left_ad
-@@||pussyspace.com/style/$image,domain=pussyspace.com
-@@||pussyspace.com/upload/$image,domain=pussyspace.com
 @@||blocket.se/annonser^
 @@||imgadult.com/css/$domain=imgadult.com
 @@||imgadult.com/upload/$domain=imgadult.com
