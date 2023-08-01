@@ -1,8 +1,8 @@
 ![Adblock Plus 2.0]
 ! Title: AdGuard Base filter
 ! Description: This filter is necessary for quality ad blocking.
-! Version: 2.2.93.42
-! TimeUpdated: 2023-08-01T16:31:41+00:00
+! Version: 2.2.93.43
+! TimeUpdated: 2023-08-01T17:03:53+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1290,10 +1290,20 @@ tool-box.xyz##+js(set-constant, adBlock, noopFunc)
 9koala.com##+js(no-fetch-if, pagead2.googlesyndication.com)
 sports247.sbs#@#.banner_ad
 blog.nationapk.com##+js(no-fetch-if, pagead2.googlesyndication.com)
-pussyspace.com,pussyspace.net##.boxofItems div[id] *:not(a):not(span) > img
-/^https:\/\/www\.pussyspace\.(?:com|net)\/style\/(?!\d{2}\/img\/).*/$image,~third-party,domain=pussyspace.com|pussyspace.net
-/^https:\/\/www\.pussyspace\.(?:com|net)\/(?!style\/).*/$image,~third-party,domain=pussyspace.com|pussyspace.net
-pussyspace.com,pussyspace.net##+js(addEventListener-defuser, , emdaol)
+pussyspace.com,pussyspace.net##[class*="boxofItems" i] div[id] *:not(a):not(span) > img
+||www.pussyspace.$image,~third-party
+@@||www.pussyspace.*/class/captcha/captcha.php|
+@@||www.pussyspace.*/class/captcha/arrow.png|
+@@||www.pussyspace.*/player/loading.gif|
+@@||www.pussyspace.*/style/img/abuse.email.png#|
+@@||www.pussyspace.*/player/playBTN.png|
+@@||www.pussyspace.*/style/03/img/bg.png|
+@@||www.pussyspace.*/style/03/img/navbg.png|
+@@||www.pussyspace.*/style/03/img/navbg.hover.png|
+@@||www.pussyspace.*/style/03/img/speed-dials.png|
+@@||www.pussyspace.*/style/03/img/x-sprite.png|
+@@||www.pussyspace.*/style/img/navbg.hover.png|
+pussyspace.com,pussyspace.net##+js(addEventListener-defuser, , .el=)
 pussyspace.com,pussyspace.net##+js(no-requestAnimationFrame-if, exoframe)
 pussyspace.com,pussyspace.net##+js(addEventListener-defuser, load, exoJsPop101)
 pussyspace.com,pussyspace.net##+js(abort-on-stack-trace, document.createElement, /ExoSupport|add.?Zone|detectCensorship/)
