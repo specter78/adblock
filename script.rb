@@ -12,7 +12,7 @@ blocklists.each do |blocklist|
       elsif line.start_with?('!')
         (skip_comments = true) if line.start_with?('!--')
         (selected_rules << line) unless skip_comments
-      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party') || line.end_with?('^$all'))
+      elsif (line.count('/') == 0) && (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party') || line.end_with?('^$all') || line.end_with?('^$popup'))
         discarded_rules << line
       else
         selected_rules << line
