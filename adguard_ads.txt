@@ -1,8 +1,8 @@
 ![Adblock Plus 2.0]
 ! Title: AdGuard Base filter
 ! Description: This filter is necessary for quality ad blocking.
-! Version: 2.3.3.21
-! TimeUpdated: 2023-10-02T15:31:35+00:00
+! Version: 2.3.3.22
+! TimeUpdated: 2023-10-02T16:31:32+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -6585,11 +6585,8 @@ kava.ee##.kava_ad_chilli
 ||static.chilli.ee^$domain=kava.ee
 junat.net###junatnet-campaign-ad
 telsu.fi##+js(no-fetch-if, googlesyndication.com)
-ylilauta.org##div[data-a][data-d]
-ylilauta.org##div[data-src*="//fcdn.lauta.media/"].a
-ylilauta.org##+js(abort-on-stack-trace, Element.prototype.append, /#(contentLoadFailed|showFail)/)
-||fcdn.lauta.media^$domain=ylilauta.org
-/^https:\/\/es\.ylilauta\.org\/files\/[a-z0-9]+\/[a-z0-9]+\/[a-z0-9]+\.jpg/$domain=ylilauta.org
+||static.ylilauta.org/js/*/Module/FrameLoader.js
+ylilauta.org##.card.a
 ||nelonenmedia-pmd-ads-*.nm-stream.nelonenmedia.fi/*.mp4$media,redirect=noop-1s.mp4,domain=ruutu.fi
 tennisassa.fi#$?#.page-content__main > div.module:first-child > div.module__content div.ad--container:upward(div.module) { remove: true; }
 kuvake.net#@#.ad728x90
@@ -11763,7 +11760,6 @@ anonyviet.com##.jeg_ad
 ||storage.fshare.vn/support/*-300x600-
 fshare.vn##div[class^="quang-cao-"]
 ||game4v.com/*/banner-*.gif
-game4v.com###close-fixedban
 hentaivn.net###over
 vietjack.com###lightbox_ballon
 win10.vn##+js(abort-current-script, eval, ignielAdBlock)
@@ -12108,6 +12104,9 @@ youtube.com#@$##contentContainer.tp-yt-app-drawer[swipe-open].tp-yt-app-drawer::
 ##.div-gpt-ad:not([style^="width: 1px; height: 1px;"])
 ##[class^="div-gpt-ad"]:not([style^="width: 1px; height: 1px;"], .div-gpt-ad_adblock_test)
 ##button[data-openuri="|BTN_URL|"]
+##body > div#fixedban
+###close-fixedban
+###teaser3
 ###soldakayan
 ###sagdakayan
 ##.top-header-ads-mobile
@@ -14290,8 +14289,9 @@ mellowads.com#$#.flexBefore { position: absolute!important; left: -4000px!import
 mellowads.com#$#div[class^="flexAd"] { position: absolute!important; left: -4000px!important; }
 screencrush.com,tasteofcountry.com#$##site-menu-wrapper > .logo { display: block!important; height: 50px!important; }
 popcrush.com#$##site-menu-wrapper > .logo { display: block!important; height: 50px!important; top: 10px!important; max-width: 318px!important; }
-screencrush.com,popcrush.com,tasteofcountry.com#$#.non-menu-content { display:none!important; }
-screencrush.com,popcrush.com,tasteofcountry.com#$#.site-menu-right { top: 0!important; }
+kyssfm.com#$#.logo-next-to-logo-container > .logo { display: block!important; height: 50px!important; }
+kyssfm.com,screencrush.com,popcrush.com,tasteofcountry.com#$#.non-menu-content { display:none!important; }
+kyssfm.com,screencrush.com,popcrush.com,tasteofcountry.com#$#.site-menu-right { top: 0!important; }
 justwatch.com#$#.filter__wrapper--fixed { top:50px!important; }
 ghanaweb.com#$#body > #pagecontainer[style$="top:85px;"] { top: 0!important; }
 medicalnewstoday.com#$#ins[data-ad-client] { position: absolute!important; left: -4000px!important; }
@@ -14527,6 +14527,7 @@ neowin.net#$#div[class^="banner-"] { height: 0!important; min-height: 0!importan
 &siteid=*&adid=$removeparam
 /mellowpresence.com^$script
 /^https:\/\/[0-9a-f]{10}\.[0-9a-f]{10}\.com\/[0-9a-f]{32}\.js$/$script,third-party
+/assets/jquery/main100.js?v=$~third-party
 /assets/jquery/jquery-1.4.1.min.js?v=2&type=adult
 /assets/jquery/jquery-1.4.2.min.js?v=2&type=adult
 /assets/jquery/jquery-1.4.3.min.js?v=2&type=adult
@@ -17795,7 +17796,7 @@ mrpcgamer.co##center > a[target="_blank"] > button
 tamrieltradecentre.com##[id^="aswift_"]
 emilypost.com##.divider
 milfzr.com###post-0
-asurascans.com,anikor.website##.kln
+asurascans.com##.kln
 codegrepper.com###right_add_long
 cnbctv18.com##.bandavdesk
 wtools.io###adsright_header
@@ -18341,7 +18342,6 @@ topeuropix.site###MyAdsId300x250
 pixlr.com##body > #right-space
 windowsnoticias.com,movilforum.com,mrlabtest.com##.publi
 ||tut.az/iframe/index$third-party
-forexlap.com###close-fixedban
 ||popin.cc/ads/
 vaughn.live##div[id^="div-insticator-ad-"]
 wccftech.com##body .ads-container
@@ -21080,7 +21080,6 @@ yoshare.net##iframe[id^="yoshare.net_"][id$="_DFP"]
 animax.*##[src*="//a.exdynsrv.com/iframe.php"]
 ||animax.*/ax.js
 cuts-url.com##.content
-anigliscans.xyz,fairymanga.com,donghuaworld.com,suryascans.com,cosmicscans.com,mangatale.co,nartag.com,chineseanime.org,void-scans.com,mihentai.com,flamescans.org,chineseanime.co.in,isekaisubs.web.id,173.249.49.204,asurascans.com###teaser3
 asurascans.com###main-menu + div[id^="asura-"] > a[href^="https://asurascans.onelink.me/"]
 ||asurascans.com/wp-content/uploads/*/immortaltaoist.gif
 world4ufree.*##a[href="https://buycheaphost.net/"]
@@ -21104,7 +21103,7 @@ nono.games###closed-vid
 desktophut.com##.visuma > div.left.column
 msendpointmgr.com##.widget_sponsors_widget
 earnload.co##.box-main > p[style]
-anikor.website,luciferdonghua.in,alpha-scans.org,xcalibrscans.com,animexin.xyz##div[id^="teaser"]
+luciferdonghua.in,alpha-scans.org,xcalibrscans.com,animexin.xyz##div[id^="teaser"]
 cryptocompare.com##more-stuff-desktop-sidebar
 ccurl.net##a > img[class^="aligncenter"][height="250"]
 ||webcamtests.com/MyShowroom/view.php
@@ -25221,7 +25220,6 @@ addictivetips.com##a[href^="https://www.addictivetips.com/go"] > img
 citethisforme.com##.sbm-ad
 x1337x.se##a[href^="/vpn"][href*=".php"]
 x1337x.se##.aabfdbb[id][href*=".php"]:not([onclick])
-pcreview.me,reviewstation.me,blogspot.com,smallinfo.in,manga-fenix.com,mantrazscan.com,gooals.top,soloboys.tv,sangetods.net,compsciedu.com,clikern.com,haxhits.com###fixedban
 ||haxhits.com/gdata/ad-vast.xml
 healthline.com##.article-body > div[class^="css-"][class*=" e"]
 healthline.com###site-header + div + section.css-9vohld
