@@ -18,6 +18,8 @@ blocklists.each do |blocklist|
         discarded_rules << line
       elsif (line.start_with?('||')) && /^[a-zA-Z0-9_.]*[a-zA-Z0-9_]$/.match?(line[2..-1])
         discarded_rules << line
+      elsif line.include?('$network')
+        discarded_rules << line
       else
         selected_rules << line
       end
