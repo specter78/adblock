@@ -20,8 +20,6 @@ blocklists.each do |blocklist|
         discarded_rules << line
       elsif line.include?('$network')
         discarded_rules << line
-      elsif line.include?('$stealth')
-        discarded_rules << line
       else
         selected_rules << line
       end
