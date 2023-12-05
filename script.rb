@@ -3,7 +3,7 @@ require 'httparty'
 def adblock_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url.strip)
+    if capture = /^(?:\|\|)?([a-zA-Z0-9\.-_]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
@@ -12,14 +12,14 @@ end
 def dns_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-]+).*/.match(url.strip)
+    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-_]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
 end
 
 def already_blocked?(url)
-  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,-]+[a-zA-Z0-9]).*/.match(url)
+  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,-_]+[a-zA-Z0-9]).*/.match(url)
     return false if capture[1].include?(',')
     return false unless capture[1].ascii_only?
     domain = capture[1]
@@ -75,8 +75,6 @@ blocklists.each do |list|
     if line.start_with?('!')
     elsif line == ''
     elsif line.include?('$network')
-    elsif '.#/-$%&*'.include?(line[0])
-      selected_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
     else
