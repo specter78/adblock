@@ -29,6 +29,27 @@ def already_blocked?(url)
   return false
 end
 
+def beginning_domains(line)
+  if capture = /^((?:@@)?(?:\|\|)?)([a-zA-Z0-9\.,\-_]+[a-zA-Z0-9])(.*)/.match(line)
+    if capture[2].include?(',')
+      domains = capture[2].split(',').delete_if {|x| already_blocked?(x)}
+      return '' if domains == []
+      line = capture[1] + domains.join(',') + capture[3]
+    end
+  end
+  return line
+end
+
+def ending_domains(line)
+  before_string = line.split('$domain=')[0]
+  after_string = line.split('$domain=')[1].split(",")[1..-1].join(',')
+  domains = line.split('$domain=')[1].split(",")[0].split("|").delete_if {|x| already_blocked?(x)}
+  return '' if domains == []
+  line = before_string + '$domain=' + domains.join('|')
+  line = line + ',' + after_string if after_string != ''
+  return line
+end
+
 
 discarded_rules = []
 total_rules = 0
@@ -75,6 +96,7 @@ blocklists.each do |list|
     elsif already_blocked?(line)
       discarded_rules << line
     else
+      line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
       selected_rules << line
     end
   end
