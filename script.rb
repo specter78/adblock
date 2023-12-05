@@ -35,6 +35,7 @@ blocklists.each do |blocklist|
       if line.start_with?('!')
       elsif line == ''
       elsif already_blocked?(line)
+        discarded_rules << line
       
       # elsif /^(\|\|)?(graph\.facebook\.com).*$/.match?(line)
       #   discarded_rules << line
