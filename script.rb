@@ -21,8 +21,9 @@ end
 
 def already_blocked?(url)
   puts url
+  return false if url.include?(',')
   url = url[2..-1] if url.start_with?('||')
-  url = url.split('^')[0].split('/')[0]
+  url = url.split('^')[0].split('#')[0].split('/')[0]
   return $dns_blocked.include?(url)
 end
 
