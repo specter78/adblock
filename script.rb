@@ -19,7 +19,7 @@ def dns_format(blocklist)
 end
 
 def already_blocked?(url)
-  if capture = /^(?:\|\|)?([a-zA-Z0-9\.,-]+).*/.match(url)
+  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,-]+).*/.match(url)
     return false if capture[1].include?(',')
     return $dns_blocked[capture[1]]
   end
@@ -69,7 +69,7 @@ blocklists.each do |list|
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
-    elsif '.#/-@$%&*'.include?(line[0])
+    elsif '.#/-$%&*'.include?(line[0])
       selected_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
