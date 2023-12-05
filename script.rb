@@ -1,5 +1,9 @@
 blocklists = ['adguard_ads.txt', 'easylist.txt', 'adguard_privacy.txt', 'easyprivacy.txt', 'adguard_mobile.txt']
 discarded_rules = []
+readme = []
+readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
+readme << "| File | Rules |"
+readme << "|:----:|:-----:|"
 
 blocklists.each do |blocklist|
   selected_rules = []
@@ -28,5 +32,7 @@ blocklists.each do |blocklist|
     end
   end
   File.write(blocklist, selected_rules.join("\n"))
+  readme << "| #{blocklist} | #{selected_rules.count} |"
 end
 File.write("discarded.txt", discarded_rules.join("\n"))
+File.write("README.md", readme.join("\n"))
