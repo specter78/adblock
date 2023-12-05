@@ -33,6 +33,7 @@ blocklists.each do |blocklist|
     f.each_line do |line|
       line = line.strip
       if line.start_with?('!')
+      elsif line == ''
       elsif already_blocked?(line)
       
       # elsif /^(\|\|)?(graph\.facebook\.com).*$/.match?(line)
