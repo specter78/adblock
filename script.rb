@@ -27,6 +27,10 @@ blocklists.each do |blocklist|
         discarded_rules << line
       elsif /^(\|\|)?(graph\.facebook\.com).*$/.match?(line)
         discarded_rules << line
+      elsif /^(\|\|)?(pagead2\.googlesyndication\.com).*$/.match?(line)
+        discarded_rules << line
+      elsif /^(\|\|)?(www\.)?(googletagmanager\.com).*$/.match?(line)
+        discarded_rules << line
       else
         selected_rules << line
       end
