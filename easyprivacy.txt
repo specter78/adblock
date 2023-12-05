@@ -55,6 +55,12 @@
 .stats?action=
 .svc/?tracking_id=
 .v4.analytics.
+/c?siteID=$image,script
+/ivw/SP/*$image,script
+/piwik.$image,script,domain=~matomo.org|~piwik.org|~piwik.pro|~piwikpro.de
+/presslabs.js$script,~third-party
+/snowplow.js$script,third-party
+/webtracking/*$~subdocument,domain=~wwwapps.ups.com
 ://a869.
 ://analytics-cdn.
 ://analytics.*/collect
@@ -250,7 +256,13 @@ _adobe_analytics.js
 _track_pixel.gif?
 img.promio-connect.com$image
 omni.soundestlink.com$image
+/cdn-cgi/apps/body/*$script,~third-party
+/cdn-cgi/apps/head/*$script,~third-party
 &pagegroup=*&url=$script
+/r/ucb.js$script,~third-party
+/client_204?$image,other,ping,script
+/csi_204?$image,other,ping,script
+/gen_204?$image,other,ping,script
 ||google.*/url?$ping
 ||google.com/gen_204?
 ||googleapis.com^*/gen_204?
@@ -337,6 +349,7 @@ _mongo_stats/
 ||ipapi.co^$third-party
 ||ipgeolocation.io^$third-party
 ||ipinfo.info^$third-party
+||iplogger.org^$third-party,domain=~iplogger.com
 ||izatcloud.net^$third-party
 ||kampyle.com^$third-party
 ||keen.io^$third-party,domain=~keen.github.io|~keen.io
@@ -366,10 +379,14 @@ _mongo_stats/
 ||onthe.io^$third-party
 ||pdst.fm^$script,third-party
 ||pendo.io^$third-party
+||petametrics.com^$image,third-party
+||pgs.io^$third-party,domain=~publicgood.com
 ||pingdom.net^$third-party
 ||pinpoll.com^$third-party
+||piwik.pro^$third-party,domain=~clearcode.cc|~clearcode.pl|~piwikpro.de
 ||plausible.io^$third-party
 ||plerdy.com^$third-party
+||popt.in^$third-party,domain=~poptin.com
 ||proofpoint.com^$third-party
 ||pxf.io^$image,script,third-party
 ||questionpro.com^$third-party,domain=~questionpro.com.au|~questionpro.eu
@@ -378,6 +395,7 @@ _mongo_stats/
 ||report-uri.com^$third-party
 ||res-x.com^$third-party
 ||researchintel.com^$third-party
+||researchnow.co.uk^$third-party,domain=~dynata.com
 ||rollbar.com^$third-party
 ||rs6.net^$image,script,third-party
 ||rumble.com^$ping,third-party
@@ -462,6 +480,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||macromill.com^$third-party
 ||moshimo.com^$third-party
 ||msgs.jp^$third-party
+||r-ad.ne.jp^$script,third-party
 ||rtoaster.jp^$third-party
 ||team-rec.jp^$third-party
 ||dcdn.lt/g.js
@@ -886,6 +905,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||eventapi.libring.com^
 ||eventful.com/apps/generic/$image,third-party
 ||events.jokerly.com^
+||events.release.narrativ.com^$subdocument,xmlhttprequest
 ||events.ubembed.com^
 ||eveonline.com/redir.asp$third-party
 ||everyaction.com/v1/Track/
@@ -992,6 +1012,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||gleam.io/seen?
 ||gleam.io^$script,third-party
 ||global.ssl.fastly.net/native/
+||gml-grp.com^*&affid=$subdocument,third-party
 ||go.com/capmon/GetDE/?
 ||go.techtarget.com^$image,xmlhttprequest
 ||goadv.com^*/track.js
@@ -1559,6 +1580,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||t.skimresources.com^
 ||t.splicky.com^
 ||tag.aticdn.net^
+||tag.search.sensefuel.live^$script,third-party
 ||taggstar.com^*/taggstar.min.js
 ||tags.clickagy.com^
 ||target.mixi.media^
@@ -1615,6 +1637,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||tracking.quisma.com^
 ||tracking.sokrati.com^
 ||tracking.synthasite.net^
+||trackjs.com/agent/$script,third-party
 ||tradablebits.com/pixels/
 ||trading24.io/erwrtyo8blqeyz4$xmlhttprequest,domain=op.gg
 ||traffic.prod.cobaltgroup.com^
@@ -1830,6 +1853,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||trustev.com/trustev.min.js$third-party
 ||webutation.net/js/load_badge.js
 ||jsrdn.com/s/cs.js
+||d1z2jf7jlzjs58.cloudfront.net^$rewrite=abp-resource:blank-js,domain=voici.fr
 ||78.46.19.203^$third-party,domain=~sprueche-zitate.net.ip
 ||adc-srv.net/retargeting.php
 ||adm24.de/hp_counter/$third-party
@@ -1840,6 +1864,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||api.tv.de/*/tracking/
 ||audimark.de/tracking/
 ||bcs-computersysteme.com/cgi-local/hiddencounter/
+||cdn.c-i.as^$script,third-party
 ||clipkit.de/metrics?
 ||cloudfront.net/customers/24868.min.js
 ||d.nativendo.de^
@@ -1979,6 +2004,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||cbsi.com.cn/js/dw.js
 ||chuzushijian.cn/c.php
 ||click.taobao.com^$script
+||cpro.baidustatic.com^$script,domain=sohu.com
 ||cri.cn/js/a1.js
 ||csdn.net^*/counter.js
 ||etwun.com:8080/counter.php?
@@ -2077,6 +2103,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 ||wmtools.it/wmtcounter.php?
 ||wopweb.net/services/counters/
 ||199.116.177.156^$domain=~fc2.jp.ip
+||affiliate.rakuten.co.jp^$script,third-party
 ||api.popin.cc/conversion2.js
 ||bidder.mediams.mb.softbank.jp^
 ||blogroll.livedoor.net/img/blank.gif?
@@ -2180,6 +2207,7 @@ $third-party,xmlhttprequest,domain=opensubtitles.org
 |http://a.pr-cy.ru^$third-party
 |https://a.pr-cy.ru^$third-party
 ||7host.ru/tr/*?r=$third-party
+||ad.mail.ru^$image,~third-party
 ||agates.ru/counters/
 ||all-top.ru/cgi-bin/topcount.cgi?
 ||anycent.com/analytics/
