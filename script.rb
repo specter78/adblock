@@ -20,6 +20,8 @@ blocklists.each do |blocklist|
         discarded_rules << line
       elsif line.include?('$network')
         discarded_rules << line
+      elsif line.start_with?('||graph.facebook.com')
+        discarded_rules << line
       else
         selected_rules << line
       end
