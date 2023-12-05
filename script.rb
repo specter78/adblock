@@ -10,6 +10,7 @@ readme << "The script removes rules that can be blocked by DNS based ad-blocking
 readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
 
+# Adguard DNS
 HTTParty.get('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt').body.each_line do |url|
   next if url.start_with?('!')
   next if url.start_with?('@@')
@@ -17,6 +18,12 @@ HTTParty.get('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/mast
   url = url[2..-1] if url.start_with?('||')
   url = url.split('^').first
   $dns_blocked << url
+end
+
+# StevenBlack
+HTTParty.get('https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts').body.each_line do |url|
+  next unless url.start_with?('0.0.0.0')
+  $dns_blocked << url.split(' ')[1]
 end
 
 def already_blocked?(url)
