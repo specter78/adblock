@@ -22,7 +22,7 @@ blocklists.each do |blocklist|
         # selected_rules << line
       # elsif (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party') || line.end_with?('^$all') || line.end_with?('^$popup'))
         # discarded_rules << line
-      elsif /^(\|\|)?[a-zA-Z0-9_.]*[a-zA-Z0-9]$/.match?(line)
+      elsif /^(\|\|)?[a-zA-Z0-9_.]*[a-zA-Z0-9]^?$/.match?(line)
         discarded_rules << line
       else
         selected_rules << line
