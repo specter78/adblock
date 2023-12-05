@@ -11,20 +11,19 @@ readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
 
 HTTParty.get('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt').body.each_line do |url|
-  url = url.strip
   next if url.start_with?('!')
   next if url.start_with?('@@')
+  next if url == ''
   url = url[2..-1] if url.start_with?('||')
-  url = url[0..-2] if url.end_with?('^')
+  url = url.split('^').first
   $dns_blocked << url
 end
 
 def already_blocked?(url)
-  puts url
-  return false if url.include?(',')
-  url = url[2..-1] if url.start_with?('||')
-  url = url.split('^')[0].split('#')[0].split('/')[0]
-  return $dns_blocked.include?(url)
+  if capture = /^(?:\|\|)?([a-zA-Z0-9][a-zA-Z0-9\.-]+[a-zA-Z0-9])(?:.*)?/.match(url)
+    return $dns_blocked.include?(capture[1])
+  end
+  return false
 end
 
 
