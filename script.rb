@@ -69,6 +69,7 @@ blocklists.each do |list|
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
+    elsif line.include?('$network')
     elsif '.#/-$%&*'.include?(line[0])
       selected_rules << line
     elsif already_blocked?(line)
