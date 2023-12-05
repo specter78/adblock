@@ -10,20 +10,23 @@ readme << "The script removes rules that can be blocked by DNS based ad-blocking
 readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
 
-# Adguard DNS
-HTTParty.get('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt').body.each_line do |url|
-  next if url.start_with?('!')
-  next if url.start_with?('@@')
-  next if url == ''
-  url = url[2..-1] if url.start_with?('||')
-  url = url.split('^').first
-  $dns_blocked << url
+
+def adblock_format(blocklist)
+  HTTParty.get(blocklist).body.each_line do |url|
+    next if url.start_with?('!')
+    next if url.start_with?('@@')
+    next if url == ''
+    url = url[2..-1] if url.start_with?('||')
+    url = url.split('^').first
+    $dns_blocked << url
+  end
 end
 
-# StevenBlack
-HTTParty.get('https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts').body.each_line do |url|
-  next unless url.start_with?('0.0.0.0')
-  $dns_blocked << url.split(' ')[1]
+def dns_format(blocklist)
+  HTTParty.get(blocklist).body.each_line do |url|
+    next unless url.start_with?('0.0.0.0')
+    $dns_blocked << url.split(' ')[1]
+  end
 end
 
 def already_blocked?(url)
@@ -33,7 +36,12 @@ def already_blocked?(url)
   return false
 end
 
+adblock_format('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt') # Adguard DNS
+adblock_format('https://big.oisd.nl') # oisd
+dns_format('https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts') # StevenBlack
+dns_format('https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.plus.txt') # hagezi
 $dns_blocked = $dns_blocked.uniq
+
 blocklists.each do |blocklist|
   selected_rules = []
   File.open(blocklist, "r") do |f|
