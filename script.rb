@@ -21,7 +21,11 @@ end
 def already_blocked?(url)
   if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,-]+).*/.match(url)
     return false if capture[1].include?(',')
-    return $dns_blocked[capture[1]]
+    domain = capture[1]
+    while domain.index('.') != nil
+      return true if $dns_blocked[domain]
+      domain = domain[(domain.index('.')+1)..-1]
+    end
   end
   return false
 end
