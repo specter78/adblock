@@ -33,7 +33,7 @@ def already_blocked?(url)
   return false
 end
 
-
+$dns_blocked = $dns_blocked.uniq
 blocklists.each do |blocklist|
   selected_rules = []
   File.open(blocklist, "r") do |f|
