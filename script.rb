@@ -40,6 +40,9 @@ adblock_format('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/ma
 adblock_format('https://big.oisd.nl') # oisd
 dns_format('https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts') # StevenBlack
 dns_format('https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.plus.txt') # hagezi
+dns_format('https://hblock.molinero.dev/hosts') # hblock
+dns_format('https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/hosts.txt') # 1Hosts
+dns_format('https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt') # developerdan
 $dns_blocked = $dns_blocked.uniq
 
 blocklists.each do |blocklist|
