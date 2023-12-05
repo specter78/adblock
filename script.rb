@@ -37,6 +37,6 @@ blocklists.each do |blocklist|
   total_rules += selected_rules.count
 end
 
-readme << "| Total | #{total_rules.count} |"
+readme << "| Total | #{total_rules} |"
 File.write("discarded.txt", discarded_rules.join("\n"))
 File.write("README.md", readme.join("\n"))
