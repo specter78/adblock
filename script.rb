@@ -20,6 +20,7 @@ HTTParty.get('https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/mast
 end
 
 def already_blocked?(url)
+  puts url
   url = url[2..-1] if url.start_with?('||')
   url = url.split('^')[0].split('/')[0]
   return $dns_blocked.include?(url)
