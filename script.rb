@@ -31,7 +31,7 @@ end
 
 def already_blocked?(url)
   puts url
-  if capture = /^(?:\|\|)?([a-zA-Z0-9\.-,]+).*/.match(url)
+  if capture = /^(?:\|\|)?([a-zA-Z0-9\.,-]+).*/.match(url)
     return false if capture[1].include?(',')
     return $dns_blocked.include?(capture[1])
   end
