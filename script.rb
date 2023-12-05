@@ -72,7 +72,6 @@ blocklists.each do |list|
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
-    elsif line.include?('$network')
     elsif already_blocked?(line)
       discarded_rules << line
     else
