@@ -3,7 +3,7 @@ require 'httparty'
 def adblock_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url)
+    if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
@@ -12,7 +12,7 @@ end
 def dns_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-]+).*/.match(url)
+    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
@@ -66,6 +66,7 @@ blocklists.each do |list|
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
+    line = line.strip
     if line.start_with?('!')
     elsif line == ''
     elsif '.#/-@$%&*'.include?(line[0])
