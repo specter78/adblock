@@ -3,9 +3,9 @@ The script removes rules that can be blocked by DNS based ad-blocking.
 
 | File | Rules |
 |:----:|:-----:|
-| adguard_ads.txt | 65320 |
+| adguard_ads.txt | 65324 |
 | easylist.txt | 27432 |
-| adguard_privacy.txt | 22351 |
+| adguard_privacy.txt | 22355 |
 | easyprivacy.txt | 6312 |
 | adguard_mobile.txt | 5352 |
-| Total | 126767 |
+| Total | 126775 |
