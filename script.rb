@@ -12,25 +12,25 @@ readme << "|:----:|:-----:|"
 
 
 def adblock_format(blocklist)
+  puts blocklist
   HTTParty.get(blocklist).body.each_line do |url|
-    next if url.start_with?('!')
-    next if url.start_with?('@@')
-    next if url == ''
-    url = url[2..-1] if url.start_with?('||')
-    url = url.split('^').first
-    $dns_blocked << url
+    if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url)
+      $dns_blocked << capture[1]
+    end
   end
 end
 
 def dns_format(blocklist)
+  puts blocklist
   HTTParty.get(blocklist).body.each_line do |url|
-    next unless url.start_with?('0.0.0.0')
-    $dns_blocked << url.split(' ')[1]
+    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-]+).*/.match(url)
+      $dns_blocked << capture[1]
+    end
   end
 end
 
 def already_blocked?(url)
-  if capture = /^(?:\|\|)?([a-zA-Z0-9][a-zA-Z0-9\.-]+[a-zA-Z0-9])(?:.*)?/.match(url)
+  if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url)
     return $dns_blocked.include?(capture[1])
   end
   return false
@@ -54,19 +54,6 @@ blocklists.each do |blocklist|
       elsif line == ''
       elsif already_blocked?(line)
         discarded_rules << line
-      
-      # elsif /^(\|\|)?(graph\.facebook\.com).*$/.match?(line)
-      #   discarded_rules << line
-      # elsif /^(\|\|)?(pagead2\.googlesyndication\.com).*$/.match?(line)
-      #   discarded_rules << line
-      # elsif /^(\|\|)?(www\.)?(googletagmanager\.com).*$/.match?(line)
-      #   discarded_rules << line
-      # elsif line[0..-2].count('/') > 0 # i.e. '/' does not exist ONLY at the end
-        # selected_rules << line
-      # elsif (line.start_with?('||')) && (line.end_with?('^') || line.end_with?('^$third-party') || line.end_with?('^$all') || line.end_with?('^$popup'))
-        # discarded_rules << line
-      # elsif /^(\|\|)?[a-zA-Z0-9_.]*[a-zA-Z0-9](\^)?(\^\$third-party)?$/.match?(line)
-        # discarded_rules << line
       else
         selected_rules << line
       end
