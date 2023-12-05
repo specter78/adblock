@@ -86,7 +86,7 @@ blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.
 blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt', 'adguard_mobile.txt']
 
 blocklists.each do |list|
-  selected_rules = []
+  selected_rules = ["! #{list[1].split('.')[0]}" modified]
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
