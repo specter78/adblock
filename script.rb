@@ -4,7 +4,7 @@ def adblock_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
     if capture = /^(?:\|\|)?([a-zA-Z0-9\.-]+).*/.match(url)
-      $dns_blocked << capture[1]
+      $dns_blocked[capture[1]] = true
     end
   end
 end
@@ -13,7 +13,7 @@ def dns_format(blocklist)
   puts blocklist
   File.read(blocklist).each_line do |url|
     if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.-]+).*/.match(url)
-      $dns_blocked << capture[1]
+      $dns_blocked[capture[1]] = true
     end
   end
 end
@@ -21,7 +21,7 @@ end
 def already_blocked?(url)
   if capture = /^(?:\|\|)?([a-zA-Z0-9\.,-]+).*/.match(url)
     return false if capture[1].include?(',')
-    return $dns_blocked.include?(capture[1])
+    return $dns_blocked[capture[1]]
   end
   return false
 end
@@ -29,7 +29,7 @@ end
 
 discarded_rules = []
 total_rules = 0
-$dns_blocked = []
+$dns_blocked = Hash.new(false)
 readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
 readme << "| File | Rules |"
@@ -52,7 +52,6 @@ published_list.each do |list|
   adblock_format(list[1]) if list[2] == 'adp'
   dns_format(list[1]) if list[2] == 'dns'
 end
-$dns_blocked = $dns_blocked.uniq
 
 
 blocklists = []
