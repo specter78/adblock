@@ -97,7 +97,7 @@ blocklists.each do |list|
       discarded_rules << line
     else
       line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
-      selected_rules << line
+      selected_rules << line if (line != '')
     end
   end
   
