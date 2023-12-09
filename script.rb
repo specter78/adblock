@@ -69,9 +69,10 @@ published_list << ['https://hblock.molinero.dev/hosts', 'filters/hblock.txt', 'd
 published_list << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/hosts.txt', 'filters/1hosts.txt', 'dns']
 published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'filters/developerdan.txt', 'dns']
 published_list.each do |list|
-  response = HTTParty.get(list[0])
-  if response.code == 200
-    File.write(list[1], response.body)
+  begin
+    response = HTTParty.get(list[0])
+    File.write(list[1], response.body) if response.code == 200
+  rescue => error
   end
   adblock_format(list[1]) if list[2] == 'adp'
   dns_format(list[1]) if list[2] == 'dns'
