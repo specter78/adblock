@@ -53,11 +53,12 @@ end
 
 discarded_rules = []
 total_rules = 0
-$dns_blocked = Hash.new(false)
 readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
 readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
+$dns_blocked = Hash.new(false)
+$dns_blocked['graph.facebook.com'] = true
 
 
 published_list = []
