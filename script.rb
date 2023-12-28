@@ -17,14 +17,15 @@ def dns_format(blocklist)
 end
 
 def already_blocked?(url)
-  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_]+[a-zA-Z0-9]).*/.match(url)
+  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_]+[a-zA-Z0-9])\^.*/.match(url)
     return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
     domain = capture[1]
-    while domain.index('.') != nil
-      return true if $dns_blocked[domain]
-      domain = domain[(domain.index('.')+1)..-1]
-    end
+    return true if $dns_blocked[domain]
+    # while domain.index('.') != nil
+    #   return true if $dns_blocked[domain]
+    #   domain = domain[(domain.index('.')+1)..-1]
+    # end
   end
   return false
 end
@@ -98,7 +99,7 @@ blocklists.each do |list|
     elsif already_blocked?(line)
       discarded_rules << line
     else
-      line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
+      # line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
       selected_rules << line if (line != '')
     end
   end
@@ -109,5 +110,5 @@ blocklists.each do |list|
 end
 
 readme << "| Total | #{total_rules} |"
-# File.write("discarded.txt", discarded_rules.join("\n"))
+File.write("discarded.txt", discarded_rules.join("\n"))
 File.write("README.md", readme.join("\n"))
