@@ -71,7 +71,7 @@ published_list << ['https://big.oisd.nl', 'filters/oisd.txt', 'adp']
 published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'filters/stevenblack.txt', 'dns']
 published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.plus.txt', 'filters/hagezi.txt', 'dns']
 published_list << ['https://hblock.molinero.dev/hosts', 'filters/hblock.txt', 'dns']
-published_list << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/hosts.txt', 'filters/1hosts.txt', 'dns']
+published_list << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/adblock.txt', 'filters/1hosts.txt', 'adp']
 published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'filters/developerdan.txt', 'dns']
 published_list.each do |list|
   begin
