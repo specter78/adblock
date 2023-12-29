@@ -17,10 +17,13 @@ def dns_format(blocklist)
 end
 
 def already_blocked?(url)
-  # if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_]+[a-zA-Z0-9])(?:\^|#).*/.match(url)
-  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_*]+[a-zA-Z0-9*]).*/.match(url)
+  # if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_*]+[a-zA-Z0-9*]).*/.match(url)
+  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_*]+).*/.match(url)
     return false if capture[1].include?(',')
     return false if capture[1].include?('*')
+    return false if capture[1][-1] == '.'
+    return false if capture[1][-1] == '-'
+    return false if capture[1][-1] == '_'
     return true unless capture[1].ascii_only?
     domain = capture[1]
     while domain.index('.') != nil
