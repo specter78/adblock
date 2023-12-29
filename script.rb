@@ -99,6 +99,7 @@ blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt
 blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'adguard_privacy.txt']
 blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy.txt']
 blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt', 'adguard_mobile.txt']
+blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt', 'adguard_annoyances.txt']
 
 blocklists.each do |list|
   selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
