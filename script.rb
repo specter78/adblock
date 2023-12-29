@@ -21,7 +21,10 @@ def already_blocked?(url)
     return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
     domain = capture[1]
-    return true if $dns_blocked[domain]
+    while domain.index('.') != nil
+      return true if $dns_blocked[domain]
+      domain = domain[(domain.index('.')+1)..-1]
+    end
   end
   return false
 end
