@@ -95,7 +95,8 @@ published_list.each do |list|
   rescue => error
   end
   adblock_format(list[1]) if list[2] == 'abp'
-  dns_format(list[1]) if list[2] == 'dns'
+  domain_format(list[1]) if list[2] == 'domain'
+  host_format(list[1]) if list[2] == 'host'
 end
 
 
