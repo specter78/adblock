@@ -110,7 +110,7 @@ blocklists.each do |list|
     elsif line == ''
     elsif line.start_with?('/') || line.start_with?('@@/')
       selected_rules << line
-    elsif /^email\.[A-Za-z0-9\.\-]+\$image$/.match(line) # temporary optimization
+    elsif /^email[A-Za-z0-9\.\-]+\$image$/.match(line) # temporary optimization
       discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
