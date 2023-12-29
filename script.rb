@@ -4,7 +4,7 @@ def already_blocked?(url)
   if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(url)
     return if capture[1].include?(',')
     return unless capture[1].ascii_only?
-    capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
+    capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (next)
     return if domain.include?('*')
     return if domain.include?('~')
     return if domain[-1] == '.'
