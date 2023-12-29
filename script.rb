@@ -2,15 +2,29 @@ require 'httparty'
 
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:\|\|)?([a-zA-Z0-9\.\-_]+).*/.match(url.strip)
+    next if url.strip.start_with?('!')
+    next if url.strip == ''
+    if capture = /^(?:\|\|)([^\^]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
 end
 
-def dns_format(blocklist)
+def domain_format(blocklist)
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:0\.0\.0\.0)\s([a-zA-Z0-9\.\-_]+).*/.match(url.strip)
+    next if url.strip.start_with?('#')
+    next if url.strip == ''
+    if capture = /^(?:\*\.)?(.*)/.match(url.strip)
+      $dns_blocked[capture[1]] = true
+    end
+  end
+end
+
+def host_format(blocklist)
+  File.read(blocklist).each_line do |url|
+    next if url.strip.start_with?('#')
+    next if url.strip == ''
+    if capture = /^(?:0\.0\.0\.0)\s(.*)/.match(url.strip)
       $dns_blocked[capture[1]] = true
     end
   end
@@ -66,21 +80,22 @@ $dns_blocked['graph.facebook.com'] = true
 
 
 published_list = []
-published_list << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt', 'filters/adguard_dns.txt', 'adp']
-published_list << ['https://big.oisd.nl', 'filters/oisd.txt', 'adp']
-published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'filters/stevenblack.txt', 'dns']
-published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.plus.txt', 'filters/hagezi.txt', 'dns']
-published_list << ['https://hblock.molinero.dev/hosts', 'filters/hblock.txt', 'dns']
-published_list << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/adblock.txt', 'filters/1hosts.txt', 'adp']
-published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'filters/developerdan.txt', 'dns']
+published_list << ['https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt', 'filters/adguard_dns.txt', 'abp']
+published_list << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswild_big.txt', 'filters/oisd.txt', 'domain']
+published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'filters/stevenblack.txt', 'host']
+published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt', 'filters/hagezi.txt', 'domain']
+published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'filters/hblock.txt', 'domain']
+published_list << ['https://o0.pages.dev/Lite/domains.wildcards', 'filters/1hosts.txt', 'domain']
+published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'filters/developerdan.txt', 'host']
 published_list.each do |list|
   begin
     response = HTTParty.get(list[0])
     File.write(list[1], response.body) if response.code == 200
   rescue => error
   end
-  adblock_format(list[1]) if list[2] == 'adp'
-  dns_format(list[1]) if list[2] == 'dns'
+  adblock_format(list[1]) if list[2] == 'abp'
+  domain_format(list[1]) if list[2] == 'domain'
+  host_format(list[1]) if list[2] == 'host'
 end
 
 
