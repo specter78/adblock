@@ -3,6 +3,7 @@ require 'httparty'
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |url|
     next if url.strip.start_with?('!')
+    next if url.strip.start_with?('@@')
     next if url.strip == ''
     puts "#{blocklist} -> #{url.strip}" unless /^(?:\|\|)([^\^]+).*/.match(url.strip)
     if capture = /^(?:\|\|)([^\^]+).*/.match(url.strip)
