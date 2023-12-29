@@ -101,7 +101,7 @@ blocklists.each do |list|
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
-    elsif line.start_with?('/^') || line.start_with?('@@/^') # line is a regex
+    elsif line.start_with?('/') || line.start_with?('@@/')
       selected_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
