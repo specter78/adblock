@@ -113,8 +113,6 @@ blocklists.each do |list|
       selected_rules << line
     elsif /^e?mail[A-Za-z0-9_\.\-]+\$image$/.match(line) # temporary optimization
       discarded_rules << line
-    elsif /^link[A-Za-z0-9_\.\-]+\$image$/.match(line) # temporary optimization
-      discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
     else
