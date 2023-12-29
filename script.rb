@@ -4,12 +4,13 @@ def already_blocked?(url)
   if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(url)
     return if capture[1].include?(',')
     return unless capture[1].ascii_only?
-    capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (return)
+    capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
     return if domain.include?('*')
     return if domain.include?('~')
     return if domain[-1] == '.'
     return if domain[-1] == '-'
     return if domain[-1] == '_'
+    puts domain
     $domain_rules[domain.split('.')[-2..-1].join('.')] += 1
     # while domain.index('.') != nil
     #   return true if $dns_blocked[domain]
