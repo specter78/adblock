@@ -2,6 +2,8 @@ require 'httparty'
 
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |url|
+    next if url.start_with?('!')
+    next if url == ''
     puts "#{blocklist} -> #{url.strip}" unless /^(?:\|\|)([^\^]+).*/.match(url.strip)
     if capture = /^(?:\|\|)([^\^]+).*/.match(url.strip)
       $dns_blocked[capture[1]] = true
