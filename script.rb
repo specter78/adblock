@@ -17,15 +17,15 @@ def dns_format(blocklist)
 end
 
 def already_blocked?(url)
-  # if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_*]+[a-zA-Z0-9*]).*/.match(url)
-  if capture = /^(?:@@)?(?:\|\|)?([a-zA-Z0-9\.,\-_*]+).*/.match(url)
+  if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(url)
     return false if capture[1].include?(',')
-    return false if capture[1].include?('*')
-    return false if capture[1][-1] == '.'
-    return false if capture[1][-1] == '-'
-    return false if capture[1][-1] == '_'
     return true unless capture[1].ascii_only?
-    domain = capture[1]
+    capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0]) : (domain = capture[1])
+    return false if domain.include?('*')
+    return false if domain.include?('~')
+    return false if domain[-1] == '.'
+    return false if domain[-1] == '-'
+    return false if domain[-1] == '_'
     while domain.index('.') != nil
       return true if $dns_blocked[domain]
       domain = domain[(domain.index('.')+1)..-1]
@@ -35,11 +35,12 @@ def already_blocked?(url)
 end
 
 def beginning_domains(line)
-  if capture = /^((?:@@)?(?:\|\|)?)([a-zA-Z0-9\.,\-_]+[a-zA-Z0-9])(.*)/.match(line)
+  if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     if capture[2].include?(',')
       domains = capture[2].split(',').delete_if {|x| already_blocked?(x)}
       return '' if domains == []
-      line = capture[1] + domains.join(',') + capture[3]
+      (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
+      line = capture[1] + domains + capture[3]
     end
   end
   return line
@@ -100,11 +101,13 @@ blocklists.each do |list|
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
+    elsif line.start_with?('/^') || line.start_with?('@@/^') # line is a regex
+      selected_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
     else
       # line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
-      selected_rules << line if (line != '')
+      selected_rules << beginning_domains(line) if (line != '')
     end
   end
   
