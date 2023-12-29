@@ -2,8 +2,8 @@ require 'httparty'
 
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:\|\|)([^\^^!]+).*/.match(url.strip)
-      $dns_blocked[capture[1]] = true
+    if capture = /^(?:\|\|)([^\^^!]+)/.match(url.strip)
+      $dns_blocked[capture[1].strip] = true
     end
   end
 end
@@ -11,15 +11,15 @@ end
 def domain_format(blocklist)
   File.read(blocklist).each_line do |url|
     if capture = /^(?:\*\.)?([^#]+)/.match(url.strip)
-      $dns_blocked[capture[1]] = true
+      $dns_blocked[capture[1].strip] = true
     end
   end
 end
 
 def host_format(blocklist)
   File.read(blocklist).each_line do |url|
-    if capture = /^(?:0\.0\.0\.0)\s([^#]+)/.match(url.strip)
-      $dns_blocked[capture[1]] = true
+    if capture = /^(?:0\.0\.0\.0\s)([^#]+)/.match(url.strip)
+      $dns_blocked[capture[1].strip] = true
     end
   end
 end
