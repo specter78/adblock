@@ -126,5 +126,5 @@ blocklists.each do |list|
 end
 
 readme << "| Total | #{total_rules} |"
-File.write("discarded.txt", discarded_rules.join("\n"))
+# File.write("discarded.txt", discarded_rules.join("\n"))
 File.write("README.md", readme.join("\n"))
