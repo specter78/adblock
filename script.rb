@@ -47,12 +47,11 @@ def beginning_domains(line)
 end
 
 def ending_domains(line)
-  before_string = line.split('$domain=')[0]
-  after_string = line.split('$domain=')[1].split(",")[1..-1].join(',')
-  domains = line.split('$domain=')[1].split(",")[0].split("|").delete_if {|x| already_blocked?(x)}
-  return '' if domains == []
-  line = before_string + '$domain=' + domains.join('|')
-  line = line + ',' + after_string if after_string != ''
+  if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
+    domains = capture[3].split("|").delete_if {|x| already_blocked?(x)}
+    return '' if domains == []
+    line = capture[1] + capture[2] + domains.join('|') + capture[4]
+  end
   return line
 end
 
@@ -106,8 +105,7 @@ blocklists.each do |list|
     elsif already_blocked?(line)
       discarded_rules << line
     else
-      # line.include?('$domain=') ? (line = ending_domains(line)) : (line = beginning_domains(line))
-      selected_rules << beginning_domains(line) if (line != '')
+      selected_rules << ending_domains(beginning_domains(line)) if (line != '')
     end
   end
   
