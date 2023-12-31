@@ -105,6 +105,7 @@ blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile.txt']
 
 blocklists.each do |list|
+  selected_rules = []
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
