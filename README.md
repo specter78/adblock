@@ -3,15 +3,14 @@ The script removes rules that can be blocked by DNS based ad-blocking.
 
 | File | Rules |
 |:----:|:-----:|
-| ubo_adguard_ads_+_easylist.txt | 59420 |
-| ubo_adguard_privacy.txt | 6893 |
-| ubo_adguard_mobile.txt | 4851 |
-| ubo_adguard_annoyances.txt | 40664 |
-| ubo_adguard_social.txt | 13485 |
-| ubo_easyprivacy.txt | 6289 |
-| adg_adguard_ads_+_easylist.txt | 61440 |
-| adg_adguard_privacy.txt | 7571 |
-| adg_adguard_mobile.txt | 5039 |
-| adg_adguard_annoyances.txt | 41530 |
-| adg_adguard_social.txt | 13546 |
-| adg_easyprivacy.txt | 6289 |
+| easyprivacy.txt | 6289 |
+| adguard_ads_+_easylist_(ublock).txt | 59420 |
+| adguard_privacy_(ublock).txt | 6893 |
+| adguard_mobile_(ublock).txt | 4851 |
+| adguard_annoyances_(ublock).txt | 40664 |
+| adguard_social_(ublock).txt | 13485 |
+| adguard_ads_+_easylist_(adguard).txt | 61440 |
+| adguard_privacy_(adguard).txt | 7571 |
+| adguard_mobile_(adguard).txt | 5039 |
+| adguard_annoyances_(adguard).txt | 41530 |
+| adguard_social_(adguard).txt | 13546 |
