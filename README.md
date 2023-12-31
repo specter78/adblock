@@ -14,3 +14,4 @@ The script removes rules that can be blocked by DNS based ad-blocking.
 | adguard_mobile_(adguard).txt | 5031 |
 | adguard_annoyances_(adguard).txt | 41259 |
 | adguard_social_(adguard).txt | 13524 |
+| adguard_ads_+_easylist_(safari).txt | 22374 |
