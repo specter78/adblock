@@ -64,13 +64,14 @@ def additional_domains(line)
 end
 
 
+$dns_blocked = Hash.new(false)
+$temporary_optimization = true
 discarded_rules = []
 total_rules = 0
 readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
 readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
-$dns_blocked = Hash.new(false)
 $dns_blocked['graph.facebook.com'] = true
 
 
@@ -114,7 +115,7 @@ blocklists.each do |list|
     elsif line == ''
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
-    elsif /^e?mail[A-Za-z0-9_\.\-]+\$image$/.match(line) # temporary optimization
+    elsif $temporary_optimization && /^e?mail[A-Za-z0-9_\.\-]+\$image$/.match(line)
       discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
