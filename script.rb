@@ -114,6 +114,8 @@ blocklists << ['https://filters.adtidy.org/mac_v2/filters/3.txt', 'adguard_priva
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/11.txt', 'adguard_mobile_(adguard).txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/14.txt', 'adguard_annoyances_(adguard).txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/4.txt', 'adguard_social_(adguard).txt']
+# AdGuard optimized
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/2_optimized.txt', 'adguard_ads_+_easylist_(safari).txt']
 
 blocklists.each do |list|
   selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
