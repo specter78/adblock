@@ -85,7 +85,8 @@ published_list << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswi
 published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'filters/stevenblack.txt', 'host']
 published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt', 'filters/hagezi.txt', 'domain']
 published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'filters/hblock.txt', 'domain']
-published_list << ['https://o0.pages.dev/Lite/domains.wildcards', 'filters/1hosts.txt', 'domain']
+# published_list << ['https://o0.pages.dev/Lite/domains.wildcards', 'filters/1hosts.txt', 'domain']
+published_list << ['https://o0.pages.dev/Pro/domains.wildcards', 'filters/1hosts.txt', 'domain']
 published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'filters/developerdan.txt', 'host']
 published_list.each do |list|
   begin
