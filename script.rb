@@ -72,7 +72,10 @@ readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
 readme << "| File | Rules |"
 readme << "|:----:|:-----:|"
-$dns_blocked['graph.facebook.com'] = true
+if $temporary_optimization
+  $dns_blocked['facebook.com'] = true
+  $dns_blocked['facebook.net'] = true
+end
 
 
 published_list = []
@@ -96,9 +99,9 @@ end
 
 
 blocklists = []
-blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt', 'adguard_ads.txt']
+# blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt', 'adguard_ads.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'adguard_ads_+_easylist.txt'] # AdGuard English filter + EasyList
-blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt', 'easylist.txt']
+# blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt', 'easylist.txt']
 # blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'adguard_privacy.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'adguard_privacy.txt']
 blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy.txt']
