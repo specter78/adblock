@@ -107,6 +107,7 @@ blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'adg
 blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy.txt']
 # blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt', 'adguard_mobile.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'adguard_annoyances.txt']
 
 blocklists.each do |list|
   selected_rules = []
