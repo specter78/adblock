@@ -34,10 +34,9 @@ end
 
 $domain_rules = Hash.new(0)
 blocklists = []
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_ads.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_ads_+_easylist.txt']
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_mobile.txt']
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_privacy.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/easylist.txt']
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/easyprivacy.txt']
 
 blocklists.each do |list|
