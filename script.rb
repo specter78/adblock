@@ -102,17 +102,17 @@ end
 blocklists = []
 blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy.txt']
 # uBlock Origin compatible
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'adguard_ads_+_easylist_ublock.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'adguard_privacy_ublock.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile_ublock.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'adguard_annoyances_ublock.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/4.txt', 'adguard_social_ublock.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'ubo_adguard_ads_+_easylist.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'ubo_adguard_privacy.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'ubo_adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'ubo_adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/4.txt', 'ubo_adguard_social.txt']
 # AdGuard compatible
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/2.txt', 'adguard_ads_+_easylist_adguard.txt']
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/3.txt', 'adguard_privacy_adguard.txt']
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/11.txt', 'adguard_mobile_adguard.txt']
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/14.txt', 'adguard_annoyances_adguard.txt']
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/4.txt', 'adguard_social_adguard.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/2.txt', 'adg_adguard_ads_+_easylist.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/3.txt', 'adg_adguard_privacy.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/11.txt', 'adg_adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/14.txt', 'adg_adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/4.txt', 'adg_adguard_social.txt']
 
 blocklists.each do |list|
   selected_rules = ["! Title: #{list[1].split('.')[0].split('_')[0..-2].collect{|x| x.capitalize}.join(" ")} Modified"]
