@@ -105,10 +105,6 @@ blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile.txt']
 
 blocklists.each do |list|
-  selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
-  selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
-  selected_rules << ['! Expires: 6 hours (update frequency)']
-  selected_rules << ['! Homepage: https://github.com/specter78/adblock']
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
@@ -125,6 +121,11 @@ blocklists.each do |list|
       selected_rules << additional_domains(line) if (line != '')
     end
   end
+  selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"] +
+                   ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"] +
+                   ['! Expires: 6 hours (update frequency)'] +
+                   ['! Homepage: https://github.com/specter78/adblock'] +
+                   selected_rules.sort.uniq
   
   File.write(list[1], selected_rules.join("\n"))
   readme << "| #{list[1]} | #{selected_rules.count} |"
