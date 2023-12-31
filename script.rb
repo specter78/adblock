@@ -1,3 +1,4 @@
+require 'date'
 require 'httparty'
 
 def adblock_format(blocklist)
@@ -105,6 +106,9 @@ blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'ad
 
 blocklists.each do |list|
   selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
+  selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
+  selected_rules << ['! Expires: 6 hours (update frequency)']
+  selected_rules << ['! Homepage: https://github.com/specter78/adblock']
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
