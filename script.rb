@@ -68,7 +68,6 @@ end
 $dns_blocked = Hash.new(false)
 $temporary_optimization = true
 discarded_rules = []
-total_rules = 0
 readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
 readme << "| File | Rules |"
@@ -101,18 +100,17 @@ end
 
 
 blocklists = []
-# blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt', 'adguard_ads.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'adguard_ads_+_easylist.txt'] # AdGuard English filter + EasyList
-# blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easylist.txt', 'easylist.txt']
-# blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt', 'adguard_privacy.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'adguard_privacy.txt']
-blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy.txt']
-# blocklists << ['https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt', 'adguard_mobile.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile.txt']
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'adguard_ads_+_easylist_ublock.txt'] # AdGuard English filter + EasyList
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'adguard_privacy_ublock.txt']
+blocklists << ['https://ublockorigin.github.io/uAssets/thirdparties/easyprivacy.txt', 'easyprivacy_ublock.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'adguard_mobile_ublock.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'adguard_annoyances_ublock.txt']
 
 blocklists.each do |list|
-  selected_rules = []
+  selected_rules = ["! Title: #{list[1].split('.')[0].split('_')[0..-2].collect{|x| x.capitalize}.join(" ")} Modified"]
+  selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
+  selected_rules << ['! Expires: 6 hours (update frequency)']
+  selected_rules << ['! Homepage: https://github.com/specter78/adblock']
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
@@ -129,17 +127,10 @@ blocklists.each do |list|
       selected_rules << additional_domains(line) if (line != '')
     end
   end
-  selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"] +
-                   ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"] +
-                   ['! Expires: 6 hours (update frequency)'] +
-                   ['! Homepage: https://github.com/specter78/adblock'] +
-                   selected_rules.sort.uniq
   
   File.write(list[1], selected_rules.join("\n"))
   readme << "| #{list[1]} | #{selected_rules.count} |"
-  total_rules += selected_rules.count
 end
 
-readme << "| Total | #{total_rules} |"
 # File.write("discarded.txt", discarded_rules.join("\n"))
 File.write("README.md", readme.join("\n"))
