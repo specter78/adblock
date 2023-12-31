@@ -75,6 +75,7 @@ readme << "|:----:|:-----:|"
 if $temporary_optimization
   $dns_blocked['facebook.com'] = true
   $dns_blocked['facebook.net'] = true
+  $dns_blocked['onion'] = true
 end
 
 
