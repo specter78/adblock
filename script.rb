@@ -38,6 +38,7 @@ blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_mobile.txt']
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_privacy.txt']
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/easyprivacy.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_annoyances.txt']
 
 blocklists.each do |list|
   response = HTTParty.get(list[0])
