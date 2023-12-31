@@ -2,31 +2,31 @@ require 'date'
 require 'httparty'
 
 def adblock_format(blocklist)
-  File.read(blocklist).each_line do |url|
-    if capture = /^(?:\|\|)([^\^^!]+)/.match(url.strip)
+  File.read(blocklist).each_line do |line|
+    if capture = /^(?:\|\|)([^\^^!]+)/.match(line.strip)
       $dns_blocked[capture[1].strip] = true
     end
   end
 end
 
 def domain_format(blocklist)
-  File.read(blocklist).each_line do |url|
-    if capture = /^(?:\*\.)?([^#]+)/.match(url.strip)
+  File.read(blocklist).each_line do |line|
+    if capture = /^(?:\*\.)?([^#]+)/.match(line.strip)
       $dns_blocked[capture[1].strip] = true
     end
   end
 end
 
 def host_format(blocklist)
-  File.read(blocklist).each_line do |url|
-    if capture = /^(?:0\.0\.0\.0\s)([^#]+)/.match(url.strip)
+  File.read(blocklist).each_line do |line|
+    if capture = /^(?:0\.0\.0\.0\s)([^#]+)/.match(line.strip)
       $dns_blocked[capture[1].strip] = true
     end
   end
 end
 
-def already_blocked?(url)
-  if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(url)
+def already_blocked?(line)
+  if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(line)
     return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
     capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
