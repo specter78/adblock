@@ -39,6 +39,7 @@ def already_blocked?(url)
       return true if $dns_blocked[domain]
       domain = domain[(domain.index('.')+1)..-1]
     end
+    return true if $dns_blocked[domain]
   end
   return false
 end
