@@ -31,6 +31,8 @@ def already_blocked?(line)
     return true unless capture[1].ascii_only?
     capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
     return false if domain[-1] == '.'
+    return false if domain[-1] == '-'
+    return false if domain[-1] == '_'
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*') && !domain.include?('~')
       domain = domain[(domain.index('.')+1)..-1]
