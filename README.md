@@ -1,4 +1,4 @@
-The script removes rules that can be blocked by DNS based ad-blocking.
+The script removes rules that are blocked by DNS based blocking.
 
 
 | File | Original | Modified |
