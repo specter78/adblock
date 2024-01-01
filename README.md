@@ -3,7 +3,7 @@ The script removes rules that are blocked by DNS based blocking.
 
 | File | Original | Modified |
 |:----:|:-----:|:-----:|
-| easylist/easyprivacy | 33657 | 6177 |
+| easylist/easyprivacy | 33656 | 6178 |
 | ublock/adguard_base | 122378 | 59291 |
 | ublock/adguard_tracking_protection | 86365 | 7186 |
 | ublock/adguard_social | 14568 | 13463 |
@@ -16,7 +16,7 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_mobile | 7685 | 5017 |
 | adguard/adguard_annoyances | 51246 | 41252 |
 | adguard/adguard_url_tracking | 2050 | 1219 |
-| safari/adguard_base | 39069 | 22370 |
+| safari/adguard_base | 39070 | 22371 |
 | safari/adguard_tracking_protection | 40164 | 4986 |
 | safari/adguard_social | 8230 | 7984 |
 | safari/adguard_mobile | 5991 | 4877 |
