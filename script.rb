@@ -151,7 +151,7 @@ blocklists.each do |list|
     end
   end
   
-  File.write(list[1], selected_rules.join("\n"))
+  File.write(list[1], selected_rules.join("\n")) if (File.read(list[1]).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{list[1].split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
 
