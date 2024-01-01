@@ -67,7 +67,7 @@ $dns_blocked = Hash.new(false)
 $temporary_optimization = true
 discarded_rules = []
 readme = []
-readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
+readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
 if $temporary_optimization
