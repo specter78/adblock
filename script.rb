@@ -66,8 +66,8 @@ $temporary_optimization = true
 discarded_rules = []
 readme = []
 readme << "The script removes rules that can be blocked by DNS based ad-blocking.\n\n"
-readme << "| File | Rules |"
-readme << "|:----:|:-----:|"
+readme << "| File | Original | Modified |"
+readme << "|:----:|:-----:|:-----:|"
 if $temporary_optimization
   $dns_blocked['facebook.com'] = true
   $dns_blocked['facebook.net'] = true
@@ -114,6 +114,7 @@ blocklists << ['https://filters.adtidy.org/mac_v2/filters/4.txt', 'adguard_socia
 blocklists << ['https://filters.adtidy.org/extension/safari/filters/2_optimized.txt', 'adguard_ads_+_easylist_(safari).txt']
 
 blocklists.each do |list|
+  original_rules = 0
   selected_rules = ["! Title: #{list[1].split('.')[0].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
@@ -121,6 +122,7 @@ blocklists.each do |list|
   response = HTTParty.get(list[0])
   next if response.code != 200
   response.body.each_line do |line|
+    original_rules += 1
     line = line.strip
     if line.start_with?('!')
     elsif line == ''
@@ -136,7 +138,7 @@ blocklists.each do |list|
   end
   
   File.write(list[1], selected_rules.join("\n"))
-  readme << "| #{list[1]} | #{selected_rules.count} |"
+  readme << "| #{list[1]} | #{original_rules.count} | #{selected_rules.count} |"
 end
 
 # File.write("discarded.txt", discarded_rules.join("\n"))
