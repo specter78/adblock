@@ -12,6 +12,7 @@ def already_blocked?(url)
     return if domain[-1] == '_'
     puts domain
     $domain_rules[domain] += 1
+    $tld_rules[domain.split('.').last] += 1
     # $domain_rules[domain.split('.')[-2..-1].join('.')] += 1
     # while domain.index('.') != nil
     #   return true if $dns_blocked[domain]
@@ -33,13 +34,14 @@ def additional_domains(line)
 end
 
 $domain_rules = Hash.new(0)
+$tld_rules = Hash.new(0)
 blocklists = []
 blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_annoyances.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_base.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_mobile.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_social.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_tracking_protection.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_url_tracking.txt']
+# blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_base.txt']
+# blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_mobile.txt']
+# blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_social.txt']
+# blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_tracking_protection.txt']
+# blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_url_tracking.txt']
 
 blocklists.each do |list|
   response = HTTParty.get(list[0])
@@ -57,5 +59,9 @@ readme = []
 readme << "Domain Counter\n\n"
 readme << "| Domain | Rules |"
 readme << "|:----:|:-----:|"
-$domain_rules.delete_if {|k,v| v <= 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$domain_rules.delete_if {|k,v| v <= 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+readme << "\n\nTLD Counter\n\n"
+readme << "| TLD | Rules |"
+readme << "|:----:|:-----:|"
+$tld_rules.delete_if {|k,v| v <= 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 File.write("README.md", readme.join("\n"))
