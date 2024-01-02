@@ -152,7 +152,7 @@ blocklists.each do |list|
     elsif already_blocked?(line)
       discarded_rules << line
     else
-      selected_rules << additional_domains(line) if (line != '')
+      (selected_rules << additional_domains(line)) if line != ''
     end
   end
 
