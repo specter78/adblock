@@ -86,15 +86,15 @@ published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main
 published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'dns/hblock.txt', 'domain']
 published_list << ['https://o0.pages.dev/Pro/domains.wildcards', 'dns/1hosts.txt', 'domain']
 published_list << ['https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt', 'dns/developerdan.txt', 'host']
-published_list.each do |list|
+published_list.each do |url, filename, format|
   begin
-    response = HTTParty.get(list[0])
-    File.write(list[1], response.body) if response.code == 200
+    response = HTTParty.get(url)
+    File.write(filename, response.body) if response.code == 200
   rescue => error
   end
-  adblock_format(list[1]) if list[2] == 'abp'
-  domain_format(list[1]) if list[2] == 'domain'
-  host_format(list[1]) if list[2] == 'host'
+  adblock_format(filename) if format == 'abp'
+  domain_format(filename) if format == 'domain'
+  host_format(filename) if format == 'host'
 end
 
 
@@ -128,17 +128,17 @@ blocklists << ['https://filters.adtidy.org/ios/filters/11_optimized.txt', 'ios/a
 blocklists << ['https://filters.adtidy.org/ios/filters/14_optimized.txt', 'ios/adguard_annoyances.txt']
 
 
-blocklists.each do |list|
+blocklists.each do |url, filename|
   original_rules_count = 0
-  selected_rules = ["! Title: #{list[1].split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
+  selected_rules = ["! Title: #{filename.split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
+  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
     ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it'].each{ |x| $dns_blocked[x] = true }
   end
   
-  response = HTTParty.get(list[0])
+  response = HTTParty.get(url)
   next if response.code != 200
   response.body.each_line do |line|
     original_rules_count += 1
@@ -157,11 +157,11 @@ blocklists.each do |list|
     end
   end
 
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
+  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
     ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it'].each{ |x| $dns_blocked[x] = false }
   end
-  File.write(list[1], selected_rules.join("\n")) if (File.read(list[1]).split("\n")[4..-1] != selected_rules[4..-1])
-  readme << "| #{list[1].split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
+  File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
+  readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
 
 File.write("README.md", readme.join("\n"))
