@@ -71,9 +71,9 @@ readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
 
-$tld_optimization = ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it', 'lv', 'nl', 'by', 'es', 'at', 'hu']
-$domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
-$domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
+# $tld_optimization = ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it', 'lv', 'nl', 'by', 'es', 'at', 'hu']
+# $domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
+# $domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
 
 
 published_list = []
@@ -99,39 +99,61 @@ end
 blocklists = []
 blocklists << ['https://easylist.to/easylist/easyprivacy.txt', 'easylist/easyprivacy.txt']
 # uBlock compatible
-blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'ublock/adguard_base.txt'] # AdGuard English + EasyList
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'ublock/adguard_base.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2_optimized.txt', 'ublock/adguard_base_optimized.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3.txt', 'ublock/adguard_tracking_protection.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/3_optimized.txt', 'ublock/adguard_tracking_protection_optimized.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/4.txt', 'ublock/adguard_social.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/4_optimized.txt', 'ublock/adguard_social_optimized.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11.txt', 'ublock/adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/11_optimized.txt', 'ublock/adguard_mobile_optimized.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14.txt', 'ublock/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/14_optimized.txt', 'ublock/adguard_annoyances_optimized.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/17.txt', 'ublock/adguard_url_tracking.txt']
+blocklists << ['https://filters.adtidy.org/extension/ublock/filters/17_optimized.txt', 'ublock/adguard_url_tracking_optimized.txt']
 # AdGuard compatible
-blocklists << ['https://filters.adtidy.org/mac_v2/filters/2.txt', 'adguard/adguard_base.txt'] # AdGuard English + EasyList
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/2.txt', 'adguard/adguard_base.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/2_optimized.txt', 'adguard/adguard_base_optimized.txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/3.txt', 'adguard/adguard_tracking_protection.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/3_optimized.txt', 'adguard/adguard_tracking_protection_optimized.txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/4.txt', 'adguard/adguard_social.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/4_optimized.txt', 'adguard/adguard_social_optimized.txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/11.txt', 'adguard/adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/11_optimized.txt', 'adguard/adguard_mobile_optimized.txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/14.txt', 'adguard/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/14_optimized.txt', 'adguard/adguard_annoyances_optimized.txt']
 blocklists << ['https://filters.adtidy.org/mac_v2/filters/17.txt', 'adguard/adguard_url_tracking.txt']
+blocklists << ['https://filters.adtidy.org/mac_v2/filters/17_optimized.txt', 'adguard/adguard_url_tracking_optimized.txt']
 # AdGuard Safari optimized
-blocklists << ['https://filters.adtidy.org/extension/safari/filters/2_optimized.txt', 'safari/adguard_base.txt'] # AdGuard English + EasyList
-blocklists << ['https://filters.adtidy.org/extension/safari/filters/3_optimized.txt', 'safari/adguard_tracking_protection.txt']
-blocklists << ['https://filters.adtidy.org/extension/safari/filters/4_optimized.txt', 'safari/adguard_social.txt']
-blocklists << ['https://filters.adtidy.org/extension/safari/filters/11_optimized.txt', 'safari/adguard_mobile.txt']
-blocklists << ['https://filters.adtidy.org/extension/safari/filters/14_optimized.txt', 'safari/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/2.txt', 'safari/adguard_base.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/2_optimized.txt', 'safari/adguard_base_optimized.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/3.txt', 'safari/adguard_tracking_protection.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/3_optimized.txt', 'safari/adguard_tracking_protection_optimized.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/4.txt', 'safari/adguard_social.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/4_optimized.txt', 'safari/adguard_social_optimized.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/11.txt', 'safari/adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/11_optimized.txt', 'safari/adguard_mobile_optimized.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/14.txt', 'safari/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/extension/safari/filters/14_optimized.txt', 'safari/adguard_annoyances_optimized.txt']
 # AdGuard iOS optimized
-blocklists << ['https://filters.adtidy.org/ios/filters/2_optimized.txt', 'ios/adguard_base.txt'] # AdGuard English + EasyList
-blocklists << ['https://filters.adtidy.org/ios/filters/3_optimized.txt', 'ios/adguard_tracking_protection.txt']
-blocklists << ['https://filters.adtidy.org/ios/filters/4_optimized.txt', 'ios/adguard_social.txt']
-blocklists << ['https://filters.adtidy.org/ios/filters/11_optimized.txt', 'ios/adguard_mobile.txt']
-blocklists << ['https://filters.adtidy.org/ios/filters/14_optimized.txt', 'ios/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/2.txt', 'ios/adguard_base.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/2_optimized.txt', 'ios/adguard_base_optimized.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/3.txt', 'ios/adguard_tracking_protection.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/3_optimized.txt', 'ios/adguard_tracking_protection_optimized.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/4.txt', 'ios/adguard_social.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/4_optimized.txt', 'ios/adguard_social_optimized.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/11.txt', 'ios/adguard_mobile.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/11_optimized.txt', 'ios/adguard_mobile_optimized.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/14.txt', 'ios/adguard_annoyances.txt']
+blocklists << ['https://filters.adtidy.org/ios/filters/14_optimized.txt', 'ios/adguard_annoyances_optimized.txt']
 
 blocklists.each do |url, filename|
   original_rules_count = 0
-  selected_rules = ["! Title: #{filename.split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
+  selected_rules = ["! Title: #{filename.split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")}"]
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
+  # $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
   
   response = HTTParty.get(url)
   next if response.code != 200
@@ -142,8 +164,8 @@ blocklists.each do |url, filename|
     elsif line == ''
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
-    elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
-      discarded_rules << line
+    # elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
+    #   discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
     else
@@ -152,7 +174,7 @@ blocklists.each do |url, filename|
     end
   end
 
-  $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
+  # $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
   File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
