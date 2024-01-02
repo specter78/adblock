@@ -33,6 +33,7 @@ def already_blocked?(line)
     return false if domain[-1] == '.'
     return false if domain[-1] == '-'
     return false if domain[-1] == '_'
+    return false if domain[0] == '~'
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
@@ -55,7 +56,7 @@ def additional_domains(line)
   
   # ending domains
   if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[3].split("|").delete_if {|x| (x[0] == '~') ? false : already_blocked?(x) }
+    domains = capture[3].split("|").delete_if { |x| already_blocked?(x) }
     return '' if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
