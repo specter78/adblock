@@ -71,7 +71,7 @@ readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
 
-# $tld_optimization = ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it', 'lv', 'nl', 'by', 'es', 'at', 'hu']
+$tld_optimization = ['ru', 'de', 'jp']
 $domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
 $domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
 
@@ -153,7 +153,7 @@ blocklists.each do |url, filename|
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  # $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
+  $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
   
   response = HTTParty.get(url)
   next if response.code != 200
@@ -174,7 +174,7 @@ blocklists.each do |url, filename|
     end
   end
 
-  # $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
+  $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
   File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
