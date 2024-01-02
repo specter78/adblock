@@ -55,7 +55,7 @@ def additional_domains(line)
   
   # ending domains
   if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[3].split("|").delete_if {|x| (x[0] == '~') ? already_blocked?(x[1..-1]) : already_blocked?(x) }
+    domains = capture[3].split("|").delete_if {|x| (x[0] == '~') ? false : already_blocked?(x) }
     return '' if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
