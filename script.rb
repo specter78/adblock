@@ -36,8 +36,8 @@ end
 $domain_rules = Hash.new(0)
 $tld_rules = Hash.new(0)
 blocklists = []
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_social.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_annoyances.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_social_optimized.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_annoyances_optimized.txt']
 # blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_base.txt']
 # blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_mobile.txt']
 # blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_tracking_protection.txt']
