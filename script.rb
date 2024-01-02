@@ -134,8 +134,8 @@ blocklists.each do |list|
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil
-    ['ru', 'pl', 'jp', 'ua', 'tr', 'br'].each{ |x| $dns_blocked[x] = true }
+  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany
+    ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de'].each{ |x| $dns_blocked[x] = true }
   end
   
   response = HTTParty.get(list[0])
@@ -152,12 +152,13 @@ blocklists.each do |list|
     elsif already_blocked?(line)
       discarded_rules << line
     else
-      (selected_rules << additional_domains(line)) if line != ''
+      line = additional_domains(line)
+      selected_rules << line if line != ''
     end
   end
 
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil
-    ['ru', 'pl', 'jp', 'ua', 'tr', 'br'].each{ |x| $dns_blocked[x] = false }
+  if $temporary_optimization && /.*(?:annoyances|social).*/.match(list[1]) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany
+    ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de'].each{ |x| $dns_blocked[x] = false }
   end
   File.write(list[1], selected_rules.join("\n")) if (File.read(list[1]).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{list[1].split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
