@@ -65,18 +65,15 @@ end
 
 
 $dns_blocked = Hash.new(false)
-$temporary_optimization = true
 discarded_rules = []
 readme = []
 readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
-if $temporary_optimization
-  $dns_blocked['facebook.com'] = true
-  $dns_blocked['facebook.net'] = true
-  $dns_blocked['onion'] = true
-end
-$tld_optimization = ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it']
+
+$tld_optimization = ['onion', 'ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it', 'lv', 'it']
+$domain_optimization = ['facebook.com', 'facebook.net'] 
+$domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
 
 
 published_list = []
@@ -134,7 +131,7 @@ blocklists.each do |url, filename|
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  $tld_optimization.each{ |x| $dns_blocked[x] = true } if ($temporary_optimization && /.*(?:annoyances|social).*/.match(filename))
+  $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
   
   response = HTTParty.get(url)
   next if response.code != 200
@@ -145,7 +142,7 @@ blocklists.each do |url, filename|
     elsif line == ''
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
-    elsif $temporary_optimization && /^e?mail\..*\$image$/.match(line)
+    elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
       discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
@@ -155,10 +152,7 @@ blocklists.each do |url, filename|
     end
   end
 
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename)
-    ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it'].each{ |x| $dns_blocked[x] = false }
-  end
-  $tld_optimization.each{ |x| $dns_blocked[x] = false } if ($temporary_optimization && /.*(?:annoyances|social).*/.match(filename))
+  $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
   File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
