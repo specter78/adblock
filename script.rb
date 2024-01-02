@@ -76,6 +76,7 @@ if $temporary_optimization
   $dns_blocked['facebook.net'] = true
   $dns_blocked['onion'] = true
 end
+$tld_optimization = ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it']
 
 
 published_list = []
@@ -127,16 +128,13 @@ blocklists << ['https://filters.adtidy.org/ios/filters/4_optimized.txt', 'ios/ad
 blocklists << ['https://filters.adtidy.org/ios/filters/11_optimized.txt', 'ios/adguard_mobile.txt']
 blocklists << ['https://filters.adtidy.org/ios/filters/14_optimized.txt', 'ios/adguard_annoyances.txt']
 
-
 blocklists.each do |url, filename|
   original_rules_count = 0
   selected_rules = ["! Title: #{filename.split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")} Modified"]
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
-    ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it'].each{ |x| $dns_blocked[x] = true }
-  end
+  $tld_optimization.each{ |x| $dns_blocked[x] = true } if ($temporary_optimization && /.*(?:annoyances|social).*/.match(filename))
   
   response = HTTParty.get(url)
   next if response.code != 200
@@ -157,9 +155,10 @@ blocklists.each do |url, filename|
     end
   end
 
-  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename) # Russia, Poland, Japan, Ukraine, Turkey, Brazil, Germany, France, Italy
+  if $temporary_optimization && /.*(?:annoyances|social).*/.match(filename)
     ['ru', 'pl', 'jp', 'ua', 'tr', 'br', 'de', 'fr', 'it'].each{ |x| $dns_blocked[x] = false }
   end
+  $tld_optimization.each{ |x| $dns_blocked[x] = false } if ($temporary_optimization && /.*(?:annoyances|social).*/.match(filename))
   File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
