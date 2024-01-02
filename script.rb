@@ -164,8 +164,8 @@ blocklists.each do |url, filename|
     elsif line == ''
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
-    # elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
-    #   discarded_rules << line
+    elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
+      discarded_rules << line
     elsif already_blocked?(line)
       discarded_rules << line
     else
@@ -175,7 +175,7 @@ blocklists.each do |url, filename|
   end
 
   # $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
-  File.write(filename, selected_rules.join("\n"))# if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
+  File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
 
