@@ -34,11 +34,12 @@ end
 
 $domain_rules = Hash.new(0)
 blocklists = []
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_ads_+_easylist.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_mobile.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_privacy.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/easyprivacy.txt']
-blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard_annoyances.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_annoyances.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_base.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_mobile.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_social.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_tracking_protection.txt']
+blocklists << ['https://raw.githubusercontent.com/specter78/adblock/main/adguard/adguard_url_tracking.txt']
 
 blocklists.each do |list|
   response = HTTParty.get(list[0])
