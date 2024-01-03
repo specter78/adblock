@@ -73,7 +73,7 @@ readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
 
 # https://en.wikipedia.org/wiki/Country_code_top-level_domain (for annoyances and social)
-$tld_optimization = ['ru', 'de', 'jp', 'cn', 'pl', 'tr', 'br', 'fr', 'ua', 'es', 'pt', 'lv', 'ch', 'gr', 'hu', 'by', 'cz', 'nl', 'dk', 'ro', 'no', 'se', 'fi', 'su', 'it', 'kz', 'kg', 'uz', 'tm', 'tj', 'au', 'si']
+$tld_optimization = ['ru', 'de', 'jp', 'cn', 'pl', 'tr', 'br', 'fr', 'ua', 'es', 'pt', 'lv', 'ch', 'gr', 'hu', 'by', 'cz', 'nl', 'dk', 'ro', 'no', 'se', 'fi', 'su', 'it', 'kz', 'kg', 'uz', 'tm', 'tj', 'au', 'si', 'hr']
 $domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
 $domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
 
