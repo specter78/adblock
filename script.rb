@@ -37,11 +37,11 @@ $tld_rules = Hash.new(0)
 
 blocklists = []
 blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_annoyances_optimized.txt'
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_base_optimized.txt'
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_mobile_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_base_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_mobile_optimized.txt'
 blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_social_optimized.txt'
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_tracking_protection_optimized.txt'
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_url_tracking_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_tracking_protection_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_url_tracking_optimized.txt'
 
 blocklists.each do |list|
   response = HTTParty.get(list)
