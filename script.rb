@@ -49,7 +49,7 @@ def additional_domains(line)
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     if capture[2].include?(',')
       domains = capture[2].split(',').delete_if {|x| already_blocked?(x+capture[3])}
-      return '' if domains == []
+      return "" if domains == []
       (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
       line = capture[1] + domains + capture[3]
     end
@@ -58,7 +58,7 @@ def additional_domains(line)
   # ending domains
   if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[3].split("|").delete_if { |x| already_blocked?(x) }
-    return '' if domains == []
+    return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
   return line
@@ -172,7 +172,7 @@ blocklists.each do |url, filename|
       discarded_rules << line
     else
       line = additional_domains(line)
-      selected_rules << line if line != ''
+      selected_rules << line if line != ""
     end
   end
 
