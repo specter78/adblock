@@ -34,11 +34,11 @@ def already_blocked?(line)
     return false if domain[-1] == '-'
     return false if domain[-1] == '_'
     return false if domain[0] == '~'
-    return true if $dns_blocked[domain.split('.').last] # tld
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
     end
+    return true if $dns_blocked[domain] # tld
   end
   return false
 end
