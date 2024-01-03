@@ -60,7 +60,7 @@ readme = []
 readme << "Domain Counter\n\n"
 readme << "| Domain | Rules |"
 readme << "|:----:|:-----:|"
-$domain_rules.delete_if {|k,v| v < 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$domain_rules.delete_if {|k,v| v < 10 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 readme << "\n\nTLD Counter\n\n"
 readme << "| TLD | Rules |"
 readme << "|:----:|:-----:|"
