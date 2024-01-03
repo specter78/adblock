@@ -3,9 +3,6 @@ Domain Counter
 
 | Domain | Rules |
 |:----:|:-----:|
-| co.uk | 539 |
-| google.com | 63 |
-| indiatimes.com | 60 |
 
 
 TLD Counter
@@ -13,20 +10,20 @@ TLD Counter
 
 | TLD | Rules |
 |:----:|:-----:|
-| com | 21727 |
+| com | 21735 |
 | net | 1954 |
 | org | 1150 |
-| uk | 590 |
+| uk | 588 |
 | * | 561 |
 | js | 435 |
 | in | 369 |
 | io | 342 |
 | tv | 309 |
 | info | 292 |
-| co | 216 |
+| co | 214 |
 | me | 210 |
 | eu | 210 |
-| ca | 165 |
+| ca | 163 |
 | xyz | 135 |
 | media | 121 |
 | cc | 116 |
