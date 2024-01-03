@@ -71,7 +71,7 @@ readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
 
-$tld_optimization = ['ru', 'de', 'jp', 'pl']
+$tld_optimization = ['ru', 'de', 'jp', 'pl', 'tr', 'br', 'fr', 'it', 'ua'] # for annoyances and social
 $domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
 $domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
 
