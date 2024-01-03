@@ -34,8 +34,7 @@ def already_blocked?(line)
     return false if domain[-1] == '-'
     return false if domain[-1] == '_'
     return false if domain[0] == '~'
-    # return true if /^(?:www\.)?google\.((?!com|in|\*).)*/.match(domain) && capture[2].start_with?('#') # filter list optimization
-    # return true if /^(?:www\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*).*/.match(domain)) && capture[2].start_with?('#') # filter list optimization
+    return true if /^(?:www\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*).*/.match(domain)) && capture[2].start_with?('#') # filter list optimization
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
@@ -49,7 +48,7 @@ def additional_domains(line)
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     if capture[2].include?(',')
-      domains = capture[2].split(',').delete_if {|x| already_blocked?(x)}
+      domains = capture[2].split(',').delete_if {|x| already_blocked?(x+capture[3])}
       return '' if domains == []
       (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
       line = capture[1] + domains + capture[3]
