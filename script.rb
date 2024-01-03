@@ -49,7 +49,6 @@ def additional_domains(line)
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     if capture[2].include?(',')
-      return "" if capture[3].start_with?('#') && !capture[3].ascii_only?
       domains = capture[2].split(',').delete_if {|x| already_blocked?(x+capture[3])}
       return "" if domains == []
       (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
