@@ -70,7 +70,7 @@ def optimize_rule(line, filename)
     return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
-  path ? return path + line : return line
+  path ? (return path + line) : (return line)
 end
 
 
