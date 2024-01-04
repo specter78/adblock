@@ -43,8 +43,8 @@ The script removes rules that are blocked by DNS based blocking.
 | ios/adguard_tracking_protection | 43179 | 4592 |
 | ios/adguard_tracking_protection_optimized | 40276 | 4591 |
 | ios/adguard_social | 14701 | 13563 |
-| ios/adguard_social_optimized | 8326 | 5819 |
+| ios/adguard_social_optimized | 8326 | 5716 |
 | ios/adguard_mobile | 7148 | 4919 |
 | ios/adguard_mobile_optimized | 6097 | 4918 |
 | ios/adguard_annoyances | 52155 | 41921 |
-| ios/adguard_annoyances_optimized | 24959 | 16602 |
+| ios/adguard_annoyances_optimized | 24959 | 16329 |
