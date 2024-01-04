@@ -30,9 +30,9 @@ def already_blocked?(line)
     return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
     capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
-    return false if domain[-1] == '.'
-    return false if domain[-1] == '-'
-    return false if domain[-1] == '_'
+    # return false if domain[-1] == '.'
+    # return false if domain[-1] == '-'
+    # return false if domain[-1] == '_'
     return false if domain[0] == '~'
     return true if /^(?:www\.|translate\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*)$/.match(domain)) && capture[2].start_with?('#') # filter list optimization
     return true if /^airfrance\..*/.match(domain) && capture[2].start_with?('#') # filter list optimization
