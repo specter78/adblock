@@ -163,6 +163,7 @@ blocklists.each do |url, filename|
   response = HTTParty.get(url)
   next if response.code != 200
   response.body.each_line do |line|
+    puts line.split(']')[1] if line.start_with?('[$path=')
     original_rules_count += 1
     line = line.strip
     if line.start_with?('!')
