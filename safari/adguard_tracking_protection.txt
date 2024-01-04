@@ -1,5 +1,5 @@
 ! Title: Adguard Tracking Protection
-! TimeUpdated: 2024-01-04T11:40:14+00:00
+! TimeUpdated: 2024-01-04T14:09:26+00:00
 ! Expires: 6 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -104,7 +104,6 @@ cbssports.com#%#(()=>{window.admiral=function(d,a,b){if("function"==typeof b)try
 6play.fr#%#//scriptlet('set-local-storage-item', 'gdprUserHasInteracted', '0')
 6play.fr#%#//scriptlet('set-local-storage-item', 'localDeviceId', '0')
 imdb.com#%#//scriptlet("set-constant", "doWithAds", "noopFunc")
-#%#//scriptlet('set-constant', 'Document.prototype.browsingTopics', 'undefined')
 fmkorea.com#%#//scriptlet("set-constant", "link_url", "")
 ppomppu.co.kr#%#AG_onLoad(() => { if (/^https:\/\/(www\.|m\.|)ppomppu\.co\.kr\/(new\/|)hotdeal\//g.test(document.location.href) && document.querySelector(".hotDeal_goods > ul#hotdeal")) { var k = (n) => { if(/\/\/click\.linkprice\.com\/click\.php\?/.test(n)) { return new URLSearchParams(n).get("tu") } else { return n } }; new MutationObserver((o) => { Array.from(o[0].addedNodes).filter(e => /[0-9]{7,9}$/.test(e.className) && /ppomppu\.co\.kr\/(new\/|)hotdeal\/\?/.test(e.querySelector(".view > a").href)).forEach((e) => { e.querySelector(".view > a").href = e.querySelector("p > a[href]:not([class])").href = k(new URLSearchParams(e.querySelector(".view > a").href).get("url"))})}).observe(document.querySelector(".hotDeal_goods > ul#hotdeal"), { childList: true })}});
 ppomppu.co.kr#%#AG_onLoad(() => { if (/m\.ppomppu\.co\.kr\/new\/bbs_view\.php\?/.test(location.href) || /ppomppu\.co\.kr\/zboard\/view\.php\?/.test(location.href)) { Array.from(document.querySelectorAll("a[href][target='_blank']")).filter(e => /^https:\/\/s\.ppomppu\.co\.kr(\/|)\?idno=/.test(e.href)).forEach((o) => { o.href = atob(new URLSearchParams(o.href).get("target").replace("\\", ""))})}});
@@ -170,6 +169,7 @@ venalia.ru#%#(function() { window.Ya = window.Ya || {}; window.Ya.Metrika = func
 citypizza.ru#%#window.yaCounter9890803 = { reachGoal: function() {} };
 apteka.ru#%#window.yaCounter14913877={ reachGoal: function() {} };
 accountkiller.com#%#window.ga = function(){var a = arguments[5];a&&a.hitCallback&&a.hitCallback();}
+#%#//scriptlet('no-topics')
 elcomercio.es#$##engagement-top { display: none !important; }
 elcomercio.es#$#body { overflow: auto !important; }
 infoseek.co.jp#$#.co-Widget[style="min-height: 6000px;"] { min-height: auto !important; }
@@ -234,6 +234,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||mcs-va-*.tiktokv.com^
 ||sock*-goguardian.pusher.com^
 |piwik.
+||tr.staff-start.com^
 ||ana*.inews24.com^
 ||analytics.streamfab.
 ||adservice.google.
@@ -4233,6 +4234,7 @@ kizi.com#%#window.google_trackConversion = function() {};
 @@||gaanacdn.com/*_social_tracking.js$domain=gaana.com
 @@||harvard.edu/scripts/ga_social_tracking.js
 @@||google.*/edu/cs/$genericblock
+@@||google.com/usability/$domain=google.com,document
 @@||espn.com/b/ss/$domain=espn.com
 @@||spot.im/api/tracker/spot/$domain=russian.rt.com
 @@||opensubtitles.org/cdn-cgi/pe/bag2?r[]=*google-analytics.com
