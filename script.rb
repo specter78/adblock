@@ -58,7 +58,7 @@ def optimize_rule(line, filename)
 
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[2].split(',').delete_if { |x| already_blocked?(x + capture[3], filename) }
+    domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
     return "" if domains == []
     (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
     line = capture[1] + domains + capture[3]
