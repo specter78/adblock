@@ -33,7 +33,7 @@ def already_blocked?(line)
     if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
       capture = /^(?:\|)?(?:https?\*?)?(?:\:\/\/\/?)?(.*)/.match(capture[1])
       return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
-      puts capture + ' ---> ' + capture[1]      
+      puts capture[0] + ' ---> ' + capture[1]      
     end
     domain = capture[1].split('/')[0].split(':')[0]
     return false if domain[-1] == '.'
