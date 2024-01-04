@@ -2,23 +2,21 @@ require 'httparty'
 
 def already_blocked?(line)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(line)
-    return if capture[1].include?(',')
     return unless capture[1].ascii_only?
-    # return if capture[1][-1] == '.'
-    return if capture[1][0] == '~'
     return if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
     domain = capture[1].split('/')[0]
-    if domain.include?('.')
-      $domain_rules[domain.split('.')[-2]] += 1
-      $tld_rules[domain.split('.')[-1]] += 1
-      $domain_rules[domain.split('.')[-3]] += 1 if domain.split('.').count > 2
-    else
-      $tld_rules[domain] += 1
-    end
+    return if domain[-1] == '.'
+    return if domain[0] == '~'
+    $domain_rules[domain] += 1
+    $tld_rules[domain.split('.').last] += 1
   end
 end
 
-def additional_domains(line)
+
+def optimize_rule(line)
+  # $path ["=" pattern]
+  line = line[line.index(']')+1..-1] if line.start_with?('[$path')
+
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     capture[2].split(',').each {|x| already_blocked?(x)}
@@ -26,7 +24,7 @@ def additional_domains(line)
   
   # ending domains
   if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
-    capture[3].split("|").each {|x| already_blocked?(x)}
+    capture[3].split('|').each {|x| already_blocked?(x)}
   end
 end
 
@@ -34,12 +32,12 @@ $domain_rules = Hash.new(0)
 $tld_rules = Hash.new(0)
 
 blocklists = []
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_annoyances_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_base_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_mobile_optimized.txt'
-blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_social_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_tracking_protection_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ublock/adguard_url_tracking_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_annoyances_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_base_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_mobile_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_social_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_tracking_protection_optimized.txt'
+# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_url_tracking_optimized.txt'
 
 blocklists.each do |list|
   response = HTTParty.get(list)
@@ -49,7 +47,7 @@ blocklists.each do |list|
     next if line.start_with?('!')
     next if line == ''
     next if line.start_with?('/^') || line.start_with?('@@/^')
-    additional_domains(line)
+    optimize_rule(line)
   end
 end
 
