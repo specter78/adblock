@@ -40,6 +40,13 @@ def already_blocked?(line, filename)
         return true if /\.(?:ru|de|jp|pl|ua|tr|it|fr|br|nl|by|es|kr|cn|cz|hu|no|ch)$/.match(domain) # tlds in annoyances and social
       end
     end
+    if /^safari.*optimized/.match(filename) # safari filter list optimization
+      return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
+      if /(?:annoyances|social)/.match(filename)
+        # return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
+        # return true if /\.(?:ru|de|jp|pl|ua|tr|it|fr|br|nl|by|es|kr|cn|cz|hu|no|ch)$/.match(domain) # tlds in annoyances and social
+      end
+    end
     
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
