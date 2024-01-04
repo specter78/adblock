@@ -9,11 +9,8 @@ def already_blocked?(line)
     return if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
     domain = capture[1].split('/')[0]
     if domain.include?('.')
-      # domain = capture[1].split('.')[-2..-1].join('.')
-      domain = domain.split('.')[-2]
-      tld = domain.split('.')[-1]
-      $domain_rules[domain] += 1
-      $tld_rules[tld] += 1
+      $domain_rules[domain.split('.')[-2]] += 1
+      $tld_rules[domain.split('.')[-1]] += 1
     else
       $tld_rules[domain] += 1
     end
