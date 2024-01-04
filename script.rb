@@ -11,6 +11,7 @@ def already_blocked?(line)
     if domain.include?('.')
       $domain_rules[domain.split('.')[-2]] += 1
       $tld_rules[domain.split('.')[-1]] += 1
+      $domain_rules[domain.split('.')[-3]] += 1 if domain.split('.').count > 2
     else
       $tld_rules[domain] += 1
     end
