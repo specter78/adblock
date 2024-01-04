@@ -31,7 +31,7 @@ def already_blocked?(line)
     return false if capture[1][0] == '/'
     return true unless capture[1].ascii_only?
     return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
-    domain = capture[1].split('/')[0].split(':')[0]
+    domain = capture[1].split('/')[0]
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
     return true if /^(?:www\.|translate\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*)$/.match(domain)) && capture[2].start_with?('#') # filter list optimization
