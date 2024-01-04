@@ -1,22 +1,21 @@
 require 'httparty'
 
 def already_blocked?(line)
-  if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(line)
+  if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(line)
     return if capture[1].include?(',')
     return unless capture[1].ascii_only?
-    return if capture[1][-1] == '.'
-    return if capture[1][-1] == '-'
-    return if capture[1][-1] == '_'
+    # return if capture[1][-1] == '.'
     return if capture[1][0] == '~'
-    if capture[1].split('/')[0].include?('.')
+    return if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
+    domain = capture[1].split('/')[0]
+    if domain.include?('.')
       # domain = capture[1].split('.')[-2..-1].join('.')
-      domain = capture[1]
-      tld = capture[1].split('.').last
-      $domain_rules[domain] += 1 unless domain.include?('*')
+      domain = domain.split('.')[-2]
+      tld = domain.split('.')[-1]
+      $domain_rules[domain] += 1
       $tld_rules[tld] += 1
     else
-      tld = capture[1].split('.').last
-      $tld_rules[tld] += 1
+      $tld_rules[domain] += 1
     end
   end
 end
@@ -64,5 +63,5 @@ $domain_rules.delete_if {|k,v| v < 10 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |
 readme << "\n\nTLD Counter\n\n"
 readme << "| TLD | Rules |"
 readme << "|:----:|:-----:|"
-$tld_rules.delete_if {|k,v| v < 100 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$tld_rules.delete_if {|k,v| v < 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 File.write("README.md", readme.join("\n"))
