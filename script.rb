@@ -34,6 +34,7 @@ def already_blocked?(line)
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
     return true if /^(?:www\.|translate\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*)$/.match(domain)) && capture[2].start_with?('#') # filter list optimization
+    return true if /^([^\.]*)?yandex\.(?:com|\*)$/.match(domain) && capture[2].start_with?('#') # filter list optimization
     return true if /^airfrance\..*/.match(domain) && capture[2].start_with?('#') # filter list optimization
     return true if /^dizipal\d+\.(?:com|cloud)$/.match(domain) && capture[2].start_with?('#') # filter list optimization
     while domain.index('.') != nil
