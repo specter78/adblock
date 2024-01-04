@@ -34,7 +34,7 @@ def already_blocked?(line, filename)
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
     return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) && $filename_optimization.match(filename) # filter list optimization
-    return true if /^([^\.]*)?yandex\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
+    return true if /^(.*\.)?yandex\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     return true if /^airfrance\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     return true if /^dizipal\d*\.(?:com|cloud)$/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     while domain.index('.') != nil
