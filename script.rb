@@ -33,11 +33,11 @@ def already_blocked?(line, filename)
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
 
-    # if /^ios/.match(filename) # ios filter list optimization
-    #   return true if /^(.*\.)?yandex\./.match(domain) && /(?:annoyances|social)/.match(filename)
-    #   return true if capture[2].start_with?('#%#') && /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain))
-    #   return true if capture[2].start_with?('#%#') && /\.(?:pl|ru|de|jp|kr|cz|fr|nl)$/.match(domain)
-    # end
+    if /^ios/.match(filename) # ios filter list optimization
+      return true if /^(.*\.)?yandex\./.match(domain) && /(?:annoyances|social)/.match(filename)
+      return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain))
+      # return true if capture[2].start_with?('#%#') && /\.(?:pl|ru|de|jp|kr|cz|fr|nl)$/.match(domain)
+    end
     
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
