@@ -33,7 +33,7 @@ def already_blocked?(line, filename)
     domain = capture[1].split('/')[0]
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
-    return true if /^(?:www\.|translate\.)?google\.(?!com|in|co\.in|\*).+$/.match(domain)) && $filename_optimization.match(filename) # filter list optimization
+    return true if /^(?:www\.|translate\.)?google\.(?!com|in|co\.in|\*).+$/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     return true if /^([^\.]*)?yandex\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     return true if /^airfrance\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     return true if /^dizipal\d*\.(?:com|cloud)$/.match(domain) && $filename_optimization.match(filename) # filter list optimization
