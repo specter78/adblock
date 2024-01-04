@@ -53,13 +53,6 @@ def optimize_rule(line, filename)
   if line.start_with?('[$path')
     path = line[0..line.index(']')]
     line = line[line.index(']')+1..-1]
-    if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
-      domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
-      return "" if domains == []
-      (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
-      line = capture[1] + domains + capture[3]
-    end
-    return path + line
   end
 
   # beginning domains
@@ -76,7 +69,7 @@ def optimize_rule(line, filename)
     return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
-  return line
+  path ? return path + line : return line
 end
 
 
