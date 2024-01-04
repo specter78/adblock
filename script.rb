@@ -46,6 +46,19 @@ def already_blocked?(line, filename)
 end
 
 def optimize_rule(line, filename)
+  # $path ["=" pattern]
+  if line.start_with?('[$path=')
+    path = line.split(']')[0]
+    line = line.split(']')[1..-1].join(']')
+    if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
+      domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
+      return "" if domains == []
+      (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
+      line = capture[1] + domains + capture[3]
+    end
+    return path + ']' + line
+  end
+
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
