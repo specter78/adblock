@@ -32,8 +32,8 @@ def already_blocked?(line)
     return true unless capture[1].ascii_only?
     if capture[1].index('.') && capture[1].index('/') && (capture[1].index('.') > capture[1].index('/'))
       puts capture[1]
-      temp_capture = /^(?:\|)?(?:https?)?(?:\:\/\/)?(.*)/.match(capture[1])
-      puts capture[1] + '-->' + temp_capture[1]
+      temp_capture = /^(?:\|)?(?:https?\*?)?(?:\:\/\/\/)?(.*)/.match(capture[1])
+      puts capture[1] + ' --> ' + temp_capture[1] if (temp_capture[1].index('.') > temp_capture[1].index('/'))
     end
     capture[1].split('/')[0].include?('.') ? (domain = capture[1].split('/')[0].split(':')[0]) : (domain = capture[1])
     return false if domain[-1] == '.'
