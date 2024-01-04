@@ -27,7 +27,6 @@ end
 
 def already_blocked?(line, filename)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(line)
-    return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
     return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
     domain = capture[1].split('/')[0]
@@ -46,15 +45,13 @@ def already_blocked?(line, filename)
   return false
 end
 
-def additional_domains(line, filename)
+def optimize_rule(line, filename)
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
-    if capture[2].include?(',')
-      domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
-      return "" if domains == []
-      (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
-      line = capture[1] + domains + capture[3]
-    end
+    domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
+    return "" if domains == []
+    (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
+    line = capture[1] + domains + capture[3]
   end
   
   # ending domains
@@ -172,10 +169,8 @@ blocklists.each do |url, filename|
       selected_rules << line
     elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
       discarded_rules << line
-    elsif already_blocked?(line, filename)
-      discarded_rules << line
     else
-      line = additional_domains(line, filename)
+      line = optimize_rule(line, filename)
       selected_rules << line if line != ""
     end
   end
