@@ -34,9 +34,11 @@ def already_blocked?(line, filename)
     return false if domain[0] == '~'
 
     if /^ios.*optimized/.match(filename) # ios filter list optimization
-      return true if /^(.*\.)?yandex\./.match(domain) && /(?:annoyances|social)/.match(filename) # yandex in annoyances and social
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
-      return true if /\.(?:ru|de|jp|pl|ua|tr|it|fr|br|nl|by|es)$/.match(domain) && /(?:annoyances|social)/.match(filename) # tlds in annoyances and social
+      if /(?:annoyances|social)/.match(filename)
+        return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
+        return true if /\.(?:ru|de|jp|pl|ua|tr|it|fr|br|nl|by|es|kr|cn|cz|hu)$/.match(domain) # tlds in annoyances and social
+      end
     end
     
     while domain.index('.') != nil
