@@ -50,11 +50,10 @@ end
 
 def optimize_rule(line, filename)
   # $path ["=" pattern]
+  path = false
   if line.start_with?('[$path')
     path = line[0..line.index(']')]
     line = line[line.index(']')+1..-1]
-  else
-    path = false
   end
 
   # beginning domains
