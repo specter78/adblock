@@ -31,7 +31,6 @@ def already_blocked?(line)
     return false if capture[1][0] == '/'
     return true unless capture[1].ascii_only?
     if capture[1].index('.') && capture[1].index('/') && (capture[1].index('.') > capture[1].index('/'))
-      puts capture[1]
       temp_capture = /^(?:\|)?(?:https?\*?)?(?:\:\/\/\/?)?(.*)/.match(capture[1])
       puts capture[1] + ' --> ' + temp_capture[1] if temp_capture[1].index('.') && temp_capture[1].index('/') && (temp_capture[1].index('.') > temp_capture[1].index('/'))
     end
