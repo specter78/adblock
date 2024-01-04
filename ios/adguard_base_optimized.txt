@@ -1,5 +1,5 @@
 ! Title: Adguard Base Optimized
-! TimeUpdated: 2024-01-04T07:57:59+00:00
+! TimeUpdated: 2024-01-04T08:24:51+00:00
 ! Expires: 6 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -469,7 +469,6 @@ btvsports.click#@##ad_left_top
 btvsports.click#@##googlead2
 btvsports.click#@##omnibar_ad
 btvsports.click#@##GoogleAd2
-privatemoviez.pics#@#[id^="google_ads_iframe"]
 emoji.gg###yousuck
 onworks.net##.adbn-wrap
 onworks.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
@@ -1252,8 +1251,6 @@ sbs.com.au#%#//scriptlet("set-constant", "adBlockerDetected", "false")
 hentai.guru,hentaihaven.vip#%#//scriptlet('prevent-fetch', 'ads-twitter.com')
 @@||paraphraser.io^$generichide
 @@||rephrase.info^$generichide
-privatemoviez.buzz#@#.adbanner
-privatemoviez.buzz#%#//scriptlet("prevent-setTimeout", "siteAccessPopup()")
 @@||fastssh.com/dfp.min.js
 fastssh.com#@#.ad-box:not(#ad-banner)
 fastssh.com#@#.ad-wrapper
@@ -1319,8 +1316,9 @@ rakuten.tv#%#//scriptlet('prevent-xhr', '/springserve\.com|cdn\.spotxcdn\.com\/m
 vijaysolution.com#@#.adbanner
 vijaysolution.com#%#//scriptlet("prevent-setTimeout", "siteAccessPopup()")
 dubznetwork.com#@#.adsbyvli
-privatemoviez.fun#@#.adbanner
-privatemoviez.fun#%#//scriptlet("prevent-setTimeout", "siteAccessPopup()")
+privatemoviez.*#@#.adbanner
+privatemoviez.*#@#[id^="google_ads_iframe"]
+privatemoviez.*#%#//scriptlet('prevent-setTimeout', '/placebo\.height|siteAccess/')
 9anime.skin#@#.ad-placement
 toolsincloud.com#%#//scriptlet("set-constant", "canRunAds", "true")
 raider.io#%#//scriptlet('abort-on-property-read', 'RIO_OnProviderBlocked')
@@ -4934,6 +4932,8 @@ vorek.pl#%#//scriptlet('prevent-setTimeout', '.offsetHeight')
 o2.pl,wp.pl#%#//scriptlet("abort-on-property-write", "Object.prototype.gaf_directOnly")
 o2.pl#?#div[class*=" "] > img[src^="https://www.o2.pl/"]:first-child + div:last-child:upward(1)
 wp.pl#?#div[class*=" "] > img[src^="https://v.wpimg.pl/"][alt]:first-child + div:last-child:upward(1)
+deliciousmagazine.pl#?#style + div[class] > img[src^="https://v.wpimg.pl/"]:only-child:upward(1)
+deliciousmagazine.pl#?#style + div[class] > img[src^="https://v.wpimg.pl/"]:first-child + div:last-child:upward(1)
 @@||www.dobreprogramy.pl^$generichide,badfilter
 @@||pilot.wp.pl^$generichide,badfilter
 vibez.pl##div[suppresshydrationwarning]
@@ -4964,7 +4964,7 @@ sportowefakty.wp.pl#@?#body > [class]:not([id]):matches-css(position: fixed):mat
 videostar.pl,pilot.wp.pl#%#//scriptlet('remove-class', 'async-hide', 'html')
 benchmark.pl,pysznosci.pl,autocentrum.pl#%#(()=>{const a=Object.getOwnPropertyDescriptor;window.Object.getOwnPropertyDescriptors=new Proxy(window.Object.getOwnPropertyDescriptors,{apply:(b,c,d)=>{const e=d[0];if(e?.toString?.()?.includes("EventTarget")){const b=a(e,"addEventListener");b?.set?.toString&&(b.set.toString=function(){})}return Reflect.apply(b,c,d)}})})();
 abczdrowie.pl,allani.pl,autokrata.pl,autokult.pl,bloog.pl,dobreprogramy.pl,dzieci.pl,easygo.pl,echirurgia.pl,fotoblogia.pl,gadzetomania.pl,hotmoney.pl,interaktywnie.com,inwestycje.pl,jejswiat.pl,kafeteria.pl,kazimierzdolny.pl,komorkomania.pl,mazury.com,mojeauto.pl,mojeosiedle.pl,money.pl,nasygnale.pl,nocowanie.pl,o2.pl,odkrywcy.pl,open.fm,parenting.pl,pudelek.pl,tlen.pl,totalmoney.pl,wakacje.pl,wawalove.pl,wp.pl,wp.tv#%#(()=>{const a=Object.getOwnPropertyDescriptor;window.Object.getOwnPropertyDescriptors=new Proxy(window.Object.getOwnPropertyDescriptors,{apply:(b,c,d)=>{const e=d[0];if(e?.toString?.()?.includes("EventTarget")){const b=a(e,"addEventListener");b?.set?.toString&&(b.set.toString=function(){})}return Reflect.apply(b,c,d)}})})();
-poczta.wp.pl#%#(function(){Object.defineProperty=new Proxy(Object.defineProperty,{apply:(a,b,c)=>{const d=c[1];return d&&"VP"===d&&(c[2].get=function(){return function(){return!1}}),Reflect.apply(a,b,c)}})})();
+deliciousmagazine.pl,poczta.wp.pl#%#(function(){Object.defineProperty=new Proxy(Object.defineProperty,{apply:(a,b,c)=>{const d=c[1];return d&&"VP"===d&&(c[2].get=function(){return function(){return!1}}),Reflect.apply(a,b,c)}})})();
 pilot.wp.pl,polygamia.pl,abczdrowie.pl,money.pl,www.dobreprogramy.pl,o2.pl,gadzetomania.pl,komorkomania.pl,autocentrum.pl,pudelek.pl,vpolshchi.pl,parenting.pl,autokult.pl,fotoblogia.pl,dom.wp.pl,pogoda.wp.pl,gry.wp.pl,wroclaw.wp.pl,moto.wp.pl,wideo.wp.pl,kuchnia.wp.pl,facet.wp.pl,sportowefakty.wp.pl,turystyka.wp.pl,magazyn.wp.pl,kobieta.wp.pl,ksiazki.wp.pl,tech.wp.pl,opinie.wp.pl,teleshow.wp.pl,gwiazdy.wp.pl,film.wp.pl,wiadomosci.wp.pl,finanse.wp.pl#%#(function(){Object.defineProperty=new Proxy(Object.defineProperty,{apply:(a,b,c)=>{const d=c[1];return d&&"VP"===d&&(c[2].get=function(){return function(){return!1}}),Reflect.apply(a,b,c)}})})();
 @@||wp.pl/*-FwkqOxhmGz4XCSo7GGYbPhcJKjsYZhs-$script,domain=film.wp.pl|finanse.wp.pl|gwiazdy.wp.pl|kobieta.wp.pl|ksiazki.wp.pl|magazyn.wp.pl|moto.wp.pl|opinie.wp.pl|sportowefakty.wp.pl|tech.wp.pl|wiadomosci.wp.pl
 @@||wp.pl/b3RvQ2h1TVIzFCcBR0pAR3*DtBSkw=$script,domain=film.wp.pl|finanse.wp.pl|gwiazdy.wp.pl|kobieta.wp.pl|ksiazki.wp.pl|magazyn.wp.pl|moto.wp.pl|opinie.wp.pl|tech.wp.pl|wiadomosci.wp.pl
@@ -21221,6 +21221,7 @@ theepochtimes.com##.eet-ad
 huffingtonpost.co.uk,huffpost.com##.entry__right-rail-width-placeholder
 euronews.com##.enw-MPU
 metric-conversions.org##.exists
+chorus.fm##.f-soc
 tvtropes.org##.fad
 futbin.com##.fb-ad-placement
 whatismyipaddress.com##.fbx-player-wrapper
@@ -22153,7 +22154,7 @@ spanishdict.com###removeAdsSidebar
 ldoceonline.com###rightslot2-container
 tweaktown.com##.adcon
 rawstory.com##.connatix-hodler
-yandex.com##div[id^="yandex_ad"]
+boatsonline.com.au,yachthub.com##.js-sticky
 google.co.in,google.com###tads[aria-label]
 google.co.in,google.com###tadsb[aria-label]
 google.co.in,google.com##.OcdnDb
