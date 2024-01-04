@@ -26,9 +26,8 @@ def host_format(blocklist)
 end
 
 def already_blocked?(line)
-  if capture = /^(?:@@)?(?:\|\|)?([^#^\^^$^%]+)(.*)/.match(line)
+  if capture = /^(?:@@)?(?:\|\|?)?([^#^\^^$^%]+)(.*)/.match(line)
     return false if capture[1].include?(',')
-    return false if capture[1][0] == '/'
     return true unless capture[1].ascii_only?
     return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
     domain = capture[1].split('/')[0]
