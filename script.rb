@@ -25,7 +25,7 @@ def host_format(blocklist)
   end
 end
 
-def already_blocked?(line)
+def already_blocked?(line, filename)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(line)
     return false if capture[1].include?(',')
     return true unless capture[1].ascii_only?
@@ -33,10 +33,10 @@ def already_blocked?(line)
     domain = capture[1].split('/')[0]
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
-    # return true if /^(?:www\.|translate\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*)$/.match(domain)) && capture[2].start_with?('#') # filter list optimization
-    # return true if /^([^\.]*)?yandex\..*/.match(domain) && capture[2].start_with?('#') # filter list optimization
-    # return true if /^airfrance\..*/.match(domain) && capture[2].start_with?('#') # filter list optimization
-    # return true if /^dizipal\d+\.(?:com|cloud)$/.match(domain) && capture[2].start_with?('#') # filter list optimization
+    # return true if /^(?:www\.|translate\.)?google\..*/.match(domain) && (not /.*(?:com|in|\*)$/.match(domain)) && $filename_optimization.match(filename) # filter list optimization
+    # return true if /^([^\.]*)?yandex\..*/.match(domain) && $filename_optimization.match(filename) # filter list optimization
+    # return true if /^airfrance\..*/.match(domain&& $filename_optimization.match(filename) # filter list optimization
+    # return true if /^dizipal\d+\.(?:com|cloud)$/.match(domain) && $filename_optimization.match(filename) # filter list optimization
     while domain.index('.') != nil
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
@@ -46,11 +46,11 @@ def already_blocked?(line)
   return false
 end
 
-def additional_domains(line)
+def additional_domains(line, filename)
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     if capture[2].include?(',')
-      domains = capture[2].split(',').delete_if {|x| already_blocked?(x+capture[3])}
+      domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
       return "" if domains == []
       (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
       line = capture[1] + domains + capture[3]
@@ -59,7 +59,7 @@ def additional_domains(line)
   
   # ending domains
   if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[3].split("|").delete_if { |x| already_blocked?(x) }
+    domains = capture[3].split("|").delete_if { |x| already_blocked?(x, filename) }
     return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
   end
@@ -78,6 +78,7 @@ readme << "|:----:|:-----:|:-----:|"
 $tld_optimization = ['ru', 'de', 'jp', 'cn', 'pl', 'tr', 'br', 'fr', 'ua', 'es', 'pt', 'lv', 'ch', 'gr', 'hu', 'by', 'cz', 'nl', 'dk', 'ro', 'no', 'se', 'fi', 'su', 'it', 'kz', 'kg', 'uz', 'tm', 'tj', 'au', 'si', 'hr', 'kr', 'tw', 'sk', 'vn', 'at', 'be', 'id', 'sg']
 $domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
 $domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
+$filename_optimization = /.*(?:annoyances|social).*/
 
 
 published_list = []
@@ -157,7 +158,7 @@ blocklists.each do |url, filename|
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
   selected_rules << ['! Expires: 6 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
-  $tld_optimization.each{ |x| $dns_blocked[x] = true } if /.*(?:annoyances|social).*/.match(filename) # filter list optimization
+  $tld_optimization.each{ |x| $dns_blocked[x] = true } if $filename_optimization.match(filename) # filter list optimization
   
   response = HTTParty.get(url)
   next if response.code != 200
@@ -170,15 +171,15 @@ blocklists.each do |url, filename|
       selected_rules << line
     elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
       discarded_rules << line
-    elsif already_blocked?(line)
+    elsif already_blocked?(line, filename)
       discarded_rules << line
     else
-      line = additional_domains(line)
+      line = additional_domains(line, filename)
       selected_rules << line if line != ""
     end
   end
 
-  $tld_optimization.each{ |x| $dns_blocked[x] = false } if /.*(?:annoyances|social).*/.match(filename)
+  $tld_optimization.each{ |x| $dns_blocked[x] = false } if $filename_optimization.match(filename)
   File.write(filename, selected_rules.join("\n")) if (File.read(filename).split("\n")[4..-1] != selected_rules[4..-1])
   readme << "| #{filename.split('.')[0]} | #{original_rules_count} | #{selected_rules.count} |"
 end
