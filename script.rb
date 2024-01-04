@@ -74,16 +74,12 @@ def optimize_rule(line, filename)
 end
 
 
-$dns_blocked = Hash.new(false)
-discarded_rules = []
 readme = []
 readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
-
-# https://en.wikipedia.org/wiki/Country_code_top-level_domain (for annoyances and social)
-$domain_optimization = ['facebook.com', 'facebook.net', 'onion'] 
-$domain_optimization.each{ |x| $dns_blocked[x] = true } # filter list optimization
+$dns_blocked = Hash.new(false)
+['facebook.com', 'facebook.net', 'onion'].each{ |x| $dns_blocked[x] = true } # filter list optimization
 
 
 published_list = []
@@ -174,7 +170,6 @@ blocklists.each do |url, filename|
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
     elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
-      discarded_rules << line
     else
       line = optimize_rule(line, filename)
       selected_rules << line if line != ""
