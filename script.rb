@@ -47,7 +47,7 @@ end
 
 def optimize_rule(line, filename)
   # $path ["=" pattern]
-  if line.start_with?('[$path=')
+  if line.start_with?('[$path')
     path = line[0..line.index(']')]
     line = line[line.index(']')+1..-1]
     if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
