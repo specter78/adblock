@@ -67,7 +67,7 @@ def optimize_rule(line, filename)
   end
   
   # ending domains
-  if capture = /^(.*)(\$domain=)([^#^\^^$^%]+)(.*)/.match(line)
+  if capture = /^(.*)((?:\$|,)domain=)([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[3].split("|").delete_if { |x| already_blocked?(x, filename) }
     return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
