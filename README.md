@@ -28,7 +28,7 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_annoyances_optimized | 24070 | 22154 |
 | adguard/adguard_url_tracking | 2072 | 1229 |
 | adguard/adguard_url_tracking_optimized | 1413 | 1229 |
-| safari/adguard_base | 130723 | 62686 |
+| safari/adguard_base | 130725 | 62690 |
 | safari/adguard_base_optimized | 39138 | 22359 |
 | safari/adguard_tracking_protection | 43104 | 4459 |
 | safari/adguard_tracking_protection_optimized | 40196 | 4458 |
