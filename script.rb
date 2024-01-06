@@ -160,7 +160,7 @@ blocklists.each do |url, filename|
   original_rules_count = 0
   selected_rules = ["! Title: #{filename.split('.')[0].split('/')[1].split('_').collect{|x| x.capitalize}.join(" ")}"]
   selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
-  selected_rules << ['! Expires: 6 hours (update frequency)']
+  selected_rules << ['! Expires: 12 hours (update frequency)']
   selected_rules << ['! Homepage: https://github.com/specter78/adblock']
   
   response = HTTParty.get(url)
