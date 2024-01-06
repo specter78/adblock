@@ -38,7 +38,7 @@ def already_blocked?(line, filename)
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
       if /(?:annoyances|social)/.match(filename)
         return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
-        return true if /\.(?:ru|de|jp|pl|ua|tr|it|fr|br|nl|by|es|kr|cn|cz|hu|no|ch|at|tw|gr|au|be|ro|se|pt|sk|vn|kz|fi|ca|dk|lv|hr|ar|ee|uk|me|fm|id|xyz|eu|co|info|news|biz|net|ba|rs|cc|il|mx|bg|si|sg|gg|ie|lt)$/.match(domain) # tlds in annoyances and social
+        return true if /\.(?:ar|at|au|az|ba|be|bg|biz|br|by|ca|ch|cn|co|cz|de|dk|ee|es|eu|fi|fm|fr|gg|gr|hk|hr|hu|id|ie|il|info|it|jp|kr|kz|lt|lv|me|mx|net|news|nl|no|pe|ph|pl|pt|pw|ro|rs|ru|se|sg|si|sk|su|th|tr|tw|ua|uk|vn|xyz|za)$/.match(domain) # tlds in annoyances and social
       end
     end
     
