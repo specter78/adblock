@@ -3,17 +3,17 @@ The script removes rules that are blocked by DNS based blocking.
 
 | File | Original | Modified |
 |:----:|:-----:|:-----:|
-| easylist/easyprivacy | 43883 | 6194 |
+| easylist/easyprivacy | 43883 | 6193 |
 | ublock/adguard_base | 122709 | 59282 |
 | ublock/adguard_base_optimized | 31364 | 18836 |
 | ublock/adguard_tracking_protection | 86419 | 6670 |
 | ublock/adguard_tracking_protection_optimized | 83501 | 6669 |
 | ublock/adguard_social | 14593 | 13481 |
-| ublock/adguard_social_optimized | 8226 | 4846 |
+| ublock/adguard_social_optimized | 8226 | 4810 |
 | ublock/adguard_mobile | 7024 | 4842 |
 | ublock/adguard_mobile_optimized | 5974 | 4841 |
 | ublock/adguard_annoyances | 50431 | 40446 |
-| ublock/adguard_annoyances_optimized | 23207 | 12924 |
+| ublock/adguard_annoyances_optimized | 23207 | 12866 |
 | ublock/adguard_url_tracking | 2067 | 1225 |
 | ublock/adguard_url_tracking_optimized | 1407 | 1225 |
 | adguard/adguard_base | 124613 | 61277 |
@@ -21,11 +21,11 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_tracking_protection | 87152 | 7349 |
 | adguard/adguard_tracking_protection_optimized | 84217 | 7348 |
 | adguard/adguard_social | 14646 | 13541 |
-| adguard/adguard_social_optimized | 8271 | 4884 |
+| adguard/adguard_social_optimized | 8271 | 4849 |
 | adguard/adguard_mobile | 7704 | 5021 |
 | adguard/adguard_mobile_optimized | 6646 | 5020 |
 | adguard/adguard_annoyances | 51367 | 41294 |
-| adguard/adguard_annoyances_optimized | 24065 | 13357 |
+| adguard/adguard_annoyances_optimized | 24065 | 13307 |
 | adguard/adguard_url_tracking | 2079 | 1235 |
 | adguard/adguard_url_tracking_optimized | 1419 | 1235 |
 | safari/adguard_base | 130753 | 62712 |
@@ -33,18 +33,18 @@ The script removes rules that are blocked by DNS based blocking.
 | safari/adguard_tracking_protection | 43106 | 4434 |
 | safari/adguard_tracking_protection_optimized | 40197 | 4433 |
 | safari/adguard_social | 14642 | 13530 |
-| safari/adguard_social_optimized | 8273 | 4881 |
+| safari/adguard_social_optimized | 8273 | 4846 |
 | safari/adguard_mobile | 7059 | 4884 |
 | safari/adguard_mobile_optimized | 6008 | 4883 |
 | safari/adguard_annoyances | 51524 | 41383 |
-| safari/adguard_annoyances_optimized | 24288 | 13420 |
+| safari/adguard_annoyances_optimized | 24288 | 13371 |
 | ios/adguard_base | 132092 | 63228 |
 | ios/adguard_base_optimized | 40507 | 22912 |
 | ios/adguard_tracking_protection | 43192 | 4442 |
 | ios/adguard_tracking_protection_optimized | 40283 | 4441 |
 | ios/adguard_social | 14702 | 13563 |
-| ios/adguard_social_optimized | 8335 | 4896 |
+| ios/adguard_social_optimized | 8335 | 4861 |
 | ios/adguard_mobile | 7148 | 4923 |
 | ios/adguard_mobile_optimized | 6097 | 4922 |
 | ios/adguard_annoyances | 52194 | 41949 |
-| ios/adguard_annoyances_optimized | 24959 | 13713 |
+| ios/adguard_annoyances_optimized | 24959 | 13658 |
