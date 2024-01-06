@@ -57,13 +57,13 @@ readme = []
 readme << "Domain Counter\n\n"
 readme << "| Domain | Count |"
 readme << "|:----:|:-----:|"
-$domain_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$domain_counter.delete_if {|k,v| v < 10 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 readme << "\n\nTLD Counter\n\n"
 readme << "| TLD | Count |"
 readme << "|:----:|:-----:|"
-$tld_counter.delete_if {|k,v| v < 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
-readme << "\n\nWord Counter\n\n"
-readme << "| Word | Count |"
-readme << "|:----:|:-----:|"
-$word_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$tld_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+# readme << "\n\nWord Counter\n\n"
+# readme << "| Word | Count |"
+# readme << "|:----:|:-----:|"
+# $word_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 File.write("README.md", readme.join("\n"))
