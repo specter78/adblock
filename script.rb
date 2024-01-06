@@ -38,7 +38,7 @@ def already_blocked?(line, filename)
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
       if /(?:annoyances|social)/.match(filename)
         return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
-        return true if /\.(?:ar|at|au|az|ba|bd|be|bg|biz|br|bw|by|bz|ca|ch|cl|cn|co|cy|cz|de|dk|dz|ee|es|eu|fi|fm|fr|gg|gl|gr|hk|hr|hu|id|ie|il|iq|ir|info|is|it|jp|ke|kg|kh|kr|kw|kz|li|lk|lt|lu|lv|me|mx|my|net|news|nl|no|np|om|pa|pe|ph|pk|pl|pt|pw|py|qa|ro|rs|ru|sa|se|sg|si|so|sk|su|sy|th|tj|tr|tt|tw|tz|ua|ug|uk|uy|uz|ve|vn|vu|xyz|ye|za)$/.match(domain) # tlds in annoyances and social
+        return true if /\.(?:ai|ar|at|au|az|ba|bd|be|bg|biz|br|bw|by|bz|ca|ch|cl|cn|co|cy|cz|de|dk|dz|ee|es|eu|fi|fm|fr|gg|gl|gr|hk|hr|hu|id|ie|il|iq|ir|info|is|it|jp|ke|kg|kh|kr|kw|kz|li|lk|lt|lu|lv|me|mx|my|net|news|nl|no|np|om|pa|pe|ph|pk|pl|pt|pw|py|qa|ro|rs|ru|sa|se|sg|si|sk|su|sy|th|tj|tr|tt|tw|tz|ua|ug|uk|uy|uz|ve|vn|vu|xyz|ye|za)$/.match(domain) # tlds in annoyances and social
       end
     end
     
