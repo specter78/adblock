@@ -7,8 +7,8 @@ def already_blocked?(line)
     domain = capture[1].split('/')[0]
     return if domain[-1] == '.'
     return if domain[0] == '~'
-    $domain_rules[domain] += 1
-    $tld_rules[domain.split('.').last] += 1
+    $domain_counter[domain] += 1
+    $tld_counter[domain.split('.').last] += 1
   end
 end
 
@@ -28,8 +28,9 @@ def optimize_rule(line)
   end
 end
 
-$domain_rules = Hash.new(0)
-$tld_rules = Hash.new(0)
+$domain_counter = Hash.new(0)
+$tld_counter = Hash.new(0)
+$word_counter = Hash.new(0)
 
 blocklists = []
 blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_annoyances_optimized.txt'
@@ -48,16 +49,21 @@ blocklists.each do |list|
     next if line == ''
     next if line.start_with?('/^') || line.start_with?('@@/^')
     optimize_rule(line)
+    line.split('.').each{ |x| $word_counter[x] += 1 }
   end
 end
 
 readme = []
 readme << "Domain Counter\n\n"
-readme << "| Domain | Rules |"
+readme << "| Domain | Count |"
 readme << "|:----:|:-----:|"
-$domain_rules.delete_if {|k,v| v < 10 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$domain_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 readme << "\n\nTLD Counter\n\n"
-readme << "| TLD | Rules |"
+readme << "| TLD | Count |"
 readme << "|:----:|:-----:|"
-$tld_rules.delete_if {|k,v| v < 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+$tld_counter.delete_if {|k,v| v < 50 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
+readme << "\n\nWord Counter\n\n"
+readme << "| Word | Count |"
+readme << "|:----:|:-----:|"
+$word_counter.delete_if {|k,v| v < 20 }.to_a.sort_by{ |x| x[1] }.reverse.each{ |x| readme << "| #{x[0]} | #{x[1]} |" }
 File.write("README.md", readme.join("\n"))
