@@ -28,8 +28,8 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_annoyances_optimized | 24022 | 13197 |
 | adguard/adguard_url_tracking | 2081 | 1238 |
 | adguard/adguard_url_tracking_optimized | 1420 | 1233 |
-| safari/adguard_base | 130797 | 62768 |
-| safari/adguard_base_optimized | 39123 | 22132 |
+| safari/adguard_base | 130799 | 62768 |
+| safari/adguard_base_optimized | 39125 | 22132 |
 | safari/adguard_tracking_protection | 43113 | 4459 |
 | safari/adguard_tracking_protection_optimized | 40203 | 4429 |
 | safari/adguard_social | 14642 | 13567 |
@@ -38,8 +38,8 @@ The script removes rules that are blocked by DNS based blocking.
 | safari/adguard_mobile_optimized | 6009 | 4874 |
 | safari/adguard_annoyances | 51527 | 41423 |
 | safari/adguard_annoyances_optimized | 24245 | 13261 |
-| ios/adguard_base | 132136 | 63285 |
-| ios/adguard_base_optimized | 40479 | 22651 |
+| ios/adguard_base | 132138 | 63285 |
+| ios/adguard_base_optimized | 40481 | 22651 |
 | ios/adguard_tracking_protection | 43199 | 4467 |
 | ios/adguard_tracking_protection_optimized | 40289 | 4437 |
 | ios/adguard_social | 14702 | 13599 |
