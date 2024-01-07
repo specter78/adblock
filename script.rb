@@ -36,7 +36,8 @@ def already_blocked?(line, filename)
 
     if /optimized/.match(filename) # filter list optimization
       return true if /(?:facebook\.com|facebook\.net|instagram\.com)$/.match(domain) # fb and instagram in all files
-      return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
+      return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # !com and !in google in all files
+      return true if /^(?:#@?%#|#@?\?#|#@?\$\?#)/.match(capture[2]) && /\.(?:pl)$/.match(domain) # advanced/extended rules
       if /(?:annoyances|social)/.match(filename)
         return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
         return true if /\.(?:ai|ar|at|au|az|ba|bd|be|bg|biz|br|bw|by|bz|ca|ch|cl|cn|co|cy|cz|de|dk|dz|ee|es|eu|fi|fm|fr|gg|gl|gr|hk|hr|hu|id|ie|il|iq|ir|info|is|it|jp|ke|kg|kh|kr|kw|kz|li|lk|lt|lu|lv|me|mx|my|net|news|nl|no|np|om|onion|pa|pe|ph|pk|pl|pro|pt|pw|py|qa|ro|rs|ru|sa|se|sg|si|sk|su|sy|th|tj|tr|tt|tw|tz|ua|ug|uk|uy|uz|ve|vn|vu|xyz|ye|za)$/.match(domain) # tlds in annoyances and social
@@ -62,7 +63,7 @@ def optimize_rule(line, filename)
 
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[2].split(',').delete_if { |x| already_blocked?(x, filename) }
+    domains = capture[2].split(',').delete_if { |x| already_blocked?(x + capture[3], filename) }
     return "" if domains == []
     (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
     line = capture[1] + domains + capture[3]
