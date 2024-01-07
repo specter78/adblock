@@ -34,7 +34,7 @@ def already_blocked?(domain, line, filename)
     return false if domain[0] == '~'
     
     if /optimized/.match(filename) # filter list optimization
-      return true if /(?:facebook\.com|facebook\.net|instagram\.com)$/.match(domain) # fb and instagram in all files
+      return true if /(?:facebook\.com|facebook\.net|instagram\.com|onion)$/.match(domain) # selected domains in all files
       return true if /^(.*\.)?yandex\./.match(domain) && line.include?('#') # yandex in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # !com and !in google in all files
       return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|es)$/.match(domain) # advanced/extended rules for selected tlds
