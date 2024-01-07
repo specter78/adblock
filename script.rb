@@ -64,15 +64,24 @@ def optimize_rule(line, filename)
   if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[2].split(',').delete_if { |x| already_blocked?(x, line, filename) }
     return "" if domains == []
-    (capture[2][-1] == ',') ? (domains = domains.join(',') + ',') : (domains = domains.join(','))
-    line = capture[1] + domains + capture[3]
+    line = capture[1] + domains.join(',') + capture[3]
+
+    plus_domain_before, plus_domain_after = false, false
+    capture[2].split(',').each { |x| plus_domain_before = true if x[0] != '~' }
+    domains.each { |x| plus_domain_after = true if x[0] != '~' }
+    return "" if (plus_domain_before == true && plus_domain_after == false)
   end
   
   # ending domains
   if capture = /^(.*)((?:\$|,)domain=)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[3].split("|").delete_if { |x| already_blocked?(x, line, filename) }
+    domains = capture[3].split('|').delete_if { |x| already_blocked?(x, line, filename) }
     return "" if domains == []
     line = capture[1] + capture[2] + domains.join('|') + capture[4]
+
+    plus_domain_before, plus_domain_after = false, false
+    capture[3].split('|').each { |x| plus_domain_before = true if x[0] != '~' }
+    domains.each { |x| plus_domain_after = true if x[0] != '~' }
+    return "" if (plus_domain_before == true && plus_domain_after == false)
   end
   path ? (return path + line) : (return line)
 end
