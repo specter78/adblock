@@ -78,6 +78,7 @@ def optimize_rule(line, filename)
 end
 
 
+$dns_blocked = Hash.new(false)
 readme = []
 readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
