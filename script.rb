@@ -35,6 +35,7 @@ def already_blocked?(line, filename)
     
 
     if /optimized/.match(filename) # filter list optimization
+      return true if /(?:facebook\.com|facebook\.net|instagram\.com)$/.match(domain) # fb and instagram in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # google in all files
       if /(?:annoyances|social)/.match(filename)
         return true if /^(.*\.)?yandex\./.match(domain) # yandex in annoyances and social
@@ -81,8 +82,6 @@ readme = []
 readme << "The script removes rules that are blocked by DNS based blocking.\n\n"
 readme << "| File | Original | Modified |"
 readme << "|:----:|:-----:|:-----:|"
-$dns_blocked = Hash.new(false)
-['facebook.com', 'facebook.net', 'instagram.com', 'onion'].each{ |x| $dns_blocked[x] = true } # filter list optimization
 
 
 published_list = []
