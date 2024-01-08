@@ -39,7 +39,7 @@ def already_blocked?(domain, line, filename)
       # return true if line.end_with?("#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')")
       # return true if line.end_with?("#%#//scriptlet('prevent-fetch', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')")
       # return true if line.end_with?("#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')")
-      return true if /#%#\/\/scriptlet\('prevent-(?:fetch|xhr)', '(?:https:\/\/)?pagead2\.googlesyndication\.com(?:\/pagead\/js\/adsbygoogle\.js)'\)$/.match(line)
+      return true if /#%#\/\/scriptlet\('prevent-(?:fetch|xhr)', '(?:https:\/\/)?pagead2\.googlesyndication\.com(?:\/pagead\/js\/adsbygoogle\.js)?'\)$/.match(line)
       return true if line.end_with?("#%#//scriptlet('prevent-fetch', 'www3.doubleclick.net')")
       return true if line.end_with?("#%#//scriptlet('prevent-fetch', 'doubleclick.net')")
       
