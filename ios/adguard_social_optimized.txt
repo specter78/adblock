@@ -1,5 +1,5 @@
 ! Title: Adguard Social Optimized
-! TimeUpdated: 2024-01-08T08:09:18+00:00
+! TimeUpdated: 2024-01-08T08:11:35+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -147,11 +147,23 @@ images/livejournal
 /image2006/default/naver.gif^
 /image2006/default/Twitter.gif^
 /image2006/default/yozm.gif^
+comicbookmovie.com#%#//scriptlet('hide-in-shadow-dom', 'div[data-testid="bookmarkSection"] + ul + div[class^="WidgetActionMenu_"]')
+msn.com#%#//scriptlet('hide-in-shadow-dom', 'msn-at-share-button')
+newsweek.com#%#//scriptlet('hide-in-shadow-dom', 'button[data-testid="ShareBtn"]')
+reddit.com#%#//scriptlet('hide-in-shadow-dom', '.share-dropdown-menu')
+ign.com#%#//scriptlet('hide-in-shadow-dom', 'button[data-testid="ShareBtn"]')
+soundiiz.com#%#//scriptlet('set-cookie', 'socialDisplayed', 'true')
+strazpozarna.maps.arcgis.com#%#//scriptlet('hide-in-shadow-dom', 'instant-apps-social-share')
+faceit.com#%#//scriptlet('hide-in-shadow-dom', '#__next > div[class^="sc-"] > div[class^="sc-"] > div[class^="sc-"] > div[class^="sc-"] > button[class^="sc-"]:first-child')
+sensatsiya.com#%#//scriptlet('remove-in-shadow-dom', '.ss-shr')
 stomp.straitstimes.com#%#(()=>{window.a2a={init(){}}})();
+kkbox.com#%#//scriptlet('hide-in-shadow-dom', 'share-box')
 brestcity.com#%#AG_onLoad(function() { document.body.innerHTML = document.body.innerHTML.replace(/\sПонравилась новость\?\sПоделитесь\sс\sдрузьями:/g, ""); });
 archive.org#%#AG_onLoad(function() { var el = document.querySelector('.js-playset-items'); if(el) { el.innerHTML = el.innerHTML.replace(/ Share/g,''); } });
+zoomtventertainment.com#%#//scriptlet('hide-in-shadow-dom', '._share_social')
 businessinsider.in#%#AG_onLoad(function(){location.href.includes("/amp_")&&(new MutationObserver(function(){document.querySelectorAll("div.i-amphtml-next-page-shadow-root").forEach(function(a){a.shadowRoot&&a.shadowRoot.querySelectorAll("div.share_widget:not([style]), div#social:not([style])").forEach(function(b){b.style="display: none !important;"})})})).observe(document,{childList:!0,subtree:!0})});
 himovies.to#%#document.cookie="show_share=true; path=/;";
+forbes.com#%#//scriptlet('remove-attr', 'href', '.article-body .tweet_quote > a[href^="https://twitter.com/intent/"]')
 yasir252.com#%#AG_onLoad(function(){setTimeout(function(){var a=document.querySelector(".onp-sl-content");if("function"===typeof jQuery&&"object"===typeof bizpanda.lockerOptions&&a)try{a=0;for(var c=Object.keys(bizpanda.lockerOptions);a<c.length;a++){var d=c[a];if(d.includes("onpLock")){var b=bizpanda.lockerOptions[d];b&&jQuery.ajax({url:b.ajaxUrl,method:"post",data:{lockerId:b.lockerId,action:"opanda_loader",hash:b.contentHash},success:function(a){var b=jQuery(".onp-sl-content"),c=jQuery(".onp-sl-social-locker"); b.append(a);b.css("display","block");c.css("display","none")}})}}}catch(e){}},1E3)});
 ~yandex.ru,~wetter.com,~milli-firka.org,~assassinscreed.com,~surfingbird.ru,~samsung.com,~imgur.com,~rockstargames.com#%#var addthis = { init: function() {}, addEventListener: function() {}, button: function() {}, counter: function() {}, update: function() {}, toolbox: function() {}, layers: function() {} };
 hopesandfears.com#%#twttr={events: { bind: function() {} }};
@@ -315,6 +327,7 @@ gorzowianin.com#?#.header_title:contains(/^Podziel się$/)
 today.com##.article-social-share-bottom
 longform.asmartbear.com#?##nav-sidebar-src-container > .card:has(> .share)
 news.mingpao.com##.articlesharepart
+thurrott.com#%#//scriptlet('remove-in-shadow-dom','button[data-testid="ShareBtn"]')
 petri.com##div[data-petri-section="widget-share"]
 axios.com##div[data-cy^="social-share-"]
 animestars.org##.pmovie__share
