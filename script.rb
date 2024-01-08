@@ -34,11 +34,11 @@ $word_counter = Hash.new(0)
 
 blocklists = []
 blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_annoyances_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_base_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_mobile_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_base_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_mobile_optimized.txt'
 blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_social_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_tracking_protection_optimized.txt'
-# blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_url_tracking_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_tracking_protection_optimized.txt'
+blocklists << 'https://raw.githubusercontent.com/specter78/adblock/main/ios/adguard_url_tracking_optimized.txt'
 
 blocklists.each do |list|
   response = HTTParty.get(list)
