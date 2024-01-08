@@ -35,8 +35,8 @@ def already_blocked?(domain, line, filename)
     
     if /optimized/.match(filename) # filter list optimization
 
-      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?googlesyndication\.com(?:\/[a-z0-9:\.\/]*)?['"]\)$/.match(line)
-      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?doubleclick\.net(?:\/[a-z0-9:\.\/]*)?['"]\)$/.match(line)
+      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?googlesyndication\.com(?:\/[a-z0-9:_\.\/]*)?['"]\)$/.match(line)
+      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?doubleclick\.net(?:\/[a-z0-9:_\.\/]*)?['"]\)$/.match(line)
       
       return true if /(?:facebook\.com|facebook\.net|instagram\.com|onion)$/.match(domain) # selected domains in all files
       return true if /^(.*\.)?yandex\./.match(domain) && line.include?('#') # yandex in all files
