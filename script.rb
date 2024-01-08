@@ -35,7 +35,7 @@ def already_blocked?(domain, line, filename)
     
     if /optimized/.match(filename) # filter list optimization
 
-      return true if /#%#\/\/scriptlet\('prevent-(?:fetch|xhr)', '(?:https:\/\/)?pagead2\.googlesyndication\.com(?:\/pagead\/js\/adsbygoogle\.js)?'\)$/.match(line)
+      return true if /#%#\/\/scriptlet\('prevent-(?:fetch|xhr)', '(?:https:\/\/)?pagead2\.googlesyndication\.com(?:[a-z\.\/]*)?'\)$/.match(line)
       return true if /#%#\/\/scriptlet\('prevent-(?:fetch|xhr)', '(?:www3\.)?doubleclick\.net'\)$/.match(line)
       
       return true if /(?:facebook\.com|facebook\.net|instagram\.com|onion)$/.match(domain) # selected domains in all files
