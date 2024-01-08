@@ -40,6 +40,7 @@ def already_blocked?(domain, line, filename)
       return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|es)$/.match(domain) # advanced/extended rules for selected tlds
       return true if line.end_with?("#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')")
       return true if line.end_with?("#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')")
+      return true if /^e?mail\..*\$image$/.match(line)
       if /(?:annoyances|social)/.match(filename)
         return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
       end
@@ -183,7 +184,6 @@ blocklists.each do |url, filename|
     elsif line == ''
     elsif line.start_with?('/^') || line.start_with?('@@/^')
       selected_rules << line
-    elsif /^e?mail\..*\$image$/.match(line) # filter list optimization
     else
       line = optimize_rule(line, filename)
       selected_rules << line if line != ""
