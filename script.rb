@@ -33,11 +33,7 @@ def already_blocked?(domain, line, filename)
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
     
-    if /optimized/.match(filename) # filter list optimization
-
-      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?googlesyndication\.com(?:\/[a-z0-9:_\.\/]*)?['"]\)$/.match(line)
-      return true if /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"](?:[a-z0-9:\.\/]*)?doubleclick\.net(?:\/[a-z0-9:_\.\/]*)?['"]\)$/.match(line)
-      
+    if /optimized/.match(filename) # filter list optimization      
       return true if /(?:facebook\.com|facebook\.net|instagram\.com|onion)$/.match(domain) # selected domains in all files
       return true if /^(.*\.)?yandex\./.match(domain) && line.include?('#') # yandex in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # !com and !in google in all files
@@ -58,6 +54,10 @@ def already_blocked?(domain, line, filename)
 end
 
 def optimize_rule(line, filename)
+  if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|]+)['"]\)$/.match(line)
+    return "" if already_blocked?(capture[1], nil, nil)
+  end
+  
   # $path ["=" pattern]
   path = false
   if line.start_with?('[$path')
