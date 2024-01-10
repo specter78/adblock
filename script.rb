@@ -54,10 +54,10 @@ def already_blocked?(domain, line, filename)
 end
 
 def optimize_rule(line, filename)
-  if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|]+)['"]\)$/.match(line)
+  if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\/^\)]+)['"]\)$/.match(line)
     return "" if already_blocked?(capture[1], nil, nil)
   end
-  if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^'^"^|]+)\)$/.match(line)
+  if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\/^\)]+)\)$/.match(line)
     return "" if already_blocked?(capture[1], nil, nil)
   end
   
