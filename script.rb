@@ -37,7 +37,7 @@ def already_blocked?(domain, line, filename)
       return true if /(?:facebook\.com|facebook\.net|onion)$/.match(domain) # selected domains in all files
       return true if /^(.*\.)?yandex\./.match(domain) && line.include?('#') # yandex in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(com|in|\*)$/.match(domain)) # !com and !in google in all files
-      return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|es)$/.match(domain) # advanced/extended rules for selected tlds
+      return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|nl|es)$/.match(domain) # advanced/extended rules for selected tlds
       return true if /^e?mail\..*\$image$/.match(line)
       if /(?:annoyances|social)/.match(filename)
         return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
