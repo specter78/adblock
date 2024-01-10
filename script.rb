@@ -57,6 +57,10 @@ def optimize_rule(line, filename)
   if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|]+)['"]\)$/.match(line)
     return "" if already_blocked?(capture[1], nil, nil)
   end
+  if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^'^"^|]+)\)$/.match(line)
+    return "" if already_blocked?(capture[1], nil, nil)
+  end
+  
   
   # $path ["=" pattern]
   path = false
