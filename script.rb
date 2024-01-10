@@ -41,7 +41,7 @@ def already_blocked?(domain, line, filename)
       return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|es)$/.match(domain) # advanced/extended rules for selected tlds
       return true if /^e?mail\..*\$image$/.match(line)
       if /(?:annoyances|social)/.match(filename)
-        return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
+        return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
       end
     end
     
