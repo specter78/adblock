@@ -12,8 +12,8 @@ The script removes rules that are blocked by DNS based blocking.
 | ublock/adguard_social_optimized | 8205 | 4503 |
 | ublock/adguard_mobile | 7033 | 4865 |
 | ublock/adguard_mobile_optimized | 5985 | 4636 |
-| ublock/adguard_annoyances | 50451 | 40457 |
-| ublock/adguard_annoyances_optimized | 23193 | 12004 |
+| ublock/adguard_annoyances | 50450 | 40456 |
+| ublock/adguard_annoyances_optimized | 23192 | 12003 |
 | ublock/adguard_url_tracking | 2076 | 1233 |
 | ublock/adguard_url_tracking_optimized | 1413 | 1230 |
 | adguard/adguard_base | 124853 | 61104 |
@@ -24,8 +24,8 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_social_optimized | 8250 | 4547 |
 | adguard/adguard_mobile | 7708 | 5040 |
 | adguard/adguard_mobile_optimized | 6652 | 4800 |
-| adguard/adguard_annoyances | 51391 | 41320 |
-| adguard/adguard_annoyances_optimized | 24054 | 12403 |
+| adguard/adguard_annoyances | 51390 | 41319 |
+| adguard/adguard_annoyances_optimized | 24053 | 12402 |
 | adguard/adguard_url_tracking | 2088 | 1243 |
 | adguard/adguard_url_tracking_optimized | 1425 | 1240 |
 | safari/adguard_base | 130992 | 62535 |
@@ -36,8 +36,8 @@ The script removes rules that are blocked by DNS based blocking.
 | safari/adguard_social_optimized | 8252 | 4537 |
 | safari/adguard_mobile | 7062 | 4901 |
 | safari/adguard_mobile_optimized | 6013 | 4662 |
-| safari/adguard_annoyances | 51549 | 41409 |
-| safari/adguard_annoyances_optimized | 24278 | 12470 |
+| safari/adguard_annoyances | 51548 | 41408 |
+| safari/adguard_annoyances_optimized | 24277 | 12469 |
 | ios/adguard_base | 132327 | 63051 |
 | ios/adguard_base_optimized | 40446 | 22354 |
 | ios/adguard_tracking_protection | 43763 | 4350 |
@@ -46,5 +46,5 @@ The script removes rules that are blocked by DNS based blocking.
 | ios/adguard_social_optimized | 8314 | 4551 |
 | ios/adguard_mobile | 7155 | 4942 |
 | ios/adguard_mobile_optimized | 6106 | 4700 |
-| ios/adguard_annoyances | 52218 | 41974 |
-| ios/adguard_annoyances_optimized | 24949 | 12751 |
+| ios/adguard_annoyances | 52217 | 41973 |
+| ios/adguard_annoyances_optimized | 24948 | 12750 |
