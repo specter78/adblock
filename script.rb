@@ -35,11 +35,11 @@ def already_blocked?(domain, line, filename)
     
     if /optimized/.match(filename) # filter list optimization      
       return true if /(?:facebook\.com|facebook\.net|onion)$/.match(domain) # selected domains in all files
-      return true if /^(.*\.)?yandex\./.match(domain) && /(?:#@?#|#@?%#|#@?\?#|#@?\$\?#)/.match(line) # yandex in all files
+      return true if /^(.*\.)?yandex\./.match(domain) && line.count('#') > 1 # yandex in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in google in all files
       return true if /^amazon\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in amazon in all files
       # return true if /(?:#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:pl|jp|ru|de|fr|es)$/.match(domain) # advanced/extended rules for selected tlds
-      return true if /(?:#@?#|#@?%#|#@?\?#|#@?\$\?#)/.match(line) && /\.(?:de|jp|pl)$/.match(domain) # rules for selected tlds
+      return true if line.count('#') > 1 && /\.(?:de|jp|pl)$/.match(domain) # rules for selected tlds
       return true if /^e?mail\..*\$image$/.match(line)
       if /(?:annoyances|social)/.match(filename)
         return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
