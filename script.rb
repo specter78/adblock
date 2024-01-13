@@ -58,7 +58,7 @@ def optimize_rule(line, filename)
 
   # $domain ["=" pattern]
   if line.start_with?('[$domain=')
-    return "" if already_blocked?(line[9..-1].split(']')[0].split(',')[0], nil, nil)
+    return "" if already_blocked?(line[9..-1].split(']')[0].split(',')[0], line, filename)
   end
   
   if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
