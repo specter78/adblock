@@ -61,12 +61,12 @@ def optimize_rule(line, filename)
     return "" if already_blocked?(line[9..-1].split(']')[0].split(',')[0], line, filename)
   end
   
-  if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
-    return "" if already_blocked?(capture[1], nil, nil)
-  end
-  if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
-    return "" if already_blocked?(capture[1], nil, nil)
-  end
+  # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
+  #   return "" if already_blocked?(capture[1], nil, nil)
+  # end
+  # if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
+  #   return "" if already_blocked?(capture[1], nil, nil)
+  # end
   
   # $path ["=" pattern]
   path = false
