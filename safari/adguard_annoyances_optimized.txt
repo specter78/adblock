@@ -1,5 +1,5 @@
 ! Title: Adguard Annoyances Optimized
-! TimeUpdated: 2024-02-01T12:33:15+00:00
+! TimeUpdated: 2024-02-01T18:22:08+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -12,6 +12,7 @@
 #%#var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn("AdGuard aborted property read: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
 #%#var AG_abortInlineScript=function(g,b,c){var d=function(){if("currentScript"in document)return document.currentScript;var a=document.getElementsByTagName("script");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&""===a.src&&g.test(a.textContent))throw c&&console.warn("AdGuard aborted execution of an inline script"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if("string"===typeof a&&-1!==a.indexOf(e))return c&&console.warn("AdGuard has caught window.onerror: "+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};
 #%#var AG_setConstant=function(e,a){if("undefined"===a)a=void 0;else if("false"===a)a=!1;else if("true"===a)a=!0;else if("noopFunc"===a)a=function(){};else if("trueFunc"===a)a=function(){return!0};else if("falseFunc"===a)a=function(){return!1};else if(/^\d+$/.test(a)){if(a=parseFloat(a),isNaN(a)||32767<Math.abs(a))return}else return;var b=!1;AG_defineProperty(e,{get:function(){return a},set:function(c){if(b)var d=!0;else void 0!==c&&void 0!==a&&typeof c!==typeof a&&(b=!0),d=b;d&&(a=c)}})};
+##div[data-cy="cookie-banner"]
 ##.u-cookies-consent
 ###consent-banner-overlay
 ##div[data-hook="ccsu-banner-wrapper"]
@@ -5608,6 +5609,8 @@ pornone.com#@#.overheaderbanner
 ||mailganer.com/jsapi/*?ref=
 ||s3.amazonaws.com/mailmunch/
 ||unpkg.com/@textback/notification-widget
+banggood.com##.modal-newbie
+banggood.com##.suspended-banner-wrap
 krotoski.com###elementor-popup-modal-64876
 tiktok.com#%#//scriptlet('trusted-click-element', 'div[data-focus-lock-disabled] div#loginContainer > div[class*="DivLoginContainer"] > div[class*="DivHomeContainer"] > div[class*="DivGuestModeContainer"] div[tabindex][role="link"]')
 blog.openreplay.com##astro-island[uid="1se2Xg"]
@@ -7468,7 +7471,6 @@ macrumors.com,platinmods.com##.notice--enablePush
 mdjonline.com,wfmz.com,tv6tnt.com##.notification-button
 wtsp.com,wfaa.com,13newsnow.com,wusa9.com,kgw.com,king5.com,wcnc.com,kens5.com,khou.com,wkyc.com,ksdk.com##.page__notifications
 elnuevodia.com###push-popup
-clarin.com#%#document.cookie = "notification-_clarin=no; path=/";
 /push.js$domain=acunn.com|news.noteru.com
 izlesene.com,doviz.com,sinemalar.com###x-comet-dialog
 ilbianconero.com,calciomercato.com###dialog-push-notification
@@ -10129,7 +10131,6 @@ theguardian.com##.site-message--banner
 bing.com#$#body > div[id^="bnp.nid"] { display: none !important; }
 bing.com#$#html[style="overflow: hidden;"] { overflow: visible !important; }
 radarbox.com##.apps
-sahibinden.com##.download-app-banner
 superfb.com##a[href="http://www.superfb.com/mobil"]
 ||superfb.com/_img/banner/sfb*.png
 ||superfb.com/_img/mobil_imaj.png
@@ -10162,10 +10163,6 @@ yemek.com#%#(function() { try { if ("undefined" != typeof localStorage) { localS
 mmajunkie.com#%#document.cookie="sb-closed=true; path=/;";
 kq2.com,kdrv.com,wfft.com,wtva.com,wktv.com,actionnewsnow.com#%#document.cookie = "smartbanner-closed=true; path=/;";
 m.nhaccuatui.com#%#document.cookie = "isCloseSmartAppBanner=true";
-givemesport.com#%#document.cookie = "gms.appPromo=1";
-forvo.com,trthaber.com#%#document.cookie = "smartbanner_exited=1";
-sahibinden.com#%#document.cookie = "sbt=none";
-sahibinden.com#%#localStorage.setItem('smartBanner', '{"smartAppBannerEnabled":true}');
 imgur.io,imgur.com#$#div[class^="SeeImgurOIA-"] { display: none !important; }
 imgur.io,imgur.com#$#body { overflow-y: auto !important; }
 msn.com#$##irisbannerph { display: none !important; }
@@ -10219,7 +10216,7 @@ gunosy.com##.download_link
 gunosy.com##.airplain
 gunosy.com##.store_fixed_footer
 jumpbookstore.com###header_app_banner
-~turkiye.gov.tr,~trtworld.com,~m.thehipstore.co.uk,~teb.com.tr###smartbanner.android
+~turkiye.gov.tr,~trtworld.com,~m.thehipstore.co.uk,~teb.com.tr##body #smartbanner.android
 togetter.com##.app_download_footer
 togetter.com##a[data-ga="action_moreapp"]
 togetter.com###appdl_bottom
@@ -10265,6 +10262,9 @@ adguard.com##.hello_from_adguard_annoyances_mobileappbanners
 youtube.com#%#AG_onLoad(function() {var a = new MutationObserver(function() {if (document.querySelector('yt-upsell-dialog-renderer')) {var b = document.querySelector('.ytd-popup-container[popup-size="UPSELL_DIALOG_RENDERER_POPUP_SIZE_LARGE"] #dismiss-button:not(.dismissed), .upsell-dialog-lightbox .upsell-dialog-dismiss-button button:not(.dismissed)');setTimeout(function() {b&&b.click()}, 3E2)}});a.observe(document, {childList: !0,subtree: !0});setTimeout(function() {a.disconnect()}, 3E3)});
 instagram.com#$?#div[class]:has(> div[class]:first-child > a[href="/explore/people/"]) { position: absolute !important; left: -3000px !important; }
 instagram.com##._aagw:empty
+marketing-interactive.com##a.full-skin-image__desktop-banner
+marketing-interactive.com##div[class] > a[href^="https://awards.marketing-interactive.com"]:upward(1)
+marketing-interactive.com##a.full-skin-image
 microsoft.com##section[aria-label="download center details page banner - Internet Explorer"]
 foxnews.com#%#//scriptlet('set-constant', 'Taplytics', 'emptyObj')
 foxnews.com#%#//scriptlet('set-constant', 'Taplytics.featureFlagEnabled', 'trueFunc')
@@ -10872,6 +10872,8 @@ msn.com#$#body { overflow: initial!important; }
 tennistemple.com##div[id="300x250_premium"]
 tennistemple.com##.right > div.box_nd > div[id="300x250"]
 banggood.com##.top_mt.datacube_banner
+12ft.io###ad
+banggood.com##.top-item
 2gis.*##div[class^="_im"]
 mlbtraderumors.com###tr-rotate-ads
 auf1.tv##.w-full:has(> div.text-sm:contains(Werbung))
