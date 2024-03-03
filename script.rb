@@ -113,7 +113,7 @@ published_list = []
 published_list << ['https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt', 'dns/adguard_dns.txt', 'abp']
 published_list << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswild_big.txt', 'dns/oisd.txt', 'domain']
 published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'dns/stevenblack.txt', 'host']
-published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus.txt', 'dns/hagezi.txt', 'domain']
+published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt', 'dns/hagezi.txt', 'domain']
 published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'dns/hblock.txt', 'domain']
 published_list << ['https://o0.pages.dev/Pro/domains.wildcards', 'dns/1hosts.txt', 'domain']
 published_list.each do |url, filename, format|
@@ -129,7 +129,6 @@ end
 
 
 blocklists = []
-blocklists << ['https://easylist.to/easylist/easyprivacy.txt', 'easylist/easyprivacy.txt']
 # uBlock compatible
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2.txt', 'ublock/adguard_base.txt']
 blocklists << ['https://filters.adtidy.org/extension/ublock/filters/2_optimized.txt', 'ublock/adguard_base_optimized.txt']
