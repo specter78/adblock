@@ -46,6 +46,7 @@ def already_blocked?(domain, line, filename)
     end
     
     while domain.index('.') != nil
+      return false if $affiliate_tracking_domains[domain]
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
     end
@@ -116,6 +117,8 @@ published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/h
 published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt', 'dns/hagezi.txt', 'domain']
 published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'dns/hblock.txt', 'domain']
 published_list << ['https://o0.pages.dev/Pro/domains.wildcards', 'dns/1hosts.txt', 'domain']
+published_list << ['https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt', 'dns/notrack.txt', 'domain']
+published_list << ['https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt', 'dns/antiad.txt', 'domain']
 published_list.each do |url, filename, format|
   begin
     response = HTTParty.get(url)
@@ -127,6 +130,22 @@ published_list.each do |url, filename, format|
   host_format(filename) if format == 'host'
 end
 
+# --------------------------
+
+$affiliate_tracking_domains = Hash.new(false)
+begin
+  response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
+  File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
+rescue => error
+end
+File.read('dns/affiliate_tracking_domains.txt').each_line do |line|
+  next if line.strip == ''
+  if capture = /^([^#]+)/.match(line.strip)
+    $affiliate_tracking_domains[capture[1].strip] = true
+  end
+end
+
+# --------------------------
 
 blocklists = []
 # uBlock compatible
