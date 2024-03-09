@@ -3,8 +3,8 @@ The script removes rules that are blocked by DNS based blocking.
 
 | File | Original | Modified |
 |:----:|:-----:|:-----:|
-| ublock/adguard_base | 126388 | 59029 |
-| ublock/adguard_base_optimized | 33413 | 18402 |
+| ublock/adguard_base | 126516 | 59038 |
+| ublock/adguard_base_optimized | 33541 | 18411 |
 | ublock/adguard_tracking_protection | 115455 | 50053 |
 | ublock/adguard_tracking_protection_optimized | 112491 | 7859 |
 | ublock/adguard_social | 14577 | 13511 |
@@ -15,8 +15,8 @@ The script removes rules that are blocked by DNS based blocking.
 | ublock/adguard_annoyances_optimized | 23422 | 12327 |
 | ublock/adguard_url_tracking | 2165 | 1313 |
 | ublock/adguard_url_tracking_optimized | 1477 | 1310 |
-| adguard/adguard_base | 128320 | 61013 |
-| adguard/adguard_base_optimized | 34005 | 19411 |
+| adguard/adguard_base | 128448 | 61022 |
+| adguard/adguard_base_optimized | 34133 | 19420 |
 | adguard/adguard_tracking_protection | 116236 | 50778 |
 | adguard/adguard_tracking_protection_optimized | 113254 | 8571 |
 | adguard/adguard_social | 14624 | 13565 |
@@ -27,8 +27,8 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_annoyances_optimized | 23970 | 12623 |
 | adguard/adguard_url_tracking | 2172 | 1320 |
 | adguard/adguard_url_tracking_optimized | 1484 | 1317 |
-| safari/adguard_base | 134115 | 62283 |
-| safari/adguard_base_optimized | 40861 | 21680 |
+| safari/adguard_base | 134243 | 62292 |
+| safari/adguard_base_optimized | 40989 | 21689 |
 | safari/adguard_tracking_protection | 46810 | 4486 |
 | safari/adguard_tracking_protection_optimized | 43854 | 4344 |
 | safari/adguard_social | 14614 | 13549 |
@@ -37,8 +37,8 @@ The script removes rules that are blocked by DNS based blocking.
 | safari/adguard_mobile_optimized | 6114 | 3596 |
 | safari/adguard_annoyances | 51877 | 41555 |
 | safari/adguard_annoyances_optimized | 24207 | 12702 |
-| ios/adguard_base | 135398 | 62786 |
-| ios/adguard_base_optimized | 42163 | 22182 |
+| ios/adguard_base | 135526 | 62795 |
+| ios/adguard_base_optimized | 42291 | 22191 |
 | ios/adguard_tracking_protection | 46892 | 4494 |
 | ios/adguard_tracking_protection_optimized | 43936 | 4352 |
 | ios/adguard_social | 14672 | 13581 |
