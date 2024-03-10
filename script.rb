@@ -117,8 +117,6 @@ published_list << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/h
 published_list << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt', 'dns/hagezi.txt', 'domain']
 published_list << ['https://hblock.molinero.dev/hosts_domains.txt', 'dns/hblock.txt', 'domain']
 published_list << ['https://o0.pages.dev/Pro/domains.wildcards', 'dns/1hosts.txt', 'domain']
-published_list << ['https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt', 'dns/notrack.txt', 'domain']
-published_list << ['https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt', 'dns/antiad.txt', 'domain']
 published_list.each do |url, filename, format|
   begin
     response = HTTParty.get(url)
