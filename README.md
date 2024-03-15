@@ -11,7 +11,7 @@ The script removes rules that are blocked by DNS based blocking.
 | ublock/adguard_social_optimized | 8277 | 4595 |
 | ublock/adguard_mobile | 7150 | 5020 |
 | ublock/adguard_mobile_optimized | 6098 | 3584 |
-| ublock/adguard_annoyances | 51166 | 41176 |
+| ublock/adguard_annoyances | 51167 | 41177 |
 | ublock/adguard_annoyances_optimized | 23674 | 12521 |
 | ublock/adguard_url_tracking | 2171 | 1321 |
 | ublock/adguard_url_tracking_optimized | 1480 | 1318 |
@@ -23,7 +23,7 @@ The script removes rules that are blocked by DNS based blocking.
 | adguard/adguard_social_optimized | 8316 | 4638 |
 | adguard/adguard_mobile | 7836 | 5200 |
 | adguard/adguard_mobile_optimized | 6776 | 3757 |
-| adguard/adguard_annoyances | 51792 | 41736 |
+| adguard/adguard_annoyances | 51793 | 41737 |
 | adguard/adguard_annoyances_optimized | 24230 | 12819 |
 | adguard/adguard_url_tracking | 2178 | 1328 |
 | adguard/adguard_url_tracking_optimized | 1487 | 1325 |
