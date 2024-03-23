@@ -37,6 +37,7 @@ def already_blocked?(domain, line, filename)
       return true if /(?:facebook\.com|facebook\.net|onion)$/.match(domain) # selected domains in all files
       return true if /^(.*\.)?google\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in google in all files
       return true if /^amazon\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in amazon in all files
+      return true if /^kayak\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in kayak in all files
       return true if line.count('#') > 1 && /^(.*\.)?yandex\./.match(domain) # yandex in all files
       return true if line.count('#') > 1 && /\.(?:de|jp|pl|ru)$/.match(domain) # selected tlds in all files
       return true if /^e?mail\..*\$image$/.match(line)
