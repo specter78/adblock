@@ -1,5 +1,5 @@
 ! Title: Adguard Base Optimized
-! TimeUpdated: 2024-03-30T12:30:33+00:00
+! TimeUpdated: 2024-03-30T18:23:04+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -7047,16 +7047,25 @@ Banner468x60
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.ad-col
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.item-ad
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.tnt-ads-container
-youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerConfig.ssapConfig', 'undefined')
+youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerConfig.ssapConfig.ssapPrerollEnabled', 'false')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.adPlacements', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.adSlots', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerAds', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'playerResponse.adPlacements', 'undefined')
+www.youtube.com#%#//scriptlet('trusted-replace-fetch-response', '/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,/', '', 'player?')
+www.youtube.com#%#//scriptlet('trusted-replace-fetch-response', '/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/', '$1$2', 'player?')
+www.youtube.com#%#//scriptlet('trusted-replace-fetch-response', '/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/', '$1$2', 'player?')
+www.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,/', '', '/playlist\?list=|player\?|watch\?v=/')
+www.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/', '$1$2', '/playlist\?list=|player\?|watch\?v=/')
+www.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/', '$1$2', '/playlist\?list=|player\?|watch\?v=/')
 youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/\"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/', '', '/^(?!.*(\/\/tv\.youtube\.com)).*(playlist\?list=|player\?|watch\?v=)/')
 tv.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '"adPlacements"', '"no_ads"', '/playlist\?list=|player\?|watch\?v=/')
-youtube.com#%#//scriptlet('json-prune', 'playerResponse.playerConfig.ssapConfig playerResponse.streamingData.serverAbrStreamingUrl playerConfig.ssapConfig streamingData.serverAbrStreamingUrl')
+youtube.com#%#//scriptlet('json-prune', 'playerResponse.streamingData.serverAbrStreamingUrl streamingData.serverAbrStreamingUrl')
+youtube.com#%#//scriptlet('trusted-replace-fetch-response', '"ssapPrerollEnabled":true', '"ssapPrerollEnabled":false', 'player?')
+youtube.com#%#//scriptlet('trusted-replace-xhr-response', '"ssapPrerollEnabled":true', '"ssapPrerollEnabled":false', 'player?')
 youtube.com#%#//scriptlet('trusted-replace-fetch-response', '/"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/', '', 'player?')
+youtube.com#%#//scriptlet('trusted-replace-fetch-response', '"adSlots"', '"no_ads"', '/playlist\?list=|player\?|watch\?v=/')
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com#%#//scriptlet('json-prune', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots')
 ||googlevideo.com/initplayback?source=youtube&*&c=TVHTML5&oad=$xmlhttprequest,domain=youtube.com
 [$path=/tv]youtube.com#%#//scriptlet('json-prune', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots', '', '/https:\/\/www\.youtube\.com\/s\/player\/.*\/tv-player-ias\.vflset\/tv-player-ias\.js:/')
@@ -19311,6 +19320,7 @@ _800x80_
 ##.widget-advertisement
 ##.widget-dfp
 ##.widget-sponsor
+##.widget-sponsor--container
 ##.widgetSponsors
 ##.widget_300x250_advertisement
 ##.widget_ad

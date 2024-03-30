@@ -1,5 +1,5 @@
 ! Title: Adguard Base
-! TimeUpdated: 2024-03-30T12:30:17+00:00
+! TimeUpdated: 2024-03-30T18:22:51+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -14225,17 +14225,26 @@ kimcartoon.me##div > div[id][style*="overflow: hidden"][style*="width: 300px;"][
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.ad-col
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.item-ad
 gazettetimes.com,missoulian.com,kenoshanews.com,cumberlink.com,trib.com,dailyprogress.com,stltoday.com,journalstar.com##.tnt-ads-container
-youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerConfig.ssapConfig', 'undefined')
+youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerConfig.ssapConfig.ssapPrerollEnabled', 'false')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.streamingData.serverAbrStreamingUrl', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.adPlacements', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.adSlots', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'ytInitialPlayerResponse.playerAds', 'undefined')
 youtubekids.com,youtube-nocookie.com,youtube.com#%#//scriptlet('set-constant', 'playerResponse.adPlacements', 'undefined')
-.com/watch?v=$xmlhttprequest,jsonprune=\$.playerConfig.ssapConfig,domain=youtubekids.com|youtube-nocookie.com|youtube.com
+.com/watch?v=$replace=/"ssapPrerollEnabled":true/"ssapPrerollEnabled":false/,domain=www.youtube.com
+.com/watch?v=$replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,domain=www.youtube.com
+.com/watch?v=$replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,domain=www.youtube.com
+.com/watch?v=$replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,domain=www.youtube.com
+/youtubei/v*/player?$replace=/"ssapPrerollEnabled":true/"ssapPrerollEnabled":false/,domain=www.youtube.com
+/youtubei/v*/player?$replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,domain=www.youtube.com
+/youtubei/v*/player?$replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,domain=www.youtube.com
+/youtubei/v*/player?$replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,domain=www.youtube.com
+.com/playlist?list=$replace=/"ssapPrerollEnabled":true/"ssapPrerollEnabled":false/,domain=www.youtube.com
+.com/playlist?list=$replace=/"auxiliaryUi":\{"messageRenderers":\{"bkaEnforcementMessageViewModel.*?e\}\}\}\,//,domain=www.youtube.com
+.com/playlist?list=$replace=/("trackingParam":"kx_fmPxhoPZR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{55}lLKPQ-SS"\})/\$1\$2/,domain=www.youtube.com
+.com/playlist?list=$replace=/("trackingParam":"k5DfmPxhoXpR)[-_0-9A-Za-z]{150}[-_0-9A-Za-z]+?([-_0-9A-Za-z]{151}lLKPQGiS"\})/\$1\$2/,domain=www.youtube.com
 .com/watch?v=$xmlhttprequest,jsonprune=\$.streamingData.serverAbrStreamingUrl,domain=youtubekids.com|youtube-nocookie.com|youtube.com
-/youtubei/v*/player?$jsonprune=\$.playerConfig.ssapConfig,domain=youtubekids.com|youtube-nocookie.com|youtube.com
 /youtubei/v*/player?$jsonprune=\$.streamingData.serverAbrStreamingUrl,domain=youtubekids.com|youtube-nocookie.com|youtube.com
-.com/playlist?list=$jsonprune=\$.playerConfig.ssapConfig,domain=youtubekids.com|youtube-nocookie.com|youtube.com
 .com/playlist?list=$jsonprune=\$.streamingData.serverAbrStreamingUrl,domain=youtubekids.com|youtube-nocookie.com|youtube.com
 .com/watch?v=$xmlhttprequest,jsonprune=\$..[adPlacements\, adSlots\, playerAds],domain=youtubekids.com|youtube-nocookie.com|youtube.com
 /youtubei/v*/player?$jsonprune=\$..[adPlacements\, adSlots\, playerAds],domain=youtubekids.com|youtube-nocookie.com|youtube.com
@@ -51027,6 +51036,7 @@ _800x80_
 ##.widget-group-Ads
 ##.widget-highlight-ads
 ##.widget-sponsor
+##.widget-sponsor--container
 ##.widget-text-ad
 ##.widget.carbonads-widget
 ##.widget1-ad
