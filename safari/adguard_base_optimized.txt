@@ -1,5 +1,5 @@
 ! Title: Adguard Base Optimized
-! TimeUpdated: 2024-04-28T12:34:31+00:00
+! TimeUpdated: 2024-04-28T18:22:32+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -371,7 +371,9 @@ pornhub.com,pornhub.org,pornhub.net#%#//scriptlet('prevent-setTimeout', '\x41\x6
 #@#.ads_banner
 ##.stickyads:not([style^="width: 32px"]):not(:empty)
 ##.ads_banner:not([style^="width: 32px"])
+pesmodding.com#@#.button-ad
 shortearn.net#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+texteditor.nsspot.net#%#//scriptlet('set-constant', 'gadb', 'false')
 @@||celebfapper.com/js/adManager.js
 celebfapper.com#%#//scriptlet('prevent-setTimeout', 'adblocktag')
 phoneky.com#%#//scriptlet('abort-on-property-read', 'adBlockFunction')
@@ -1671,7 +1673,7 @@ b2bhint.com#%#//scriptlet('prevent-setTimeout', 'verifyBlocker')
 order-order.com#%#//scriptlet('prevent-setTimeout', 'fetchBad')
 @@||order-order.com/wp-content/themes/orderorder/admanager.google.com.js
 @@||order-order.com^$generichide
-mysports.to,footy.to#%#//scriptlet("abort-current-inline-script", "$", "ad-modal")
+mysports.to#%#//scriptlet("abort-current-inline-script", "$", "ad-modal")
 @@/wp-content/plugins/imedia-basic/adserver-*.js$domain=sgxnifty.org|dollarindex.org|cacfutures.org|dowfutures.org|nasdaqfutures.org|spfutures.org|ftsefutures.org|daxfutures.org|nikkeifutures.org|niftyfutures.org|comexlive.org|mcxlive.org|ncdexlive.org
 kituweh.xyz,artunnel57.com#@#.ad-placement
 kituweh.xyz,artunnel57.com#@#.adbadge
@@ -6888,6 +6890,11 @@ youtube.com#%#//scriptlet('json-prune', 'playerResponse.playerConfig.ssapConfig 
 youtube.com#%#//scriptlet('json-prune-xhr-response', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots', '', '/playlist\?list=|player\?|watch\?v=/')
 youtube.com#%#//scriptlet('json-prune-fetch-response', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots', '', '/playlist\?list=|player\?|watch\?v=/')
 m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com#%#//scriptlet('json-prune', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots')
+tv.youtube.com#%#//scriptlet('trusted-replace-xhr-response', '"adPlacements"', '"no_ads"', '/playlist\?list=|player\?|watch\?v=/')
+youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/\"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/', '', '/^(?!.*(\/\/tv\.youtube\.com)).*(playlist\?list=|player\?|watch\?v=)/')
+youtube.com#%#//scriptlet('trusted-replace-xhr-response', '/\"adSlots.*?\}\]\}\}\]\,/', '', '/^(?!.*(\/\/tv\.youtube\.com)).*(playlist\?list=|player\?|watch\?v=)/')
+youtube.com#%#//scriptlet('trusted-replace-fetch-response', '/"adPlacements.*?([A-Z]"\}|"\}{2,4})\}\]\,/', '', 'player?')
+youtube.com#%#//scriptlet('trusted-replace-fetch-response', '"adSlots"', '"no_ads"', '/playlist\?list=|player\?|watch\?v=/')
 ||googlevideo.com/initplayback?source=youtube&*&c=TVHTML5&oad=$xmlhttprequest,domain=youtube.com
 [$path=/tv]youtube.com#%#//scriptlet('json-prune', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots', '', '/https:\/\/www\.youtube\.com\/s\/player\/.*\/tv-player-ias\.vflset\/tv-player-ias\.js:/')
 www.youtube.com#%#(()=>{window.JSON.parse=new Proxy(JSON.parse,{apply(r,e,t){const n=Reflect.apply(r,e,t);if(!location.pathname.startsWith("/shorts/"))return n;const a=n?.entries;return a&&Array.isArray(a)&&(n.entries=n.entries.filter((r=>{if(!r?.command?.reelWatchEndpoint?.adClientParams?.isAd)return r}))),n}});})();
@@ -7041,7 +7048,6 @@ genius.com##div[class^="StubhubLink"]
 howtoinstall.co##div[id^="ads-wrapper-"]
 olx.in##div[class]:has(> div[id^="baxter-ads"])
 okmilfporn.com##div.text-center[style*="height: 250px;"]
-imgur.com##div[id*="/InContent/"][style*="min-height: 250px;"]
 amateurpornvidz.com##div[style="height:280px;"]
 luxuretv.com##iframe[data-src^="https://rokymedia.com/"]
 luxuretv.com###vz_im_ad
@@ -17300,6 +17306,7 @@ _800x80_
 ##.home-ads
 ##.homeAd
 ##.homepageAd
+##.homepage__native-ad
 ##.horizontal-ad
 ##.horizontal-ads
 ##.horizontal-advert-container
