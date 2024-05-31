@@ -1,5 +1,5 @@
 ! Title: Adguard Base
-! TimeUpdated: 2024-05-31T06:26:35+00:00
+! TimeUpdated: 2024-05-31T12:37:08+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 ||5.61.55.143^$all
@@ -423,6 +423,8 @@ pornhub.com,pornhub.org,pornhub.net##+js(no-setTimeout-if, \x41\x64\x62\x6c\x6f\
 #@#.ads_banner
 ##.stickyads:not([style^="width: 32px"], [style^="width: 33px"], [style*="left: -43px"]):not(:empty)
 ##.ads_banner:not([style^="width: 32px"], [style^="width: 33px"])
+4khd.com##.popup
+4khd.com##+js(no-xhr-if, magsrv.com)
 howtoconcepts.com###adb
 leakshaven.com##+js(no-fetch-if, pagead2.googlesyndication.com)
 top10cafe.se##+js(abort-on-stack-trace, DOMTokenList.prototype.contains, manageBodyClasses)
@@ -5252,6 +5254,7 @@ svetzeny.cz##+js(set-constant, __burdaAds, {})
 svetzeny.cz##+js(set-constant, __burdaAds.getDevice, noopFunc)
 svetzeny.cz##+js(set-constant, __burdaAds.isSeznam, noopFunc)
 svetzeny.cz##+js(set-constant, __burdaAds.refreshAllSlots, noopFunc)
+/cwl.js$domain=seznam.cz
 seznam.cz##div[data-dot="gadgetCommercial"]
 seznam.cz##.atm-ad-label
 seznam.cz##.mol-ssp-advert-content--responsive
@@ -7694,6 +7697,16 @@ roweroweporady.pl#@#.ad_container
 ||cdn.questvert.pl/publishers/*/qpscript.js
 ||cdn.files.smcloud.net/t/adquesto_beszamel_se_pl.js
 ||weszlo.com/wp-content/themes/weszlo/questpass.js
+kb.pl##.sticky2
+kb.pl##body .kba
+kb.pl##.kboferwidget
+||oferteo.pl/widget/$domain=kb.pl
+gratka.pl###empty-placeholder
+gratka.pl##.mobile-placeholder
+gratka.pl##.desktop-main-page-placeholder
+gratka.pl##div[id^="placeholder-slot-"]
+gratka.pl##.td-post-content > div[style*="height:"][style*="width:"][style*="margin-bottom:"]:has(> div[id^="slot-left"])
+gratka.pl#$?#.big-placeholder { remove: true; }
 tygodnikpowszechny.pl#@#.block-simpleads
 tygodnikpowszechny.pl#$#.block-simpleads { display: block !important; position: absolute !important; left: -3000px !important; }
 tygodnikpowszechny.pl##+js(addEventListener-defuser, DOMContentLoaded, .offsetHeight)
@@ -12374,7 +12387,6 @@ dlsharefile.com##+js(json-prune, *.*, *.clk)
 y2mate.guru##+js(window.open-defuser)
 files.im##+js(json-prune, *, ppuClicks)
 janusnotes.com##+js(window.open-defuser)
-ytmp3.mobi##+js(window.open-defuser, ad.ytmp3.mobi)
 strikeout.nu##+js(json-prune, *.*, *.clk)
 abcvideo.cc##+js(abort-on-property-read, nextPop)
 streamsport.icu##+js(window.open-defuser)
@@ -13999,8 +14011,13 @@ $xmlhttprequest,third-party,denyallow=rsc.cdn77.org|linkvertise.com|fastly.net|s
 ||livehdplay.ru/blast.js
 ||lovesomecommunity.com/blast.js
 ||b4ucast.com/blast.js
+neoseeker.com##.prms_inc
+neoseeker.com##div[style^="text-align:center;background:"][style*="min-height:"]:has(> .text-secondary > small)
+torrentgalaxy.unblockninja.com###blockalert
+torrentgalaxy.unblockninja.com###stopad
+ytmp3.mobi##+js(window.open-defuser, ad.ymcdn)
+||4khd.com/interstitial.js
 gocomics.com##.gc-top-advertising
-base64decode.org##.ad_corner
 educationtimes.com##div[class]:has(> div[class] > div[id^="div-gpt-ad"])
 kickassanime.*#$?#body ~ div[style^="position:"] { remove: true; }
 vidco.pro#$?#iframe[style^="position:"] { remove: true; }
@@ -31131,6 +31148,7 @@ nybooks.com##.ad-spacing
 $popup,third-party,domain=fembed-hd.com,badfilter
 $popup,third-party,domain=sbplay2.com,badfilter
 $popup,third-party,domain=dood.ws,badfilter
+||amazon-adsystem.com/aax2/apstag.js$script,redirect=amazon_apstag.js,domain=worldsurfleague.com,important
 ||jwplayer.com^$domain=gamesradar.com,badfilter
 @@||images.macrumors.com/*/article-new/
 $popup,third-party,domain=aniwave.to,badfilter
@@ -56398,6 +56416,7 @@ firstpost.com##.taboola-div
 weather.com##div[id*="Taboola-sidebar"]
 weather.com##div[id^="Taboola-main-"]
 express.co.uk##div[id^="taboola-"]
+mail.aol.com##li:has(a[data-test-id="pencil-ad-messageList"])
 filmibeat.com,gizbot.com,goodreturns.in,oneindia.com##ul > li:has(> div[id^="taboola-mid-home-stream"])
 ndtv.com,ndtv.in##[class^="firework"]
 ndtv.com,ndtv.in##[id^="firework"]
