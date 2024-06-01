@@ -58,12 +58,14 @@ end
 
 def optimize_rule(line, filename)
 
-  # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
-  #   return "" if already_blocked?(capture[1], line, filename)
-  # end
-  # if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
-  #   return "" if already_blocked?(capture[1], line, filename)
-  # end
+  if /ios/.match(filename)
+    if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
+      return "" if already_blocked?(capture[1], line, filename)
+    end
+    if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
+      return "" if already_blocked?(capture[1], line, filename)
+    end
+  end
 
   # $domain ["=" pattern]
   if line.start_with?('[$domain=')
