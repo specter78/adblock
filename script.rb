@@ -44,9 +44,6 @@ def already_blocked?(domain, line, filename)
       if /(?:annoyances|social)/.match(filename)
         return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
       end
-      if /ios/.match(filename)
-        return true if line.count('#') > 1 && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in all files
-      end
     end
     
     while domain.index('.') != nil
