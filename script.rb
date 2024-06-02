@@ -47,7 +47,6 @@ def already_blocked?(domain, line, filename)
     end
     
     while domain.index('.') != nil
-      return false if $affiliate_tracking_domains[domain]
       return true if $dns_blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
     end
@@ -127,21 +126,6 @@ published_list.each do |url, filename, format|
   adblock_format(filename) if format == 'abp'
   domain_format(filename) if format == 'domain'
   host_format(filename) if format == 'host'
-end
-
-# --------------------------
-
-$affiliate_tracking_domains = Hash.new(false)
-begin
-  response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
-  File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
-rescue => error
-end
-File.read('dns/affiliate_tracking_domains.txt').each_line do |line|
-  next if line.strip == ''
-  if capture = /^([^#]+)/.match(line.strip)
-    $affiliate_tracking_domains[capture[1].strip] = true
-  end
 end
 
 # --------------------------
