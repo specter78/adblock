@@ -39,12 +39,14 @@ def already_blocked?(domain, line, filename)
       return true if /^amazon\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in amazon in all files
       return true if /^kayak\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in kayak in all files
       return true if line.count('#') > 1 && /^(.*\.)?yandex\./.match(domain) # yandex in all files
-      return true if line.count('#') > 1 && /\.(?:de|jp|pl|ru|il)$/.match(domain) # selected tlds in all files
+      return true if line.count('#') > 1 && /\.(?:de|jp|pl|ru)$/.match(domain) # selected tlds in all files
       return true if /^e?mail\..*\$image$/.match(line)
       if /(?:annoyances|social)/.match(filename)
         return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
       end
-    end
+      if /ios/.match(filename)
+        return true if line.count('#') > 1 && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in all files
+      end
     
     while domain.index('.') != nil
       return false if $affiliate_tracking_domains[domain]
@@ -58,14 +60,12 @@ end
 
 def optimize_rule(line, filename)
 
-  if /ios/.match(filename)
-    if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
-      return "" if already_blocked?(capture[1], line, filename)
-    end
-    if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
-      return "" if already_blocked?(capture[1], line, filename)
-    end
-  end
+  # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
+  #   return "" if already_blocked?(capture[1], line, filename)
+  # end
+  # if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
+  #   return "" if already_blocked?(capture[1], line, filename)
+  # end
 
   # $domain ["=" pattern]
   if line.start_with?('[$domain=')
