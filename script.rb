@@ -47,6 +47,7 @@ def already_blocked?(domain, line, filename)
       if /ios/.match(filename)
         return true if line.count('#') > 1 && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in all files
       end
+    end
     
     while domain.index('.') != nil
       return false if $affiliate_tracking_domains[domain]
