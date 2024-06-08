@@ -54,6 +54,15 @@ def already_blocked?(domain, line, platform, filename)
   return false
 end
 
+def optimize_repeating_domains(domains)
+  ['google', 'amazon', 'tripadvisor', 'skyscanner'].each do |repeats|
+    if domains.count{ |x| /^#{repeats}\./.match(x) } >= 10
+      domains = domains.collect{ |x| /^#{repeats}\./.match(x) ? "#{repeats}.*" : x }.uniq
+    end
+  end
+  return domains
+end
+
 def optimize_rule(line, platform, filename)
 
   # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
@@ -66,6 +75,7 @@ def optimize_rule(line, platform, filename)
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)(\[[^\]]*\])?([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[3].split(',').delete_if { |x| already_blocked?(x, line, platform, filename) }
+    domains = optimize_repeating_domains(domains)
     return "" if domains == []
     line = capture[1] + capture[2].to_s + domains.join(',') + capture[4]
     return "" if capture[3].split(',').any?{ |e| e[0] != '~'} && domains.none?{ |e| e[0] != '~'}
