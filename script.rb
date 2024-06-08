@@ -62,20 +62,13 @@ def optimize_rule(line, platform, filename)
   # if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
   #   return "" if already_blocked?(capture[1], line, platform, filename)
   # end
-  
-  # $path ["=" pattern]
-  path = false
-  if line.start_with?('[$path')
-    path = line[0..line.index(']')]
-    line = line[line.index(']')+1..-1]
-  end
 
   # beginning domains
-  if capture = /^((?:@@)?(?:\|\|)?)([^#^\^^$^%]+)(.*)/.match(line)
-    domains = capture[2].split(',').delete_if { |x| already_blocked?(x, line, platform, filename) }
+  if capture = /^((?:@@)?(?:\|\|)?)(\[[^\]]*\])?([^#^\^^$^%]+)(.*)/.match(line)
+    domains = capture[3].split(',').delete_if { |x| already_blocked?(x, line, platform, filename) }
     return "" if domains == []
-    line = capture[1] + domains.join(',') + capture[3]
-    return "" if capture[2].split(',').any?{ |e| e[0] != '~'} && domains.none?{ |e| e[0] != '~'}
+    line = capture[1] + capture[2].to_s + domains.join(',') + capture[4]
+    return "" if capture[3].split(',').any?{ |e| e[0] != '~'} && domains.none?{ |e| e[0] != '~'}
   end
   
   # ending domains
@@ -86,7 +79,7 @@ def optimize_rule(line, platform, filename)
     return "" if capture[3].split('|').any?{ |e| e[0] != '~'} && domains.none?{ |e| e[0] != '~'}
   end
   
-  path ? (return path + line) : (return line)
+  return line
 end
 
 # --------------------------
