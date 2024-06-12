@@ -21,7 +21,7 @@ The script removes rules that are blocked by DNS based blocking.
 | safari/adguard_mobile_optimized | 6287 | 3746 |
 | safari/adguard_annoyances_optimized | 23766 | 12671 |
 | safari/adguard_url_tracking_optimized | 2 | 2 |
-| ios/adguard_base_optimized | 35991 | 21671 |
+| ios/adguard_base_optimized | 35993 | 21673 |
 | ios/adguard_tracking_protection_optimized | 48961 | 6226 |
 | ios/adguard_social_optimized | 8154 | 4594 |
 | ios/adguard_mobile_optimized | 6343 | 3788 |
