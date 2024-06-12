@@ -37,6 +37,7 @@ def already_blocked?(domain, line, platform, filename)
     return true if /^(.*\.)?(?:facebook\.com|facebook\.net|fb\.com|onion)$/.match(domain) # selected domains in all files
     return true if /^(.*\.)?google\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in google in all files
     return true if /^(?:amazon\.|kayak\.|webike\.|tripadvisor\.|momondo\.|expedia\.|skyscanner\.|yelp\.)/.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in in all files
+    return true if /^dizipal\d*\.(?:com|cloud)$/.match(domain) # dizipal in all files
     return true if line.count('#') > 1 && /^(.*\.)?yandex\./.match(domain) # yandex in all files
     return true if line.count('#') > 1 && /\.(?:de|jp|pl|ru)$/.match(domain) # selected tlds in all files
     return true if /^e?mail\..*\$image$/.match(line)
