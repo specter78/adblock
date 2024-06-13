@@ -1,5 +1,5 @@
 ! Title: Adguard Annoyances Optimized
-! TimeUpdated: 2024-06-13T06:27:17+00:00
+! TimeUpdated: 2024-06-13T12:38:13+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -13,6 +13,7 @@
 #%#var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn("AdGuard aborted property read: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
 #%#var AG_abortInlineScript=function(g,b,c){var d=function(){if("currentScript"in document)return document.currentScript;var a=document.getElementsByTagName("script");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&""===a.src&&g.test(a.textContent))throw c&&console.warn("AdGuard aborted execution of an inline script"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if("string"===typeof a&&-1!==a.indexOf(e))return c&&console.warn("AdGuard has caught window.onerror: "+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};
 #%#var AG_setConstant=function(e,a){if("undefined"===a)a=void 0;else if("false"===a)a=!1;else if("true"===a)a=!0;else if("noopFunc"===a)a=function(){};else if("trueFunc"===a)a=function(){return!0};else if("falseFunc"===a)a=function(){return!1};else if(/^\d+$/.test(a)){if(a=parseFloat(a),isNaN(a)||32767<Math.abs(a))return}else return;var b=!1;AG_defineProperty(e,{get:function(){return a},set:function(c){if(b)var d=!0;else void 0!==c&&void 0!==a&&typeof c!==typeof a&&(b=!0),d=b;d&&(a=c)}})};
+###dv-cookie-notice
 ###politykaprywatnosci
 ##.cws-cookies-notification
 ###agree_cookies
@@ -1254,9 +1255,14 @@ crazygames.com,leanplayer.com,player.cjcbradio.com#%#//scriptlet('trusted-click-
 /wrapperMessagingWithoutDetection.js$script,domain=olivemagazine.com|visit-hannover.com|dpd.com|sky.com|meineorte.com|handelsblatt.com|denofgeek.com|classicfm.com|globalplayer.com|cio.com|macworld.com|axelspringer.com|dexerto.com|techadvisor.com|stuff.tv|speed.io|mcnmotorcycleshow.com|csoonline.com|dailyresearchplot.com|badoo.com|eiu.com|playpilot.com|kachelmannwetter.com|hobbyconsolas.com|thepeoplesperson.com|whats-on-netflix.com|bikeradar.com|theloadout.com|bbcgoodfood.com|discoverwildlife.com|pcgamesn.com|sciencefocus.com|macworld.com|brighttalk.com|carthrottle.com|unnuetzes.com|classical-music.com|vice.com|techtarget.com|computerweekly.com|thechelseachronicle.com|meteologix.com|gardenersworld.com|charlieintel.com|67hailhail.com|goal.com|propermanchester.com
 rockpapershotgun.com,vg247.com,cmpv2.foundryco.com,bloomberg.*,theguardian.com,infoworld.com,scotsman.com,motorsport-magazin.com,independentespanol.com,networkworld.com,gentside.com,consent-manager.ft.com,thepopverse.com,cmp.videogameschronicle.com,cmpsp.computerhoy.com,consent.formula1.com,consent.gamingbible.com#%#//scriptlet('trusted-click-element', 'button.sp_choice_type_11')
 codesandbox.io,seduo.*#%#//scriptlet('remove-class', 'force--consent|show--consent', 'html')
-docs.snyk.io,docs.keeper.io,developers.deepl.com##[aria-label="Cookies"]
+docs.powershelluniversal.com,docs.snyk.io,docs.keeper.io,developers.deepl.com##[aria-label="Cookies"]
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', '.gdpr a.submit')
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', 'div[aria-labelledby="cookieMainHeader"] a#gwt-debug-close_id')
+remitly.com#%#//scriptlet('trusted-set-cookie', 'cookie_consent', '000')
+remitly.com#%#//scriptlet('trusted-set-local-storage-item', 'cookie_consent_date', '$now$')
+americanexpress.com#$##user-consent-management-granular-banner-overlay { display: none !important; }
+americanexpress.com#$#body { overflow: auto !important; }
+scaleway.com#%#//scriptlet('trusted-click-element', '.sc-dGCmGc.fJEvkp', '!localStorage:gbFeaturesCache')
 revolut.com##div[aria-label="Choose your cookies"]
 openbank.*#%#//scriptlet('trusted-click-element', 'button[onclick="onClickRefuseCookies(event)"]', '!cookie:CONSENTMGR')
 monzo.com#%#//scriptlet('set-cookie', 'cookies_accepted', 'false')
@@ -1285,7 +1291,6 @@ yce.perfectcorp.com##div[class^="cookie-statement_container__"]
 copaair.com###__next > div.MuiBox-root:has(> div[role="dialog"] a[href$="/politica-de-privacidad/"])
 dw.com#%#//scriptlet('trusted-click-element', '#cmpwrapper >>> #cmpbntyestxt')
 ufi.org###cookies-prompt
-scaleway.com#%#//scriptlet('trusted-set-cookie', '_scw_rgpd_hash', '1777213350')
 theoceancleanup.com#%#//scriptlet('trusted-set-cookie', 'toc_cookie_consent', 'strictly_necessary')
 vikacg.com##.arco-overlay-notification
 nttgame.com#%#//scriptlet('trusted-set-cookie', 'gnb-cookie-agree', 'agree')
@@ -3915,7 +3920,6 @@ kick.com#%#//scriptlet('set-local-storage-item', 'kick_cookie_accepted', 'true')
 atelier801.com#%#//scriptlet('set-cookie', 'cb-enabled', 'true')
 energetyka24.com,defence24.com#%#(function() { try { if ('undefined' != typeof localStorage) { localStorage.setItem('privacy2022', '{"required":true,"performance":false,"functional":true,"marketing":false,"analytics":false}') } } catch (ex) {} })();
 filen.io#%#//scriptlet('set-cookie', 'cookieConsent', 'yes')
-scaleway.com#%#//scriptlet('set-cookie', 'consent-analytics', 'false')
 qatarairways.com#%#//scriptlet("set-cookie", "cookie_visited", "true")
 search.deleteme.com#%#//scriptlet('set-cookie', 'cookieControlPrefs', '0')
 lasestrellas.tv#%#//scriptlet('set-cookie', '_tvsPrivacy', 'true')
@@ -9702,7 +9706,6 @@ gaodun.com##.js_appdownload
 translate.google.*##div[class][jsname] > div[class] > c-wiz > div[class][jsname][style^="transform: matrix("]
 bittorrent.com#?#.prodnews-container div[class^="col-"] > div.row:has(> div[class] a[id^="prodnews-go-adfree-"])
 google.co.in,google.com##.rbgrBd div[role="dialog"] > div[jsaction^="settings."] button[jsaction^="settings.useApp;"]
-tunein.com#%#//scriptlet('set-cookie', 'navBasedDialogManager', 'true')
 spacemarket.com##div[class^="AppInstallBannerPresenter__StyledBannerContainer"]
 mc.163.com##.down-box
 m.hoyolab.com#%#//scriptlet('set-local-storage-item', 'closedAppHeader', '1')
@@ -9847,7 +9850,6 @@ m.mobile01.com,indianexpress.com,financialexpress.com##.app-btn
 f2movies.to##a[href="/android-movies-apk"]
 creatur.io###mobile-download-panel
 bing.com###bnp_hfly
-tunein.com#$#body { overflow: visible !important; }
 quora.com##.q-box > div[class^="CssComponent-"][style*="height: 50px;"]
 parcelsapp.com##.badges
 dealmoon.com##.download_app
@@ -11291,7 +11293,7 @@ mp4upload.com#%#//scriptlet('adjust-setTimeout', 'tick', '*', '0.001')
 bfmtv.com#%#//scriptlet('remove-attr', 'autoplay', '.video_block')
 bfmtv.com#%#//scriptlet('set-attr', '.video_block', 'autoplay', 'false')
 kuncomic.com#%#//scriptlet('adjust-setInterval', 'countdownTime', '1500', '0.001')
-creatorsmaster.com,indianinventions.com,addomainbroker.com#%#//scriptlet('adjust-setInterval', 'myTimer', '*', '0.02')
+lcliq.com,funkeykida.com#%#//scriptlet('adjust-setInterval', 'myTimer', '*', '0.02')
 sanemoku.com#%#//scriptlet('adjust-setInterval', 'countdown', '*', '0.001')
 shareus.io#%#//scriptlet('trusted-click-element', '.adunit-container >.card img', '','500')
 btcbitco.in,cempakajaya.com,wiour.com,mcafee-com.com,blog.freeoseocheck.com#%#//scriptlet('set-constant', 'document.hasFocus', 'trueFunc')
