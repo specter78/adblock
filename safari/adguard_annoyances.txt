@@ -1,9 +1,9 @@
-! Checksum: Psg045Ng3npc2WU2LDJ0RQ
-! Diff-Path: ../patches/14_optimized/14_optimized-s-1719506159-3600.patch
+! Checksum: lcmRK56nkqRl2+lWUGZDmA
+! Diff-Path: ../patches/14_optimized/14_optimized-s-1719534890-3600.patch
 ! Title: AdGuard Annoyances filter (Optimized)
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups. Contains the following AdGuard filters: Cookie Notices, Popups, Mobile App Banners, Other Annoyances and Widgets.
-! Version: 2.2.0.57
-! TimeUpdated: 2024-06-27T16:33:34+00:00
+! Version: 2.2.0.59
+! TimeUpdated: 2024-06-28T00:32:48+00:00
 ! Expires: 5 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -18,6 +18,7 @@
 !#######################################################
 !######### General element hiding rules ################
 !#######################################################
+###buzzblogpro-cookie-banner
 ##.navbar-privacy
 ##.nca-cookiesaccept-line
 ###dv-cookie-notice
@@ -1385,6 +1386,8 @@ codesandbox.io,damota.me,pracazarogiem.pl,pracezarohem.cz,pracazarohom.sk,seduo.
 docs.powershelluniversal.com,docs.snyk.io,docs.keeper.io,developers.deepl.com##[aria-label="Cookies"]
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', '.gdpr a.submit')
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', 'div[aria-labelledby="cookieMainHeader"] a#gwt-debug-close_id')
+bing.com##div[id^="bnp"]:has(> #bnp_cookie_banner)
+bing.com#$#html[style="overflow: hidden;"] { overflow: auto !important; }
 ||kaup24.ee/*/home/cookiebox
 renlife.ru##.popap_cookie
 nowymarketing.pl#%#//scriptlet('trusted-set-cookie', 'cmplz_banner-status', 'dismissed')
