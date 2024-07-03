@@ -1,9 +1,9 @@
-! Checksum: e2ZfwkhL7GEilun0KKkNfQ
-! Diff-Path: ../patches/14_optimized/14_optimized-s-1720006544-3600.patch
+! Checksum: mx9efW+QnuCNiIuBueF7Ww
+! Diff-Path: ../patches/14_optimized/14_optimized-s-1720020968-3600.patch
 ! Title: AdGuard Annoyances filter (Optimized)
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups. Contains the following AdGuard filters: Cookie Notices, Popups, Mobile App Banners, Other Annoyances and Widgets.
-! Version: 2.2.1.6
-! TimeUpdated: 2024-07-03T11:30:40+00:00
+! Version: 2.2.1.9
+! TimeUpdated: 2024-07-03T15:33:55+00:00
 ! Expires: 12 hours (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -1390,6 +1390,7 @@ codesandbox.io,damota.me,pracazarogiem.pl,pracezarohem.cz,pracazarohom.sk,seduo.
 docs.powershelluniversal.com,docs.snyk.io,docs.keeper.io,developers.deepl.com##[aria-label="Cookies"]
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', '.gdpr a.submit')
 consent-pref.trustarc.com#%#//scriptlet('trusted-click-element', 'div[aria-labelledby="cookieMainHeader"] a#gwt-debug-close_id')
+vippsmobilepay.com##.Cookiebox
 fanbox.cc##div[class^="HeaderConfirmation__Wrapper-"]
 espoonseurakunnat.fi#%#//scriptlet('trusted-click-element', '#reject-cookies', '', '500')
 darkfans.com##.banner.pt-0
@@ -9058,6 +9059,8 @@ auto.ru#%#//scriptlet('json-prune', 'ads')
 drive2.ru#%#//scriptlet('abort-on-property-read', 'Object.prototype.AdChosen')
 drive2.ru#?#.js-page > div > div[class="x-box x-box--mh o-f"]:has(> script)
 mail.ru#%#//scriptlet('set-constant', 'Object.prototype.hideTgbAd', '', '', 'asResolved')
+||imgsmail.ru/octavius/*/app-*.js$replace=/this\.sendHoneypotDetectRadar\(!0\)/return/
+e.mail.ru,octavius.mail.ru#%#//scriptlet('prevent-setTimeout', '/\(\)=>[a-z]{1}\(\)$/')
 dzen.ru##body header#dzen-header ~ div[class*="__widgetContainer-"] div[style]:has(div.adv-skeleton___main)
 dzen.ru##div[class^="float-interview__float-"]
 rambler.ua,rambler.ru#%#//scriptlet('set-cookie', '_blocker_hidden', '1')
@@ -13712,6 +13715,7 @@ g123.jp,accounts.binance.com#@##credential_picker_container
 gzt.com,haber.biz,sakshi.com,shiftdelete.net,community.oneplus.com,lnc.nc,superfilmes.ph,meduza.global.ssl.fastly.net,meduza.io,yenisafak.com,offidocs.com,onedio.com,hpplus.jp,fullfilmcibaba1.com,joom.com,nbc.com,maximum.ru,ch3plus.com,dropmefiles.com,rg.ru,reddit.com,life.ru#%#//scriptlet('set-constant', 'Notification.requestPermission', 'noopFunc')
 wallstreet-online.de,dni.ru#%#if (window.PushManager) { window.PushManager.prototype.subscribe = function () { return { then: function (func) { } }; }; }
 macwelt.de,pcwelt.de#%#//scriptlet("set-constant", "firebase.messaging", "noopFunc")
+tku.co.jp###js-webpush
 discordservers.com#%#//scriptlet('set-session-storage-item', 'footer-notification', 'false')
 ||24sata.hr/static/scripts/notifications/notifications.min.js
 sirabee.com#%#//scriptlet('trusted-click-element', '.slideDown .is-later')
@@ -17454,6 +17458,7 @@ musicalinc.de,mycopilot.ai,thomasmeyerhoefer.com,bakadesuyo.com,apotekfordeg.no,
 ###smartbanner.ios
 turkishairlines.com,atmos-tokyo.com,radarbox.com,ciceksepeti.com,rabota.by,temp-mail.org,ortobom.com.br,dicionarioinformal.com.br,5-fifth.com,news.sky.com,chat.babel.com,getwordly.com,school-turnup.com,naked-science.ru,vod.tvp.pl,tvn24.pl,m.lamoda.ru,lkfl2.nalog.ru,kocailem.com,dartworld.shopgate.com,m.alles10euro.de,dodopizza.ru,allo.ua,tempo.co,beymen.com,tvnmeteo.tvn24.pl,outsidetv.com,golfchannel.com,sportsnet.ca,euronews.com,pkobp.pl,tesco.hu,prima.hu,immobilienscout24.de,lcwaikiki.com,m.sigrun-woehr.com,transfermarkt.de,fragfinn.de,hh.ru,eraffe24.de,infranken.de,m.computeruniverse.net,m.emp.de,meduza.global.ssl.fastly.net,meduza.io##body .smartbanner
 temu.com#?#div[role="main"] div[style] > div[style]:has(> div[style] div[js-selector="mobile-download-ui"])
+trip.com###new-app-download-component
 teb.com.tr###lblBanner2819
 e.mail.ru,octavius.mail.ru#?#.octopus__icon_qr-code
 e.mail.ru,octavius.mail.ru#?#.octopus__icon_qr-code + div.octopus__text > span.octopus__line:has(> span.octopus__subtitle > div:contains(/^Скачайте Почту на телефон/))
@@ -23908,6 +23913,7 @@ ukr.net###sinoptik_container
 /gs_informerClient.min.$third-party
 ||gismeteo.*/getInformer/$third-party
 ||meteoprog.ua/*/weather/informer/$third-party
+||paypal.com/giving/campaigns$domain=xboxera.com
 nashaniva.com##.article__content > div[style]:has(> a[href="https://patreon.com/nashaniva"])
 jam-news.net###donationPopup
 proekt.media##proekt-group > proekt-block:has(> proekt-columns span#donateButton)
