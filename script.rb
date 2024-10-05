@@ -31,6 +31,7 @@ def already_blocked?(domain, line, platform, filename)
     return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
     domain = capture[1].split('/')[0]
     return false if domain[0] == '['
+    return false if domain[0] == '/'
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
     
