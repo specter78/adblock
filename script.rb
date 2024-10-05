@@ -32,6 +32,7 @@ def already_blocked?(domain, line, platform, filename)
     domain = capture[1].split('/')[0]
     return false if domain[-1] == '.'
     return false if domain[0] == '~'
+    return false if domain[0] == '['
     
     # filter list optimization      
     return true if /^(.*\.)?(?:facebook\.com|facebook\.net|fb\.com|onion)$/.match(domain) # selected domains in all files
