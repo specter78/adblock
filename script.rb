@@ -1,5 +1,6 @@
 require 'date'
 require 'httparty'
+require 'json'
 
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |line|
@@ -69,7 +70,7 @@ def already_blocked?(domain, line, platform, filename)
   return false
 end
 
-def optimize_rule(line, platform, filename)
+def optimize_rule_old(line, platform, filename)
 
   # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
   #   return "" if already_blocked?(capture[1], line, platform, filename)
@@ -166,20 +167,17 @@ platforms.each do |platform|
     selected_rules << ['! Expires: 12 hours (update frequency)']
     selected_rules << ['! Homepage: https://github.com/specter78/adblock']
 
-    response.body.each_line do |line|
-      line = line.strip
-      if line.start_with?('!')
-      elsif line == ''
-      elsif line.start_with?('/^') || line.start_with?('@@/^')
-        # selected_rules << line
-      else
-        line = optimize_rule(line, platform, filename)
-        selected_rules << line if line != ""
-      end
-    end
+    File.write("filterlist.txt", response.body)
+    system("node adguard_parse.js")
+    parsed_filter = JSON.parse(File.read('parsedfilter.json'))
+    File.write('filterlist.txt', optimize_rule(parsed_filter))
+    system("node adguard_deparse.js")
+
+
 
     File.write("#{folder}/#{filename}_optimized.txt", selected_rules.join("\n")) if (File.read("#{folder}/#{filename}_optimized.txt").split("\n")[4..-1] != selected_rules[4..-1])
     readme << "| #{folder}/#{filename}_optimized | #{original_rules_count} | #{selected_rules.count - 4} |"
+    exit
   end
 end
 
