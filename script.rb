@@ -25,6 +25,15 @@ def host_format(blocklist)
   end
 end
 
+def optimize_repeating_domains(domains)
+  ['google', 'amazon', 'tripadvisor', 'skyscanner'].each do |repeats|
+    if domains.count{ |x| /^#{repeats}\./.match(x) } >= 10
+      domains = domains.collect{ |x| /^#{repeats}\./.match(x) ? "#{repeats}.*" : x }.uniq
+    end
+  end
+  return domains
+end
+
 def already_blocked?(domain, line, platform, filename)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(domain)
     return true unless capture[1].ascii_only?
