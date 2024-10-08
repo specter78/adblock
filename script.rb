@@ -3,24 +3,28 @@ require 'httparty'
 
 def adblock_format(blocklist)
   File.read(blocklist).each_line do |line|
-    if capture = /^(?:\|\|)([^\^^!]+)/.match(line.strip)
-      $dns_blocked[capture[1].strip] = true
+    if capture = /^(?:\|\|)([a-zA-Z0-9\.\-\_]+)\^$/.match(line.strip)
+      $blocked[capture[1]] = true
+    elsif capture = /^(?:@@\|\|)([a-zA-Z0-9\.\-\_]+)\^\|?$/.match(line.strip)
+      $allowed[capture[1]] = true
     end
   end
 end
 
 def domain_format(blocklist)
   File.read(blocklist).each_line do |line|
-    if capture = /^(?:\*\.)?([^#]+)/.match(line.strip)
-      $dns_blocked[capture[1].strip] = true
+    line = line.strip.split('#').first
+    if capture = /^(?:\*\.)?([a-zA-Z0-9\.\-\_]+)$/.match(line)
+      $blocked[capture[1].strip] = true
     end
   end
 end
 
 def host_format(blocklist)
   File.read(blocklist).each_line do |line|
-    if capture = /^(?:0\.0\.0\.0\s)([^#]+)/.match(line.strip)
-      $dns_blocked[capture[1].strip] = true
+    line = line.strip.split('#').first
+    if capture = /^(?:0\.0\.0\.0\ )([a-zA-Z0-9\.\-\_]+)$/.match(line)
+      $blocked[capture[1]] = true
     end
   end
 end
@@ -56,11 +60,11 @@ def already_blocked?(domain, line, platform, filename)
     end
     
     while domain.index('.') != nil
-      return false if $affiliate_tracking_domains[domain]
-      return true if $dns_blocked[domain] && !domain.include?('*')
+      return false if $allowed[domain]
+      return true if $blocked[domain] && !domain.include?('*')
       domain = domain[(domain.index('.')+1)..-1]
     end
-    return true if $dns_blocked[domain] # tld
+    return true if $blocked[domain] # tld
   end
   return false
 end
@@ -95,7 +99,22 @@ end
 
 # --------------------------
 
-$dns_blocked = Hash.new(false)
+$allowed = Hash.new(false)
+begin
+  response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
+  File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
+rescue => error
+end
+File.read('dns/affiliate_tracking_domains.txt').each_line do |line|
+  next if line.strip == ''
+  if capture = /^([^#]+)/.match(line.strip)
+    $allowed[capture[1]] = true
+  end
+end
+
+# --------------------------
+
+$blocked = Hash.new(false)
 blocklists = []
 blocklists << ['https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt', 'dns/adguard_dns.txt', 'abp']
 blocklists << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswild_big.txt', 'dns/oisd.txt', 'domain']
@@ -112,21 +131,6 @@ blocklists.each do |url, filename, format|
   adblock_format(filename) if format == 'abp'
   domain_format(filename) if format == 'domain'
   host_format(filename) if format == 'host'
-end
-
-# --------------------------
-
-$affiliate_tracking_domains = Hash.new(false)
-begin
-  response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
-  File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
-rescue => error
-end
-File.read('dns/affiliate_tracking_domains.txt').each_line do |line|
-  next if line.strip == ''
-  if capture = /^([^#]+)/.match(line.strip)
-    $affiliate_tracking_domains[capture[1]] = true
-  end
 end
 
 # --------------------------
