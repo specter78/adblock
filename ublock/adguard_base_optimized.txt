@@ -1,5 +1,5 @@
 ! Title: Adguard Base Optimized
-! TimeUpdated: 2024-10-27T06:30:12+00:00
+! TimeUpdated: 2024-10-28T01:52:43+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 ||ads.livetv*.me^
@@ -898,9 +898,11 @@ egao.in##+js(noeval-if, checker)
 hecker.likesyou.org##+js(no-xhr-if, pagead2.googlesyndication.com)
 conceptartworld.com,themezon.net,mrproblogger.com##+js(abort-on-stack-trace, document.createElement, doTest)
 emailnator.com##+js(no-setTimeout-if, adsbygoogle)
-xfreehd.com##+js(no-fetch-if, ads.exosrv.com)
-xfreehd.com##+js(abort-current-script, $, abk_vmsg)
-xfreehd.com##+js(abort-on-stack-trace, String.fromCharCode, HTMLScriptElement.onerror)
+xfreehd.com##+js(no-setTimeout-if, .innerHTML)
+xfreehd.com##+js(remove-node-text, script, .abk_msg)
+xfreehd.com#@#.ad-title
+xfreehd.com##.abk_msg
+xfreehd.com#@#.ad-body
 $script,redirect-rule=noop.js,domain=xfreehd.com
 all3dp.com##+js(set-constant, ALL3DP_ABDC, true)
 citytv.com##+js(no-xhr-if, get_ad_targets_by_url, true)
@@ -1397,8 +1399,6 @@ vods.tv##+js(no-fetch-if, www3.doubleclick.net)
 orbispatches.com#@#.adsbyvli
 orbispatches.com##+js(no-fetch-if, services.vlitag.com/adv)
 @@||et.novelgames.com/ads.js?adTagUrl=
-xfreehd.com##.video-container > div:not(.fluid_video_wrapper)
-xfreehd.com##+js(abort-on-property-write, axtest01)
 10play.com.au##+js(no-fetch-if, pagead2.googlesyndication.com)
 ansedo.com##+js(set-constant, canRunAdvertBanner, true)
 @@||ansedo.com/js/advert-banner.js
@@ -1626,10 +1626,6 @@ quizack.com##+js(no-setTimeout-if, blocker)
 ||cdn.jsdelivr.net/gh/mytoolznet/M-AdBlocker/2.0/code.min.js
 toeflmocks.com##+js(no-fetch-if, pagead2.googlesyndication.com)
 @@||lootup.me/assets/js/ads-prebid.js
-xfreehd.com##+js(remove-node-text, script, .abk_msg)
-xfreehd.com#@#.ad-title
-xfreehd.com##.abk_msg
-xfreehd.com#@#.ad-body
 bizjournals.com##+js(no-fetch-if, /pagead2\.googlesyndication\.com|cdn\.cxense\.com|securepubads\.g\.doubleclick\.net/)
 $xmlhttprequest,third-party,redirect-rule=noop.js,domain=bizjournals.com
 clickscoin.com##+js(abort-current-script, $, 'body')
@@ -6901,6 +6897,7 @@ thepiratebay.org##label#d > a[target="_NEW"]
 proboards.com##.content > .list > tbody > tr:not([id^="thread-"],[id^="board-"],[class])
 ||*.com/|$third-party,domain=youtubepro.app
 g4u.to##table tr > td:has(> a[href*="download"][target="_blank"])
+g4u.to##table tr > td:has(> a[href*="/update/"])
 ||111.90.159.132/wp-content/plugins/catfish-advert-banner/
 ||111.90.159.132/wp-content/uploads/*OPPA888-Banner-
 111.90.159.132#$#body > div[class^="mfp-"] { display: none !important; }
