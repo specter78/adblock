@@ -1,5 +1,5 @@
 ! Title: Adguard Annoyances Optimized
-! TimeUpdated: 2024-11-21T18:32:52+00:00
+! TimeUpdated: 2024-11-22T01:54:06+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
@@ -12,6 +12,7 @@
 #%#var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn("AdGuard aborted property read: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
 #%#var AG_abortInlineScript=function(g,b,c){var d=function(){if("currentScript"in document)return document.currentScript;var a=document.getElementsByTagName("script");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&""===a.src&&g.test(a.textContent))throw c&&console.warn("AdGuard aborted execution of an inline script"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if("string"===typeof a&&-1!==a.indexOf(e))return c&&console.warn("AdGuard has caught window.onerror: "+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};
 #%#var AG_setConstant=function(e,a){if("undefined"===a)a=void 0;else if("false"===a)a=!1;else if("true"===a)a=!0;else if("noopFunc"===a)a=function(){};else if("trueFunc"===a)a=function(){return!0};else if("falseFunc"===a)a=function(){return!1};else if(/^\d+$/.test(a)){if(a=parseFloat(a),isNaN(a)||32767<Math.abs(a))return}else return;var b=!1;AG_defineProperty(e,{get:function(){return a},set:function(c){if(b)var d=!0;else void 0!==c&&void 0!==a&&typeof c!==typeof a&&(b=!0),d=b;d&&(a=c)}})};
+##.muniweb-cookies
 ###gdpr_bar
 ##dialog[data-controller="common--cookies--alert"]
 ##.cookie-message-overlay
@@ -1243,6 +1244,7 @@ scootertechno.com,aeotec.com#$#div[consent-skip-blocker] { display: none !import
 scootertechno.com,aeotec.com#$#body[style] { overflow: auto !important; }
 scootertechno.com,aeotec.com#$#html[style] { overflow: auto !important; }
 scootertechno.com#$?#div[consent-skip-blocker] { remove: true; }
+jobs.nike.com#%#//scriptlet('trusted-click-element', '#acceptButton')
 ubereats.com##div[data-scene-meta="{\"popover_id\":\"gdpr_banner\"}"]
 animoto.com##.s-gdpr
 careers.philips.com##div[data-widget="ph-cookie-popup-v2"]
@@ -3676,6 +3678,7 @@ brother.com###cookieLawBar
 thuvienhoasen.org,fitmoda.com,a-or-an.com,gameforge.com###cookie_container
 biomedcentral.com,exxen.com,club-opel.com,marketrealist.com,infowars.com,multiup.org##.cc-banner
 gmanetwork.com##.ckn-container
+kingdomcomerpg.com##.container__cookiesPolicy
 startefacts.com##.cookieOverlay
 tes.com##.cookielaw-panel
 openrice.com##.cookies-agreement
@@ -4249,6 +4252,8 @@ adguard.com##.hello_from_adguard_annoyances_cookies
 adguard.com##.hello_from_adguard_annoyances_apps
 adguard.com##.hello_from_adguard_apps
 adguard.com#$#.hello_from_adguard_advanced_protection_ios { display: none !important; }
+jobs.nike.com#@#.cookies-popup
+jobs.nike.com#@#.cookie-content
 kendrion.com#@#.cc-window[aria-label="cookieconsent"]
 kendrion.com#@#.cc-floating
 @@||warsteiner-gruppe.de/wp-content/themes/warsteiner/js/gdpr.js
@@ -5673,6 +5678,7 @@ pornone.com#@#.overheaderbanner
 ||accounts.google.com/gsi/client^$third-party,script,domain=stackoverflow.com|nytimes.com|baltimoresun.com|medium.com|gzt.com|mercurynews.com|diffchecker.com|nissanclub.com|crazygames.com|usnews.com|nypost.com|etnownews.com|timesnownews.com|menshealth.com|themirror.com
 ##iframe[id="google-one-tap-iframe"][allow="identity-credentials-get"]
 /.*/$permissions=identity-credentials-get=(),document
+brittneystandardwestern.com##.guestMode
 similarweb.com#$#.app-modal__overlay { display: none !important; }
 similarweb.com#$#.exit-popup { display: none !important; }
 similarweb.com#$#body { overflow: auto !important; }
