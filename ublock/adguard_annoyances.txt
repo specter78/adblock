@@ -1,10 +1,10 @@
 ![Adblock Plus 2.0]
-! Checksum: wqAEwoXaX/Z42W6ZnxnwUQ
-! Diff-Path: ../patches/14_optimized/14_optimized-s-1745496869-3600.patch
+! Checksum: uGG/zOql4teq2xwJBwlqHA
+! Diff-Path: ../patches/14_optimized/14_optimized-s-1745514659-3600.patch
 ! Title: AdGuard Annoyances filter (Optimized)
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups. Contains the following AdGuard filters: Cookie Notices, Popups, Mobile App Banners, Other Annoyances and Widgets.
-! Version: 2.2.28.27
-! TimeUpdated: 2025-04-24T12:10:40+00:00
+! Version: 2.2.28.32
+! TimeUpdated: 2025-04-24T17:06:45+00:00
 ! Expires: 5 days (update frequency)
 !#######################################################
 !######### General element hiding rules ################
@@ -732,7 +732,7 @@
 ##.coockie_banner
 ##.cookie-accept-container
 ##.cookie-accept-overlay
-##.cookie-alert
+##body:not(.scroll-lock) .cookie-alert
 ##.cookie-alert-box
 ##.cookie-banner-bottom
 ##.cookie-bar:not(body)
@@ -1435,6 +1435,7 @@ help.lurker.tv,help.zenky.io,docs.powershelluniversal.com,docs.snyk.io,docs.keep
 scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$?#div[consent-skip-blocker] { remove: true; }
 scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$#body[style] { overflow: auto !important; }
 scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$#html[style] { overflow: auto !important; }
+interestingsomething.com##body > div.cl-cb
 amazon.jobs##div[data-react-class="CookieBanner"]
 amazon.jobs##div[class^="_banner_"]:has(> ul > li > a[href$="/cookies"])
 shop.mts.ru##.cookies-massage-wrapper
@@ -13980,8 +13981,6 @@ substack.com##article > div > div.pencraft:has(> div.pencraft > div.subscribe-wi
 substack.com##.embedded-publication-subscribe
 chathamhouse.org##.newsletter-form.paragraph
 grazia.nl##.showheroes-unit:has(> div.newsletter)
-leaddev.com#$##zephr-zone-popup { display: none !important; }
-leaddev.com#$#body[style^="overflow: hidden;"] { overflow: auto !important; position: absolute !important }
 scmp.com##div[data-qa="HomePage-Newsletters"]
 pc-builds.com###newsletter-sidebar-form
 pc-builds.com##+js(set-cookie, newsletter_view_count, 1)
@@ -20771,6 +20770,9 @@ hobbyhall.fi##.full-width-banner-top
 musee-pla.com##.bnrSideNav__list
 3dmgame.com##.Content_R > a[href="https://h5.3dmgame.com/activities/signinPc"]
 mail.proton.me##.bg-promotion
+ig-store.ru##div[class^="productAd--"]
+ig-store.ru##div[class^="productAd--"] + div.product-slider-wrapper
+ig-store.ru##.news-banner
 ig-store.ru##.banner-one-item
 ig-store.ru##.banner-gl
 ig-store.ru##.banner-3000-points-trigger
