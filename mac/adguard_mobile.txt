@@ -1,9 +1,9 @@
-! Checksum: iFBu5bOm0no5NzXgrZRxOQ
-! Diff-Path: ../patches/11_optimized/11_optimized-s-1757995975-3600.patch
+! Checksum: 4FrU0K2nxtf/b7oFYuxuog
+! Diff-Path: ../patches/11_optimized/11_optimized-s-1758021040-3600.patch
 ! Title: AdGuard Mobile Ads filter (Optimized)
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 2.0.64.34
-! TimeUpdated: 2025-09-16T04:07:54+00:00
+! Version: 2.0.64.36
+! TimeUpdated: 2025-09-16T11:06:36+00:00
 ! Expires: 12 hours (update frequency)
 ||*.libaishuo.com^$third-party
 ||adx-open-service.youku.com^
@@ -1050,6 +1050,9 @@ turbopages.org##.page__result > div[class*="type_native"]
 ###ad-300x250_mobile
 !+ NOT_OPTIMIZED
 ##body > style + div[id="ics"]
+dailymotion.com#%#//scriptlet('set-constant', 'DMP_IS_AUTOPLAY_ENABLED', 'false')
+dailymotion.com#%#//scriptlet('trusted-set-constant', '__PLAYER_CONFIG__.player.autostart', '"off"')
+dailymotion.com#%#(()=>{const a={apply:(a,t,r)=>{try{!0===r[0]?.parameters?.[1]?.autoplay&&(r[0].parameters[1].autoplay=!1)}catch(a){console.trace(a)}return Reflect.apply(a,t,r)}};window.JSON.stringify=new Proxy(window.JSON.stringify,a)})();
 wuxianxiaoshuowang.com#%#//scriptlet("abort-on-property-read", "createApp")
 m.7days.ru#%#//scriptlet('remove-class', 'banners-brand', '#page_content')
 momon-ga.com#%#//scriptlet('prevent-addEventListener', 'load', 'document.cookie')
@@ -1797,6 +1800,7 @@ opinion.cw.com.tw,aidoly.net,celeby-media.net,kyun2-girls.com,hapiee.com,2ch-c.n
 chip.de,gamesworld.de,fnn.jp##.Ad
 medipalette.lotte.co.jp,genxy-net.com,m.price.com.hk,otakuma.net,nikkan-gendai.com,ranking.goo.ne.jp,m.hellporno.com,topics.smt.docomo.ne.jp,rank-king.jp,kun.uz,m.lenta.ru,m.aydin24haber.com,m.xcum.com,m.alphaporno.com,m.yourlust.com,m.3movs.com,m.sexu.com##body .banner
 sp.manga.nicovideo.jp##div[style^="--ads-width:"]
+tabootube.*##.mobile-links
 hyperts.net###amarnk
 avito.ru##div[data-key^="advBannerWidget"]
 ixbt.games##.mobile-c
