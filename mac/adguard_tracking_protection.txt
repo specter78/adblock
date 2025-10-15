@@ -1,10 +1,12 @@
-! Checksum: mbbr+G8EuZ3oUG3NdQwBtQ
-! Diff-Path: ../patches/3_optimized/3_optimized-s-1760492381-3600.patch
+! Checksum: fMVq8xAgqguGcZFXrkYvJg
+! Diff-Path: ../patches/3_optimized/3_optimized-s-1760526663-3600.patch
 ! Title: AdGuard Tracking Protection filter (Optimized)
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.92.89
-! TimeUpdated: 2025-10-15T01:35:24+00:00
+! Version: 2.0.92.93
+! TimeUpdated: 2025-10-15T11:06:41+00:00
 ! Expires: 12 hours (update frequency)
+!+ NOT_PLATFORM(ext_chromium_mv3)
+www.youtube.com#%#//scriptlet('prevent-xhr', '/\/api\/stats\/atr\?.+?&rt=\d+\.\d+.+?&volume=\d+&cbr=.+?&fexp=v1%[-%0-9C]{300,}&.+?&muted=\d(&vis=3)?&docid=/ method:POST')
 slobodnadalmacija.hr,meconomynews.com,brandbrief.co.kr,motorgraph.com#%#//scriptlet('abort-current-inline-script', 'atob', 'eval(decodeURIComponent(escape(window.atob("KCgpPT5')
 slobodnadalmacija.hr,meconomynews.com,brandbrief.co.kr,motorgraph.com#%#//scriptlet('prevent-eval-if', '/07c225f3\.online|content-loader\.com|css-load\.com|html-load\.com/')
 convertcase.net,issuya.com,topstarnews.net,islamicfinder.org,secure-signup.net#%#//scriptlet('remove-node-text', 'script', 'error-report.com')
@@ -253,6 +255,8 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||ib.snssdk.com^
 ||xlog.snssdk.com^
 ||log.snssdk.com^
+||wurflcloud.com^
+||tvspix.com^
 ||events.stylux.io^
 ||*-sdk.rum.aliyuncs.com^
 ||digitalcamp.co.kr^$third-party
@@ -458,7 +462,6 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 ||analytics.turk.pro^
 ||metric-api.newrelic.com^
 ||conduit-beacon.mtvnservices.com^
-||redfast.com^
 ||analytics.newsifier.nl^
 ||mn-tz.com^
 ||tr.thecontentserver.com^
@@ -70955,6 +70958,7 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1)  { remove: true; }
 !+ PLATFORM(windows, mac, android)
 ||incoming.telemetry.mozilla.org^
 |piwik.
+||xstat.gazeta.bo^
 ||stats.avito.ru^
 ||nr-beacon.movingimage.com^
 ||analytics.monetha.io^
@@ -109323,6 +109327,10 @@ $cookie=_awl;maxAge=30,domain=nypost.com|al.com|9news.com
 ||mmdm.ru/static/users/js/login.*.js$replace=/yaCounter\d+\.reachGoal\('\w+'\);//
 ||google-analytics.com^$object,redirect=noopjs
 ||googletagmanager.com/gtag/$third-party,object,redirect=noopjs
+||redfast.com/ping/
+||statix.business-gazeta.ru/js/components/metrics.js
+||statix.business-gazeta.ru/js/components/murmur.js
+||fanfictionero.com/srv/statistics/
 ||aa.com/aileron/api/log|
 ||fafvertizing.crazygames.com/*-prebid-
 ||bookitnow.lt/gtm/
@@ -115130,6 +115138,8 @@ $cookie=_pubcid
 $cookie=pbjs-unifiedid
 $cookie=bf_lead
 $cookie=bf_visit
+||x.com^$cookie=guest_id_ads
+||x.com^$cookie=guest_id_marketing
 ||novakid.$cookie=ftr
 ||novakidschool.com^$cookie=ftr
 ||purevpn.$cookie=/^intercom-/
