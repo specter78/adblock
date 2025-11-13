@@ -1,9 +1,9 @@
-! Checksum: RVyl2Q+Xqi2HMSLsQpoGNw
-! Diff-Path: ../patches/14_optimized/14_optimized-s-1762967534-3600.patch
+! Checksum: c44aTzlVsrYPdPG8zTXTjQ
+! Diff-Path: ../patches/14_optimized/14_optimized-s-1762985452-3600.patch
 ! Title: AdGuard Annoyances filter (Optimized)
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups. Contains the following AdGuard filters: Cookie Notices, Popups, Mobile App Banners, Other Annoyances and Widgets.
-! Version: 2.2.48.87
-! TimeUpdated: 2025-11-12T17:08:38+00:00
+! Version: 2.2.48.92
+! TimeUpdated: 2025-11-12T22:07:23+00:00
 ! Expires: 5 days (update frequency)
 !#######################################################
 !######### General element hiding rules ################
@@ -1223,7 +1223,7 @@
 -cookiePolicy.
 -cookies-policy.
 -privacy-cookie-
-.cookieconsent.$domain=~cookieconsent.io
+.cookieconsent.$domain=~cookieconsent.io|~register-of-charities.charitycommission.gov.uk
 .cookienotice.
 .cookiepolicy.
 .cookiesdirective.
@@ -1565,6 +1565,9 @@ cmp.focus.de#%#//scriptlet('trusted-click-element', '.sp_choice_type_9[title*="Z
 raz-zeitung.de,muensteraner-rechtsanwaelte.de,hardware-helden.de,naheland-apotheken.de,homeoftravel.de,greenit.systems,accace.pl,entrack.pl,kraemer-it.de,teslawissen.ch,scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$?#div[consent-skip-blocker] { remove: true; }
 raz-zeitung.de,muensteraner-rechtsanwaelte.de,hardware-helden.de,naheland-apotheken.de,homeoftravel.de,greenit.systems,accace.pl,entrack.pl,kraemer-it.de,teslawissen.ch,scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$#body[style] { overflow: auto !important; }
 raz-zeitung.de,muensteraner-rechtsanwaelte.de,hardware-helden.de,naheland-apotheken.de,homeoftravel.de,greenit.systems,accace.pl,entrack.pl,kraemer-it.de,teslawissen.ch,scootertechno.com,mysize.ch,aeotec.com,geschichte-wissen.de,4kfilme.de,pk.edu.pl,warzywapolowe.pl,airportwebcams.net#$#html[style] { overflow: auto !important; }
+trypair.com#%#//scriptlet('trusted-set-cookie', 'cpm-accepted-cookies-policy', '%7B%22necessary%22%3Atrue%2C%22preferences%22%3Afalse%2C%22statistics%22%3Afalse%7D')
+shopcider.com#%#//scriptlet('trusted-click-element', '.cmp-mask .disable-button')
+register-of-charities.charitycommission.gov.uk#%#//scriptlet('set-cookie-reload', 'cookie_consent', 'false')
 telcel.com##.telcel-banner-aviso-cookies
 staloysius.nsw.edu.au##.article-acknowledge-main
 /assets/js/*.sirdata.js$domain=futbolfantasy.com
@@ -2256,7 +2259,7 @@ pdf-xchange.com##.cookie-fixed-hint
 tomtom.com#%#//scriptlet('trusted-set-cookie', 'tt_settings', '{%22%2C%22advertising%22:false%2C%22social%22:false%2C%22analytical%22:false}')
 juedische-allgemeine.de##.ub-cmp
 jusbrasil.com.br##div[class^="topbar-lgpd_root__"]
-sparkasse-hochfranken.de,sskduesseldorf.de,kreissparkasse-duesseldorf.de,sparkasse-dortmund.de,sparkasse-minden-luebbecke.de#%#//scriptlet('trusted-click-element', '.if6_eprivacy a[data-form=".eprivacy_optin_decline"]', '!cookie:ePrivacyStatus_de', '5000')
+sparkasse-mainfranken.de,berliner-sparkasse.de,sparkasse-hannover.de,sskm.de,sparkasse-nuernberg.de,mbs.de,ksk-koeln.de,sparkasse-hochfranken.de,sskduesseldorf.de,kreissparkasse-duesseldorf.de,sparkasse-dortmund.de,sparkasse-minden-luebbecke.de#%#//scriptlet('trusted-click-element', '.if6_eprivacy a[data-form=".eprivacy_optin_decline"]', '!cookie:ePrivacyStatus_de', '3500')
 rmf.fm#%#//scriptlet('didomi-loader')
 rule34.xxx#%#//scriptlet('set-cookie', 'gdpr', '1')
 rule34.xxx#%#//scriptlet('set-cookie', 'gdpr-consent', '1')
@@ -4266,6 +4269,7 @@ samolet.ru##div[data-selector="cookie"]
 sinerji.gen.tr###CookieConcent
 fi.google.com##fi-cookie-consent
 tunemymusic.com##div[class^="HeaderMenu_CookieAlert_"]
+gra.parkiet.com###gpw-cookie-popup
 itnext.io#%#//scriptlet('set-local-storage-item', '201805-policy|accepted', '1')
 akket.com###anycomment-root .MuiSnackbarContent-root
 casetify.com#%#//scriptlet('trusted-set-cookie-reload', 'accept_cookies', 'essential,function')
@@ -17524,6 +17528,11 @@ ozgurkocaeli.com.tr,turkuazgazetesi.net,yenialanya.com,mansetaydin.com,seskocael
 gaugau.futabanet.jp,newscientist.com,jiji.com,edp24.co.uk,technologyreview.com,nordbayern.de,thelocal.ch,morgenpost.de,waz.de,nrz.de,braunschweiger-zeitung.de,abendblatt.de,wolfsburger-nachrichten.de,wolfenbuetteler-zeitung.de,ynet.co.il#$#html > body.tp-modal-open { overflow: auto !important; }
 gaugau.futabanet.jp,newscientist.com,jiji.com,edp24.co.uk,technologyreview.com,nordbayern.de,thelocal.ch,morgenpost.de,waz.de,nrz.de,braunschweiger-zeitung.de,abendblatt.de,wolfsburger-nachrichten.de,wolfenbuetteler-zeitung.de,ynet.co.il#$#div[class="tp-modal"][style^="z-index: 3000"] { display: none !important; }
 gaugau.futabanet.jp,newscientist.com,jiji.com,edp24.co.uk,technologyreview.com,nordbayern.de,thelocal.ch,morgenpost.de,waz.de,nrz.de,braunschweiger-zeitung.de,abendblatt.de,wolfsburger-nachrichten.de,wolfenbuetteler-zeitung.de,ynet.co.il#$#div[class="tp-modal"][style^="z-index: 3000"] ~ div.tp-backdrop { display: none !important; }
+tour.bushikaku.net#%#//scriptlet('set-cookie', 'mailmagazine_guide_hidden', 'true')
+gq-magazine.co.uk##div[data-testid="ContentFooterBottom"] div[class^="ContentFooterNewsletterContentWrapper-"]
+gq-magazine.co.uk##.body__inner-container div[class^="NewsletterOneClickVerticalPullQuoteWrapper"]
+m.shopcider.com#%#//scriptlet('set-cookie', 'cider-site-email-sub-home-modal-shrink', '1')
+studyingreece.edu.gr##.elementor-hidden-tablet[data-element_type="column"]:has(a[href^="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3"])
 tr.investing.com##div[class^="article_"] > div:not([class]) > div[style]:has(> a[href^="https://tr.investing.com/pro/landing-page?"])
 afisha.ru##.slider > a[href="https://t.me/afisha/"]:has(> picture)
 wwd.com#$##piano-paywall { display: none !important; }
@@ -21996,6 +22005,13 @@ buttondown.email#@##subscribe-form
 !+ PLATFORM(ios)
 #$?#meta[name="apple-itunes-app"] { remove: true; }
 alfastrah.ru,turkishairlines.com,atmos-tokyo.com,radarbox.com,ciceksepeti.com,rabota.by,temp-mail.org,ortobom.com.br,dicionarioinformal.com.br,5-fifth.com,news.sky.com,chat.babel.com,getwordly.com,school-turnup.com,naked-science.ru,vod.tvp.pl,tvn24.pl,m.lamoda.ru,lkfl2.nalog.ru,kocailem.com,dartworld.shopgate.com,m.alles10euro.de,dodopizza.ru,allo.ua,tempo.co,beymen.com,tvnmeteo.tvn24.pl,outsidetv.com,golfchannel.com,sportsnet.ca,euronews.com,pkobp.pl,tesco.hu,prima.hu,immobilienscout24.de,lcwaikiki.com,m.sigrun-woehr.com,transfermarkt.de,fragfinn.de,hh.ru,eraffe24.de,infranken.de,m.computeruniverse.net,m.emp.de,meduza.io##body .smartbanner
+bushikaku.net#%#//scriptlet('set-cookie', 'hide_fixed_bottom_app_banner', 'true')
+tour.bushikaku.net##.headerAppBanner
+m.yelp.com##div[class^="overlay-wrapper__"]:has(> a[aria-label="Download the Yelp app"] ~ div[data-testid="review-feed-pitch"])
+bootbarn.com##div[content-asset-id^="mobile-app-banner-"]
+grainger.com##.gcom__header-mobile
+shopcider.com#$#.web2app-banner-container { display: none !important; }
+shopcider.com#%#//scriptlet('remove-class', 'show-branch', '.header > .header-container')
 hh.ru##div[class^="footer-app-banner-"]
 www.dji.com#%#//scriptlet('trusted-click-element', '.universal-product-tip a.universal-product-tip-link[href^="https://cdp-vg.djiservice.org/"] ~ .close-icon')
 callie.com#$#.vi-app { display: none !important; }
