@@ -151,8 +151,8 @@ filters  << ['17_optimized', 'adguard_url_tracking']
 
 # --------------------------
 
-platforms.each do |platform|
-  filters.each do |filter, filename|
+filters.each do |filter, filename|
+  platforms.each do |platform|
 
     response = HTTParty.get("https://filters.adtidy.org/#{platform}/filters/#{filter}.txt")
     next if response.code != 200
@@ -181,6 +181,11 @@ platforms.each do |platform|
     File.write("#{folder}/#{filename}_optimized.txt", selected_rules.join("\n")) if (File.read("#{folder}/#{filename}_optimized.txt").split("\n")[4..-1] != selected_rules[4..-1])
     readme << "| #{folder}/#{filename}_optimized | #{original_rules_count} | #{selected_rules.count - 4} |"
   end
+
+  merged_rules = File.read("mac/#{filename}_optimized.txt").split("\n") + File.read("ios/#{filename}_optimized.txt").split("\n")[4..-1] + File.read("safari/#{filename}_optimized.txt").split("\n")[4..-1]
+  File.write("apple/#{filename}_optimized.txt", merged_rules.uniq.join("\n"))
+
 end
 
+readme[3..-1] = readme[3..-1].sort
 File.write("README.md", readme.join("\n"))
