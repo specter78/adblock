@@ -49,7 +49,6 @@ def already_blocked?(domain, line, platform, filename)
     
     # filter list optimization      
     return true if /^(.*\.)?(?:facebook\.com|facebook\.net|fb\.com|onion)$/.match(domain) # selected domains in all files
-    return true if /^(.*\.)?google\./.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in google in all files
     return true if /^(?:amazon\.|kayak\.|webike\.|tripadvisor\.|momondo\.|expedia\.|skyscanner\.|yelp\.)/.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in in all files
     return true if line.count('#') > 1 && /^dizipal\d*\.(?:com|cloud)$/.match(domain) # dizipal in all files
     return true if line.count('#') > 1 && /^(.*\.)?yandex\./.match(domain) # yandex in all files
@@ -171,7 +170,7 @@ filters.each do |filter, filename|
       if line.start_with?('!')
       elsif line == ''
       elsif line.start_with?('/^') || line.start_with?('@@/^')
-        # selected_rules << line
+        selected_rules << line
       else
         line = optimize_rule(line, platform, filename)
         selected_rules << line if line != ""
