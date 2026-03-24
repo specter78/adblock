@@ -2,60 +2,46 @@ require 'date'
 require 'httparty'
 
 def adblock_format(blocklist)
-  File.read(blocklist).each_line do |line|
-    if capture = /^(?:\|\|)([a-zA-Z0-9\.\-\_]+)\^$/.match(line.strip)
+  File.read(blocklist).each_line(chomp: true) do |line|
+    if capture = /^(?:\|\|)([a-zA-Z0-9\.\-\_]+)\^$/.match(line)
       $blocked[capture[1]] = true
-    elsif capture = /^(?:@@\|\|)([a-zA-Z0-9\.\-\_]+)\^\|?$/.match(line.strip)
+    elsif capture = /^(?:@@\|\|)([a-zA-Z0-9\.\-\_]+)\^\|?$/.match(line)
       $allowed[capture[1]] = true
     end
   end
 end
 
 def domain_format(blocklist)
-  File.read(blocklist).each_line do |line|
-    line = line.strip.split('#').first
+  File.read(blocklist).each_line(chomp: true) do |line|
+    line = line.split('#').first
     if capture = /^(?:\*\.)?([a-zA-Z0-9\.\-\_]+)$/.match(line)
-      $blocked[capture[1].strip] = true
+      $blocked[capture[1]] = true
     end
   end
 end
 
 def host_format(blocklist)
-  File.read(blocklist).each_line do |line|
-    line = line.strip.split('#').first
+  File.read(blocklist).each_line(chomp: true) do |line|
+    line = line.split('#').first
     if capture = /^(?:0\.0\.0\.0\ )([a-zA-Z0-9\.\-\_]+)$/.match(line)
       $blocked[capture[1]] = true
     end
   end
 end
 
-def optimize_repeating_domains(domains)
-  ['google', 'amazon', 'tripadvisor', 'skyscanner'].each do |repeats|
-    if domains.count{ |x| /^#{repeats}\./.match(x) } >= 10
-      domains = domains.collect{ |x| /^#{repeats}\./.match(x) ? "#{repeats}.*" : x }.uniq
-    end
-  end
-  return domains
-end
 
 def already_blocked?(domain, line, platform, filename)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(domain)
-    return true unless capture[1].ascii_only?
-    return false if capture[1].index('.') && capture[1].index('/') && (capture[1].index('/') < capture[1].index('.'))
-    domain = capture[1].split('/')[0]
-    return false if domain.nil?
-    return false if domain[-1] == '.'
-    return false if domain[0] == '~'
+    domain = capture[1].split('/').first
+    return false if domain.nil? || domain[-1] == '.' || domain[0] == '~' || !domain.include?('.')
     
     # filter list optimization      
-    return true if /^(.*\.)?(?:facebook\.com|facebook\.net|fb\.com|onion)$/.match(domain) # selected domains in all files
-    return true if /^(?:amazon\.|kayak\.|webike\.|tripadvisor\.|momondo\.|expedia\.|skyscanner\.|yelp\.)/.match(domain) && (not /\.(?:com\*?|in|\*)$/.match(domain)) # !com and !in in all files
-    return true if line.count('#') > 1 && /^dizipal\d*\.(?:com|cloud)$/.match(domain) # dizipal in all files
-    return true if line.count('#') > 1 && /^(.*\.)?yandex\./.match(domain) # yandex in all files
-    return true if line.count('#') > 1 && /\.(?:de|jp|pl|ru)$/.match(domain) # selected tlds in all files
-    return true if /^e?mail\..*\$image$/.match(line)
-    if /(?:annoyances|social)/.match(filename)
-      return true if (line.start_with?('||') || line.include?('#') || line.include?('domain=')) && domain.include?('.') && (not /\.(?:com|in|io|org|to|tv|\*)$/.match(domain)) # tlds in annoyances and social
+    return true if /^(.*\.)?(?:onion)$/.match?(domain) # selected domains in all files
+    return true if /#.?.?#/.match?(line) && /^(.*\.)?yandex\./.match?(domain)
+    return true if /#.?.?#/.match?(line) && /\.(?:de|jp|pl|ru)$/.match?(domain) # selected tlds in all files
+    return true if /^e?mail\..*\$image$/.match?(line)
+    if /(?:annoyances|social)/.match?(filename)
+      return true if /#.?.?#/.match?(line) && (not /\.(?:com|in|io|org|to|tv|\*)$/.match?(domain)) # tlds in annoyances and social
     end
     
     while domain.index('.') != nil
@@ -68,15 +54,8 @@ def already_blocked?(domain, line, platform, filename)
   return false
 end
 
+
 def optimize_rule(line, platform, filename)
-
-  # if capture = /#%#\/\/scriptlet\(['"]prevent-(?:fetch|xhr)['"], ['"]([^'^"^|^\)]+)['"]\)$/.match(line)
-  #   return "" if already_blocked?(capture[1], line, platform, filename)
-  # end
-  # if capture = /##\+js\(no-(?:fetch|xhr)-if, ([^|^\)]+)\)$/.match(line)
-  #   return "" if already_blocked?(capture[1], line, platform, filename)
-  # end
-
   # beginning domains
   if capture = /^((?:@@)?(?:\|\|)?)(\[[^\]]*\])?([^#^\^^$^%]+)(.*)/.match(line)
     domains = capture[3].split(',').delete_if { |x| already_blocked?(x, line, platform, filename) }
@@ -104,9 +83,9 @@ begin
   File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
 rescue => error
 end
-File.read('dns/affiliate_tracking_domains.txt').each_line do |line|
-  next if line.strip == ''
-  if capture = /^([^#]+)/.match(line.strip)
+File.read('dns/affiliate_tracking_domains.txt').each_line(chomp: true) do |line|
+  next if line.empty?
+  if capture = /^([^#]+)/.match(line)
     $allowed[capture[1]] = true
   end
 end
@@ -159,22 +138,18 @@ filters.each do |filter, filename|
     folder = platform.gsub('extension/', '').gsub('_v2', '')
     File.write("#{folder}/#{filename}.txt", response.body)
 
-    original_rules_count = response.body.split("\n").count{ |line| (line[0] != '!') && (line.strip != '') }
+    original_rules_count = response.body.split("\n").count{ |line| (line[0] != '!') && (line != '') }
     selected_rules = ["! Title: #{filename.split('_').collect{|x| x.capitalize}.join(" ")} Optimized"]
     selected_rules << ["! TimeUpdated: #{DateTime.now.new_offset(0).to_s}"]
     selected_rules << ['! Expires: 12 hours (update frequency)']
     selected_rules << ['! Homepage: https://github.com/specter78/adblock']
 
-    response.body.each_line do |line|
-      line = line.strip
-      if line.start_with?('!')
-      elsif line == ''
-      elsif line.start_with?('/^') || line.start_with?('@@/^')
-        selected_rules << line
-      else
+    response.body.each_line(chomp: true) do |line|
+      next if line.empty? || line[0] == '!'
+      if not (line.start_with?('/^') || line.start_with?('@@/^'))
         line = optimize_rule(line, platform, filename)
-        selected_rules << line if line != ""
       end
+      selected_rules << line if line != ""
     end
 
     File.write("#{folder}/#{filename}_optimized.txt", selected_rules.join("\n")) if (File.read("#{folder}/#{filename}_optimized.txt").split("\n")[4..-1] != selected_rules[4..-1])
