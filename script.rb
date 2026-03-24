@@ -33,7 +33,7 @@ end
 def already_blocked?(domain, line, platform, filename)
   if capture = /^(?:@@)?(?:\|\|?)?(?:https?)?(?:\:\/\/)?([^#^\^^$^%]+)(.*)/.match(domain)
     domain = capture[1].split('/').first
-    return false if domain.nil? || domain[-1] == '.' || domain[0] == '~' || !domain.include?('.')
+    return false if domain.nil? || domain[0] == '~' || !domain.include?('.')
     
     # filter list optimization      
     return true if /^(.*\.)?(?:onion)$/.match?(domain) # selected domains in all files
@@ -81,7 +81,6 @@ $allowed = Hash.new(false)
 response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
 raise "Failed to download 'affiliate_tracking_domains' - Status: #{response.code}" unless response.success?
 response.body.each_line(chomp: true) do |line|
-  next if line.empty?
   if capture = /^([^#]+)/.match(line)
     $allowed[capture[1]] = true
   end
