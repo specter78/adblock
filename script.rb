@@ -2,7 +2,7 @@ require 'date'
 require 'httparty'
 
 def adblock_format(blocklist)
-  File.read(blocklist).each_line(chomp: true) do |line|
+  blocklist.each_line(chomp: true) do |line|
     if capture = /^(?:\|\|)([a-zA-Z0-9\.\-\_]+)\^$/.match(line)
       $blocked[capture[1]] = true
     elsif capture = /^(?:@@\|\|)([a-zA-Z0-9\.\-\_]+)\^\|?$/.match(line)
@@ -12,7 +12,7 @@ def adblock_format(blocklist)
 end
 
 def domain_format(blocklist)
-  File.read(blocklist).each_line(chomp: true) do |line|
+  blocklist.each_line(chomp: true) do |line|
     line = line.split('#').first
     if capture = /^(?:\*\.)?([a-zA-Z0-9\.\-\_]+)$/.match(line)
       $blocked[capture[1]] = true
@@ -21,7 +21,7 @@ def domain_format(blocklist)
 end
 
 def host_format(blocklist)
-  File.read(blocklist).each_line(chomp: true) do |line|
+  blocklist.each_line(chomp: true) do |line|
     line = line.split('#').first
     if capture = /^(?:0\.0\.0\.0\ )([a-zA-Z0-9\.\-\_]+)$/.match(line)
       $blocked[capture[1]] = true
@@ -78,12 +78,9 @@ end
 # --------------------------
 
 $allowed = Hash.new(false)
-begin
-  response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
-  File.write('dns/affiliate_tracking_domains.txt', response.body) if response.code == 200
-rescue => error
-end
-File.read('dns/affiliate_tracking_domains.txt').each_line(chomp: true) do |line|
+response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
+raise "Failed to download 'affiliate_tracking_domains' - Status: #{response.code}" unless response.success?
+response.body.each_line(chomp: true) do |line|
   next if line.empty?
   if capture = /^([^#]+)/.match(line)
     $allowed[capture[1]] = true
@@ -94,21 +91,18 @@ end
 
 $blocked = Hash.new(false)
 blocklists = []
-blocklists << ['https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt', 'dns/adguard_dns.txt', 'abp']
-blocklists << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswild_big.txt', 'dns/oisd.txt', 'domain']
-blocklists << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'dns/stevenblack.txt', 'host']
-blocklists << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt', 'dns/hagezi.txt', 'domain']
-blocklists << ['https://hblock.molinero.dev/hosts_domains.txt', 'dns/hblock.txt', 'domain']
-blocklists << ['https://o0.pages.dev/Pro/domains.wildcards', 'dns/1hosts.txt', 'domain']
-blocklists.each do |url, filename, format|
-  begin
-    response = HTTParty.get(url)
-    File.write(filename, response.body) if response.code == 200
-  rescue => error
-  end
-  adblock_format(filename) if format == 'abp'
-  domain_format(filename) if format == 'domain'
-  host_format(filename) if format == 'host'
+blocklists << ['https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt', 'abp']
+blocklists << ['https://raw.githubusercontent.com/sjhgvr/oisd/main/domainswild_big.txt', 'domain']
+blocklists << ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'host']
+blocklists << ['https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt', 'domain']
+blocklists << ['https://hblock.molinero.dev/hosts_domains.txt', 'domain']
+blocklists << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/domains.wildcards', 'domain']
+blocklists.each do |url, format|
+  response = HTTParty.get(url)
+  raise "Failed to download #{url} - Status: #{response.code}" unless response.success?
+  adblock_format(response.body) if format == 'abp'
+  domain_format(response.body) if format == 'domain'
+  host_format(response.body) if format == 'host'
 end
 
 # --------------------------
