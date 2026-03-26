@@ -2,18 +2,18 @@ require 'date'
 require 'httparty'
 
 def adblock_format(blocklist)
-  blocklist.each_line(chomp: true) do |line|
-    if capture = /^(?:\|\|)([a-zA-Z0-9\.\-\_]+)\^$/.match(line)
-      $blocked[capture[1]] = true
-    elsif capture = /^(?:@@\|\|)([a-zA-Z0-9\.\-\_]+)\^\|?$/.match(line)
-      $allowed[capture[1]] = true
+  blocklist.each_line do |line|
+    line = line.strip
+    if capture = /^(?:@@)?(?:\|\|?)?([a-zA-Z0-9\.\-\_]+)\^?\|?$/.match(line)
+      next if /[^a-zA-Z0-9]/.match?(capture[1][0]) || /[^a-zA-Z0-9]/.match?(capture[1][-1])
+      line.start_with?('@@') ? $allowed[capture[1]] = true : $blocked[capture[1]] = true
     end
   end
 end
 
 def domain_format(blocklist)
-  blocklist.each_line(chomp: true) do |line|
-    line = line.split('#').first
+  blocklist.each_line do |line|
+    line = line.split('#').first.strip
     if capture = /^(?:\*\.)?([a-zA-Z0-9\.\-\_]+)$/.match(line)
       $blocked[capture[1]] = true
     end
@@ -21,9 +21,9 @@ def domain_format(blocklist)
 end
 
 def host_format(blocklist)
-  blocklist.each_line(chomp: true) do |line|
-    line = line.split('#').first
-    if capture = /^(?:0\.0\.0\.0\ )([a-zA-Z0-9\.\-\_]+)$/.match(line)
+  blocklist.each_line do |line|
+    line = line.split('#').first.strip
+    if capture = /^(?:0\.0\.0\.0\s)([a-zA-Z0-9\.\-\_]+)$/.match(line)
       $blocked[capture[1]] = true
     end
   end
@@ -46,7 +46,7 @@ def already_blocked?(domain, line, platform, filename)
     
     while domain.index('.') != nil
       return false if $allowed[domain]
-      return true if $blocked[domain] && !domain.include?('*')
+      return true if $blocked[domain]
       domain = domain[(domain.index('.')+1)..-1]
     end
     return true if $blocked[domain] # tld
