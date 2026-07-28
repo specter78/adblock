@@ -1,9 +1,9 @@
-! Checksum: Fn5xF28pp+lEc6e0n993WA
-! Diff-Path: ../patches/3_optimized/3_optimized-s-1785225599-3600.patch
+! Checksum: +XHv4A1Ovb85Z1lhFi+XLQ
+! Diff-Path: ../patches/3_optimized/3_optimized-s-1785236403-3600.patch
 ! Title: AdGuard Tracking Protection filter (Optimized)
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.1.8.16
-! TimeUpdated: 2026-07-28T07:57:12+00:00
+! Version: 2.1.8.19
+! TimeUpdated: 2026-07-28T10:55:58+00:00
 ! Expires: 12 hours (update frequency)
 bilibili.com#%#//scriptlet('trusted-replace-argument', 'history.pushState', '2', 'replace:/(?<=[?&])(?:vd_source|trackid|spm_id_from)=[^&#]*&?//g')
 bilibili.com#%#//scriptlet('trusted-replace-argument', 'history.replaceState', '2', 'replace:/(?<=[?&])(?:vd_source|trackid|spm_id_from)=[^&#]*&?//g')
@@ -256,6 +256,9 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1) { remove: true; }
 ||ib.snssdk.com^
 ||xlog.snssdk.com^
 ||log.snssdk.com^
+||aladinia.app^
+||cdp.customer.io^
+||cloud.monolytics.app^
 ||acv.mira-dsp.com^
 ||snippet.affilimate.io^
 ||mtag.markopolo.ai^
@@ -78761,6 +78764,9 @@ biteki.com#$?#.slick-slide > div[id] + script:upward(1) { remove: true; }
 !+ PLATFORM(windows, mac, android, cli)
 ||incoming.telemetry.mozilla.org^
 |piwik.
+||flow-control.profitroom.net^
+||e2.sy-d.io^
+||analytics.crewly.pl^
 ||d3lw7s0briwuoi.cloudfront.net^
 ||analytics.sutochno.ru^
 ||athena.archive.org^
@@ -181620,6 +181626,12 @@ mexc.com#%#//scriptlet('set-local-storage-item', '_yjsu_yjad', '$remove$')
 ||mmdm.ru/static/users/js/login.*.js$replace=/yaCounter\d+\.reachGoal\('\w+'\);//
 ||google-analytics.com^$object,redirect=noopjs
 ||googletagmanager.com/gtag/$third-party,object,redirect=noopjs
+||bnesim.com/js/trackers.js
+/e/*^ip=$domain=heygen.com
+||api2.heygen.com/v1/movio.batch_track
+||glutenfreeonashoestring.com/wp-content/*/analytics*.min.js
+||player.fabster.com/event/
+||spolshy.com.ua/js/data|
 ||wpastra.com/wp-content/plugins/cross-domain-tracker-for-affiliatewp/
 ||autoline.link/weblog
 ||karte.io/event
@@ -181666,8 +181678,9 @@ peacocktv.com#%#//scriptlet('set-local-storage-item', 'impressionTrackingSession
 ||czesciauto24.pl/securegtm/
 ||czesciauto24.pl/p/g^
 ||hexa.su/script.js
+||candytm.pl/gtmgateway/
 /^https?:\/\/(android\.com\.pl|biznesenter\.pl)\/[a-z0-9]{1,4}\/$/$script,~third-party,domain=android.com.pl|biznesenter.pl
-biznesenter.pl#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'gtm.start')
+candytm.pl,biznesenter.pl#%#//scriptlet('abort-current-inline-script', 'document.createElement', '/gtm\.start|dataLayer/')
 ||bifrost-api.hotstar.com/v*/events
 ||linuxcommunity.io/assets/google-universal-analytics-*.js
 ||credistory.ru/api/Metrics/
@@ -189883,6 +189896,10 @@ d4?appid*type*
 !### Temporary ###
 @@||st-*.dynamicyield.com/st*&inHead=true&id=*&jsession=*scriptVersion=*&noConsent=
 !#################
+@@||rm.redbull.com/gtm.js$domain=redbull.com
+@@||googletagmanager.com/gtm.js$domain=candy-home.com
+!+ NOT_OPTIMIZED
+||candy-home.com^$referrerpolicy=origin
 @@||googletagmanager.com/gtm.js$domain=brita.pl
 @@||xzeepb2clookuppsta001.blob.core.windows.net/bge/$content
 @@||googletagmanager.com/gtm.js$domain=hokkaido-np.co.jp
