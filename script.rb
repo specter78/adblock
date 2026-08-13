@@ -98,6 +98,7 @@ blocklists << ['https://hblock.molinero.dev/hosts_domains.txt', 'domain']
 blocklists << ['https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/domains.wildcards', 'domain']
 blocklists.each do |url, format|
   response = HTTParty.get(url)
+  next if response.code == 404
   raise "Failed to download #{url} - Status: #{response.code}" unless response.success?
   adblock_format(response.body) if format == 'abp'
   domain_format(response.body) if format == 'domain'
