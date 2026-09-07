@@ -1,5 +1,5 @@
 ! Title: Adguard Base Optimized
-! TimeUpdated: 2026-09-07T12:15:54+00:00
+! TimeUpdated: 2026-09-07T21:25:36+00:00
 ! Expires: 12 hours (update frequency)
 ! Homepage: https://github.com/specter78/adblock
 ||ad-host-backup-*.aliyuncs.com^
@@ -365,6 +365,9 @@ youporn.com#%#//scriptlet('remove-node-text', 'script', '/window\.[\s\S]*?_zone_
 #@#.ads_banner
 ##.stickyads:not([style^="width: 32px"], [style^="width: 33px"], [style*="left: -43px"], [style*="-3"][style*="important"][style*="display: block;"], [style*="position: fixed"][style*="-188"], [style*="!important;"][style*="width:"][style*="height:"][style*="position"][style*="left:"][style*="top:"][style*="display"], [data-freestar-ad="123"]):not(:empty)
 ##.ads_banner:not([style^="width: 32px"], [style^="width: 33px"], [style*="left: -43px"], [style*="-3"][style*="important"][style*="display: block;"], [style*="position: fixed"][style*="-188"], [style*="!important;"][style*="width:"][style*="height:"][style*="position"][style*="left:"][style*="top:"][style*="display"]):not(:empty)
+plataformamedia.com#%#//scriptlet('set-constant', 'advanced_ads_check_adblocker', 'noopFunc')
+plataformamedia.com#@#.ad-unit:not(.textads)
+plataformamedia.com#@#.ad_unit
 lightningquest.net#%#//scriptlet('prevent-setTimeout', 'runAdblockCheck')
 @@||extractpics.com^$generichide
 smallseotools.co.uk###adBlockerOverlay
@@ -7915,6 +7918,7 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 ~dogdrip.net,~smsonline.cloud##img[height="   250"][width="   300"]
 /^https:\/\/loader\.[-0-9a-z]+\.[a-z][a-z][a-z]?\/loader\.min\.js$/$script,~third-party,match-case
 /^https:\/\/loader\.[-0-9a-z]+\.[a-z][a-z][a-z]?\/script\/www\.[-0-9a-z]+\.js$/$script,~third-party,match-case
+###pfx_interstitial
 ##.gtm-ga4-walkthrough-imp-event
 ##.is-sp[data-ad]
 ##.kyuujinbox_recurit
@@ -7964,6 +7968,7 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 ##body[marginwidth="0"][marginheight="0"][style="background:transparent;line-height:0"] > div[id][class][style="overflow:hidden;position:absolute"]
 ##body[onclick="ExitApi.exit();"][style="cursor:pointer"] > a[href="javascript:(function(){open(window.clickTag)})()"]
 ##body[style$="transform-origin: left top;"] > div[id^="img_"]
+##button[class]:has(+ div[id][style="width:    320px; height:    100px;"])
 ##button[id^="img_"][onclick^="window.open"]
 ##canvas[id^="img_"][height="600"]
 ##div:not([class]) + style + div[class^="img_"] > img[src*="html-load.com/"]
@@ -7984,9 +7989,11 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 ##div[class][style="min-height:180px;"]:empty
 ##div[class][style="min-height:250px;margin:0 0 10px;"]
 ##div[class][style^="display: block; width:    100%;"][started]
+##div[class][style^="left:0px;top:0px;width:   100%;height:   100%"]
 ##div[class][style^="min-width: 300px; min-height: 250px; color:#fff"]
 ##div[class][style^="min-width: 336px; min-height: 280px; color:#fff"]
 ##div[class][style^="width:300px; height:250px; color:#fff"]
+##div[class][width="   300"][height="   600"]
 ##div[data-google-av-itpl]
 ##div[id^="img_"] > div[id^="img_"][style="width: auto;"]
 ##div[id^="img_"] > div[style$="text-decoration:none;width:300px;"]
@@ -8046,6 +8053,7 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 ##div[id][style$="width:    970px; height:    250px;"]
 ##div[id][style$="width:    970px; height:    90px;"]
 ##div[id][style$="width:336px; max-width:100%; min-height:250px; background-color:transparent;"]
+##div[id][style*="height:    100%; width:    100%"]
 ##div[id][style^="border: 0pt; max-height: none !important; max-width: 375px !important; padding: 0px !important; width: 375px !important;"]
 ##div[id][style^="left:0px;top:0px;width:   100%;height:   100%"]
 ##div[id][style^="margin-top: 30px; text-align: center; width: 375px !important; max-width: 375px !important;"]
@@ -8054,8 +8062,10 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 ##div[id][style^="width:    1"][style$="height:    90px;"]
 ##div[id][style^="width:    3"][style*="height:    "]
 ##div[id][style^="width:    320px"]
+##div[id][style^="width:   "][style*="height:   "]
 ##div[id][style^="width:   "][style$="overflow:hidden"]
 ##div[id][style^="width:   "][style$="overflow: hidden;"]
+##div[id][style="height:    100%"]
 ##div[id][style="max-height: 180px; text-align: center; margin: 0px auto; display: block;"]
 ##div[id][style="min-width: 320px; min-height: 50px;"]
 ##div[id][style="width:    auto;"]
@@ -8135,6 +8145,7 @@ dogdrip.net#$?#html[lang="ko"] [id^="img_"][style]:has(iframe[frameborder="0"][s
 @@||infinityfree.com^$generichide
 @@||smsonline.cloud^$generichide
 @@||dogdrip.net^$generichide
+nikkansports.com###footerInner > script + style + div[id][class]
 natalie.mu##div[data-_get-element-size="{\"w\":400,\"h\":280}"]
 .php$script,domain=onmpeg.com
 /fl.js$domain=oralhoes.com|sexytrunk.com|xxxbanjo.com|beeg.com|imagetwist.com|kporno.com|picshick.com|picturelol.com|porntube.com|24video.in|peretrah.com|imgtaxi.com|chaostube.net|imgdrive.net
@@ -8220,6 +8231,8 @@ timesofkarachi.pk,faqwiki.us,grammarhow.com,geeksdigit.com,transfernewslive.com,
 $xmlhttprequest,third-party,denyallow=mega.co.nz|mega.nz|libs.baidu.com|ilfcdn.li|bytecdntp.com|doodcdn.io|intensedebate.com|vixcloud.co|cdn.plyr.io|rsc.cdn77.org|linkvertise.com|fastly.net|statically.io|sharecast.ws|b-cdn.net|bunnycdn.ru|bootstrapcdn.com|cdn.ampproject.org|cloudflare.com|cdn.staticfile.org|disqus.com|disquscdn.com|dmca.com|ebacdn.com|facebook.net|fastlylb.net|fbcdn.net|fluidplayer.com|fontawesome.com|github.io|google.com|googleapis.com|googletagmanager.com|gstatic.com|jquery.com|jsdelivr.net|jwpcdn.com|jwplatform.com|recaptcha.net|shrink.pe|twitter.com|ulogin.ru|unpkg.com|userapi.com|vidazoo.com|vk.com|yastatic.net|ytimg.com|zencdn.net|youtube.com|cackle.me|googleoptimize.com|vuukle.com|chatango.com|twimg.com|google-analytics.com|hcaptcha.com|media-imdb.com|blogger.com|hwcdn.net|instagram.com|wp.com|fastcomments.com|plyr.io|imgsmail.ru|cloudflare.net|rabbitstream.net|x.com|pp.ua|discord.com,_____,domain=everia.club|projectfreetv.cyou|skidrowreloaded.com|kickassanime.*|dlhd.*|nxbrew.net|ziperto.com|lilymanga.net|stly.link|bentomanga.top|bigcomics.bid|brmangas.top|cmoa1.top|janime.top|jpraw.xyz|kakuyomu.in|kkraw.com|komiku.win|lectormanga.top|lermanga.top|manga1000.top|manga1001.win|manga1001.xyz|mangajp.top|mangakl.su|mangaraw.bid|mangavy.com|mangaz.win|scanita.top|shinigami-id.top|sushiscan.top|worldsports.me|poscitechs.xyz|harimanga.com|movieshubweb.com|animeflv.net|techcabal.net|nextgencloudtools.com|soap2day.day|cricstreams.re|flixrave.me|audioz.download|playdede.link|canna-power.to|canna.to|filecrypt.cc|dlhd.dad|3isk.icu|3isk.info|animesrbija.com|yts.lt|totalsportek.*|totalsportek.army|ext.to|eztvx.to|bypass.city|fileditchfiles.me|furry34.com|filecrypt.co|yts.*|yts.gg|yts.bz|streamtape.net
 $image,third-party,denyallow=googleapis.com,domain=vipbox1.org
 $third-party,script,domain=klto9.com|f2movies.to|hacamchicac.com|yourporngod.com|zinchanmanga.com|yaoimangaonline.com|tututweak.app|mangaraw.ac|eromanga-show.com|hentai-one.com|hentaipaw.com|nukibooks.com|paipancon.com|jgvdata.com|youtubevanced.com|pandamtl.com|mangaplus.shueisha.tv|shueisharaw.tv
+linkedprofileviewer.com##nav + div.mx-auto:has(> div[data-testid^="banner-"])
+redirectchecker.io##main > div > div.w-full:has( div > p.tracking-wide)
 phonearena.com##.recommendations-items > div.recommendations-tile:has(> div.tile-picture > div.label.gray)
 deemix.org#%#//scriptlet('prevent-window-open')
 deemix.org#%#//scriptlet('remove-node-text', 'script', 'FingerprintJS')
@@ -10705,7 +10718,7 @@ lnk.to##div[data-advertiser="amazon-music"]
 economist.com##div[class^="adComponent_advert"]
 uxwing.com##.adspc01
 fontesk.com##.postlist > .postlist-col:has(> aside > .textwidget > .feed-ads)
-triathlete.com,open.spotify.com##div[aria-label="Advertisement"]
+linkedprofileviewer.com,triathlete.com,open.spotify.com##div[aria-label="Advertisement"]
 camwhores.tv##a[target="_blank"][href*="utm_campaign"]
 hentaicovid.com,cosplay18.pics,pig69.com,porn4f.com,idol69.net,cnpics.org##.fileviewer-body center:has(.vr-adv-unit)
 yts-official.org##.container > a[rel="nofollow"] > img[style]
@@ -23069,6 +23082,7 @@ snopes.com##.sidebar_ad
 alternet.org##.sidebar_sticky_container
 macrumors.com##.sidebarblock
 linuxtopia.org##.sidelinks > .sidelinks
+colossus.com##.single-sponsor
 nypost.com##.single__outbrain
 gizza.ai,mixonline.com,radioworld.com##.site-ad
 winaero.com##.site-content > div > p[style="margin: 22px"]
@@ -23462,6 +23476,7 @@ elitepvpers.com##[width="729"]
 moviekhhd.biz##a[alt="Sponsor Ads"]
 facebook.com##a[aria-label="Advertiser link"]
 facebook.com##a[aria-label="Advertiser"]
+colossus.com##a[data-article-sponsor-name]
 androidauthority.com##a[data-sel="db-link-el"]
 getaiperks.com##a[href*="&utm_"]
 pcgamestorrents.com##a[href*="/gameadult/"]
