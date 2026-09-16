@@ -79,11 +79,14 @@ end
 
 $allowed = Hash.new(false)
 response = HTTParty.get('https://raw.githubusercontent.com/nextdns/click-tracking-domains/main/domains')
-raise "Failed to download 'affiliate_tracking_domains' - Status: #{response.code}" unless response.success?
-response.body.each_line(chomp: true) do |line|
-  if capture = /^([^#]+)/.match(line)
-    $allowed[capture[1]] = true
+if response.success?
+  response.body.each_line(chomp: true) do |line|
+    if capture = /^([^#]+)/.match(line)
+      $allowed[capture[1]] = true
+    end
   end
+else
+  puts "Failed to download 'affiliate_tracking_domains' - Status: #{response.code}"
 end
 
 # --------------------------
